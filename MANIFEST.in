@@ -1,0 +1,18 @@
+include MANIFEST.in
+include requirements.txt
+include *.json
+include *.md
+include *.py
+include *.txt
+recursive-include gazda *.css
+recursive-include gazda *.csv
+recursive-include gazda *.html
+recursive-include gazda *.ico
+recursive-include gazda *.js
+recursive-include gazda *.json
+recursive-include gazda *.md
+recursive-include gazda *.png
+recursive-include gazda *.py
+recursive-include gazda *.svg
+recursive-include gazda *.txt
+recursive-exclude gazda *.pyc
