@@ -1,0 +1,140 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "naming_series:naming_series",
+ "creation": "2023-02-01 12:44:46.610497",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "naming_series",
+  "nekretnina",
+  "column_break_j5xvd",
+  "tip_tranasakcije",
+  "osoba",
+  "datum",
+  "section_break_4jsn0",
+  "prihod",
+  "column_break_nko3c",
+  "rashod",
+  "section_break_mxdwy",
+  "komentar",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Broj transakcije",
+   "no_copy": 1,
+   "options": "TRA-.YY.MM.",
+   "reqd": 1
+  },
+  {
+   "allow_in_quick_entry": 1,
+   "fieldname": "nekretnina",
+   "fieldtype": "Link",
+   "label": "Nekretnina",
+   "options": "Nekretnine",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_j5xvd",
+   "fieldtype": "Column Break"
+  },
+  {
+   "allow_in_quick_entry": 1,
+   "default": "Kirija",
+   "fieldname": "tip_tranasakcije",
+   "fieldtype": "Select",
+   "label": "Tip Tranasakcije",
+   "options": "Kirija\nVoda\nStruja\nGas\nGrejanje\nArenda\nRenovacije",
+   "reqd": 1
+  },
+  {
+   "allow_in_quick_entry": 1,
+   "fetch_from": "nekretnina.u\u017eivalac_nekretnine",
+   "fieldname": "osoba",
+   "fieldtype": "Link",
+   "label": "Osoba",
+   "options": "Osoba"
+  },
+  {
+   "default": "Today",
+   "fieldname": "datum",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Datum",
+   "options": "Today"
+  },
+  {
+   "fieldname": "section_break_4jsn0",
+   "fieldtype": "Section Break"
+  },
+  {
+   "allow_in_quick_entry": 1,
+   "fieldname": "prihod",
+   "fieldtype": "Float",
+   "label": "Prihod",
+   "precision": "2"
+  },
+  {
+   "fieldname": "column_break_nko3c",
+   "fieldtype": "Column Break"
+  },
+  {
+   "allow_in_quick_entry": 1,
+   "fieldname": "rashod",
+   "fieldtype": "Float",
+   "label": "Rashod",
+   "precision": "2"
+  },
+  {
+   "fieldname": "section_break_mxdwy",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "komentar",
+   "fieldtype": "Text",
+   "label": "Komentar"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Transakcije Nekretnina",
+   "print_hide": 1,
+   "read_only": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2023-02-01 14:04:29.974176",
+ "modified_by": "Administrator",
+ "module": "Nekretnine",
+ "name": "Transakcije Nekretnina",
+ "name_case": "UPPER CASE",
+ "naming_rule": "By \"Naming Series\" field",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
