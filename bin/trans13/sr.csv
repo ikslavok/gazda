@@ -12635,8 +12635,8 @@ Transaction Error,transakcija Greška
 Transaction Hash,transakcija hash
 Transaction ID,ID transakcije
 Transaction Limit,transakcija limit
-Transaction Log,transakcija se
-Transaction Log Report,Transakcija se izveštaj
+Transaction Log,Zapis operacije
+Transaction Log Report,Izveštaj zapisa operacije
 Transaction Name,transakcija Ime
 Transaction Type,vrsta transakcije
 Transaction currency must be same as Payment Gateway currency,Transakcija valuta mora biti isti kao i za plaćanje Gatevai valute

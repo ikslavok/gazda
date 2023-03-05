@@ -5,5 +5,5 @@
 from frappe.tests.utils import FrappeTestCase
 
 
-class TestNekretnine(FrappeTestCase):
+class TestNekretnina(FrappeTestCase):
 	pass
