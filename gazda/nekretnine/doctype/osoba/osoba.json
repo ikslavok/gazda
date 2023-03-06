@@ -12,7 +12,6 @@
   "ime",
   "adresa",
   "column_break_g4pxi",
-  "razlog_kontakta",
   "kontakt"
  ],
  "fields": [
@@ -38,12 +37,6 @@
    "fieldtype": "Column Break"
   },
   {
-   "fieldname": "razlog_kontakta",
-   "fieldtype": "Select",
-   "label": "Razlog kontakta",
-   "options": "Stanar\nInteresuje se\nSaradnik\nAgencija\nVlasnik"
-  },
-  {
    "fieldname": "kontakt",
    "fieldtype": "Link",
    "label": "Kontakt",
@@ -52,7 +45,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-02-01 06:22:44.903161",
+ "modified": "2023-03-06 15:54:20.595462",
  "modified_by": "Administrator",
  "module": "Nekretnine",
  "name": "Osoba",

@@ -9,25 +9,28 @@
  "engine": "InnoDB",
  "field_order": [
   "naming_series",
-  "stanje",
+  "state",
   "nekretnina",
   "column_break_j5xvd",
-  "tip_tranasakcije",
+  "tip_transakcije",
   "rok_za_pla\u0107anje",
   "datum_placanja",
   "osoba",
   "section_break_4jsn0",
+  "pocetak_perioda",
+  "prihod",
   "column_break_nko3c",
+  "krej_perioda",
   "rashod",
   "section_break_mxdwy",
   "komentar",
+  "naziv",
   "amended_from"
  ],
  "fields": [
   {
    "fieldname": "naming_series",
    "fieldtype": "Select",
-   "in_list_view": 1,
    "label": "Broj transakcije",
    "no_copy": 1,
    "options": "TRA-.YY.MM.",
@@ -47,18 +50,11 @@
   },
   {
    "allow_in_quick_entry": 1,
-   "default": "Kirija",
-   "fieldname": "tip_tranasakcije",
-   "fieldtype": "Select",
-   "label": "Tip Tranasakcije",
-   "options": "Kirija\nVoda\nStruja\nGas\nGrejanje\nArenda\nRenovacije",
-   "reqd": 1
-  },
-  {
-   "allow_in_quick_entry": 1,
    "fetch_from": "nekretnina.u\u017eivalac_nekretnine",
+   "fetch_if_empty": 1,
    "fieldname": "osoba",
    "fieldtype": "Link",
+   "in_list_view": 1,
    "label": "Osoba",
    "options": "Osoba"
   },
@@ -87,6 +83,51 @@
    "label": "Komentar"
   },
   {
+   "fieldname": "rok_za_pla\u0107anje",
+   "fieldtype": "Date",
+   "label": "Rok za pla\u0107anje"
+  },
+  {
+   "default": "Today",
+   "fieldname": "datum_placanja",
+   "fieldtype": "Date",
+   "label": "Datum pla\u0107anja",
+   "options": "Today"
+  },
+  {
+   "allow_in_quick_entry": 1,
+   "default": "Kirija",
+   "fieldname": "tip_transakcije",
+   "fieldtype": "Select",
+   "label": "Tip Transakcije",
+   "options": "Kirija\nVoda\nStruja\nGas\nGrejanje\nArenda\nRenovacije",
+   "reqd": 1
+  },
+  {
+   "fieldname": "prihod",
+   "fieldtype": "Currency",
+   "label": "Prihod",
+   "precision": "2"
+  },
+  {
+   "fieldname": "state",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Status",
+   "options": "NIJE PLA\u0106ENO\nPLA\u0106ENO"
+  },
+  {
+   "fieldname": "pocetak_perioda",
+   "fieldtype": "Date",
+   "hide_seconds": 1,
+   "label": "Po\u010detak perioda"
+  },
+  {
+   "fieldname": "krej_perioda",
+   "fieldtype": "Date",
+   "label": "Krej perioda"
+  },
+  {
    "fieldname": "amended_from",
    "fieldtype": "Link",
    "label": "Amended From",
@@ -96,29 +137,16 @@
    "read_only": 1
   },
   {
-   "fieldname": "rok_za_pla\u0107anje",
-   "fieldtype": "Date",
-   "label": "Rok za pla\u0107anje"
-  },
-  {
-   "default": "Today",
-   "fieldname": "datum_placanja",
-   "fieldtype": "Date",
-   "in_list_view": 1,
-   "label": "Datum pla\u0107anja",
-   "options": "Today"
-  },
-  {
-   "fieldname": "stanje",
-   "fieldtype": "Select",
-   "label": "Stanje",
-   "options": "NIJE PLA\u0106ENO\nPLA\u0106ENO"
+   "fieldname": "naziv",
+   "fieldtype": "Read Only",
+   "label": "Naziv"
   }
  ],
  "index_web_pages_for_search": 1,
+ "is_calendar_and_gantt": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2023-03-05 23:00:00.957862",
+ "modified": "2023-03-06 16:46:13.920452",
  "modified_by": "Administrator",
  "module": "Nekretnine",
  "name": "Transakcija",
@@ -139,6 +167,8 @@
    "write": 1
   }
  ],
+ "show_preview_popup": 1,
+ "show_title_field_in_link": 1,
  "sort_field": "modified",
  "sort_order": "DESC",
  "states": [
@@ -150,5 +180,7 @@
    "color": "Green",
    "title": "PLA\u0106ENO"
   }
- ]
+ ],
+ "title_field": "naziv",
+ "track_changes": 1
 }

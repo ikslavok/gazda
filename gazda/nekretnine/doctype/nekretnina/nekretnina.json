@@ -27,16 +27,18 @@
   "stanje_tab",
   "status",
   "u\u017eivalac_nekretnine",
+  "cena_stanarine",
   "korisnik_zadu\u017een_za_nekretninu",
   "column_break_olbef",
   "nivo_name\u0161tenosti_stana",
-  "opis_name\u0161teja_u_stanu",
+  "opis_name\u0161taja_u_stanu",
   "slika_i_lokacija_tab",
   "slika_prilaza_nekretnini_display",
   "slika_prilaza_nekretnini",
   "kako_do\u0107i_do_nekretnine",
   "column_break_0p8vh",
-  "lokacija_na_mapi"
+  "lokacija_parcele",
+  "embed_parcele"
  ],
  "fields": [
   {
@@ -140,11 +142,6 @@
    "options": "Nename\u0161ten\nPoluname\u0161ten\nName\u0161ten"
   },
   {
-   "fieldname": "opis_name\u0161teja_u_stanu",
-   "fieldtype": "Text",
-   "label": "Opis name\u0161teja u stanu"
-  },
-  {
    "fieldname": "slika_i_lokacija_tab",
    "fieldtype": "Tab Break",
    "label": "Slika i lokacija"
@@ -152,7 +149,8 @@
   {
    "fieldname": "slika_prilaza_nekretnini_display",
    "fieldtype": "Image",
-   "label": "Slika prilaza nekretnini display"
+   "label": "Slika prilaza nekretnini display",
+   "options": "slika_prilaza_nekretnini"
   },
   {
    "fieldname": "slika_prilaza_nekretnini",
@@ -167,11 +165,6 @@
   {
    "fieldname": "column_break_0p8vh",
    "fieldtype": "Column Break"
-  },
-  {
-   "fieldname": "lokacija_na_mapi",
-   "fieldtype": "Geolocation",
-   "label": "Lokacija na mapi"
   },
   {
    "fieldname": "adresa",
@@ -190,8 +183,30 @@
   {
    "fieldname": "section_break_xbgdy",
    "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "opis_name\u0161taja_u_stanu",
+   "fieldtype": "Text",
+   "label": "Opis name\u0161taja u stanu"
+  },
+  {
+   "fieldname": "lokacija_parcele",
+   "fieldtype": "HTML",
+   "label": "Lokacija parcele"
+  },
+  {
+   "fieldname": "embed_parcele",
+   "fieldtype": "Text",
+   "label": "Embed parcele"
+  },
+  {
+   "fieldname": "cena_stanarine",
+   "fieldtype": "Currency",
+   "label": "Cena Stanarine",
+   "precision": "2"
   }
  ],
+ "image_field": "slika_prilaza_nekretnini",
  "index_web_pages_for_search": 1,
  "links": [
   {
@@ -200,7 +215,7 @@
    "link_fieldname": "nekretnina"
   }
  ],
- "modified": "2023-03-05 23:06:19.158134",
+ "modified": "2023-03-06 16:09:16.797413",
  "modified_by": "Administrator",
  "module": "Nekretnine",
  "name": "Nekretnina",
