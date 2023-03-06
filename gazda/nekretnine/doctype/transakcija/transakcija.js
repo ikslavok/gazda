@@ -32,9 +32,6 @@ frappe.ui.form.on('Transakcija', {
 	"rashod": function(frm) {
 			frm.save();
 	},
-	"on_submit": function(frm) {
-		frm.set_value("state","PLAĆENO");
-	},
 	"validate": function(frm) {
 		frm.set_value('naziv',frm.doc.osoba + ' - ' + frm.doc.tip_transakcije + ' za ' + frm.doc.nekretnina);		
 	}

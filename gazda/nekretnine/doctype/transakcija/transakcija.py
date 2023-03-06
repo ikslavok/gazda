@@ -5,4 +5,5 @@
 from frappe.model.document import Document
 
 class Transakcija(Document):
-	pass
+	def before_submit(self):
+		self.db_set('stanje','PLAĆENO')

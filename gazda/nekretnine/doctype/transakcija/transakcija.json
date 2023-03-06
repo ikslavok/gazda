@@ -9,13 +9,13 @@
  "engine": "InnoDB",
  "field_order": [
   "naming_series",
-  "state",
+  "stanje",
   "nekretnina",
+  "rok_za_pla\u0107anje",
   "column_break_j5xvd",
   "tip_transakcije",
-  "rok_za_pla\u0107anje",
-  "datum_placanja",
   "osoba",
+  "datum_placanja",
   "section_break_4jsn0",
   "pocetak_perioda",
   "prihod",
@@ -55,7 +55,7 @@
    "fieldname": "osoba",
    "fieldtype": "Link",
    "in_list_view": 1,
-   "label": "Osoba",
+   "label": "Platilac",
    "options": "Osoba"
   },
   {
@@ -110,13 +110,6 @@
    "precision": "2"
   },
   {
-   "fieldname": "state",
-   "fieldtype": "Select",
-   "in_list_view": 1,
-   "label": "Status",
-   "options": "NIJE PLA\u0106ENO\nPLA\u0106ENO"
-  },
-  {
    "fieldname": "pocetak_perioda",
    "fieldtype": "Date",
    "hide_seconds": 1,
@@ -140,13 +133,19 @@
    "fieldname": "naziv",
    "fieldtype": "Read Only",
    "label": "Naziv"
+  },
+  {
+   "fieldname": "stanje",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Stanje",
+   "options": "NIJE PLA\u0106ENO\nPLA\u0106ENO"
   }
  ],
  "index_web_pages_for_search": 1,
- "is_calendar_and_gantt": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2023-03-06 16:46:13.920452",
+ "modified": "2023-03-06 21:48:16.943415",
  "modified_by": "Administrator",
  "module": "Nekretnine",
  "name": "Transakcija",

@@ -7,6 +7,6 @@ bench migrate
 bench clear-cache
 
 
-#git add .
-#git commit  -m "Dodat prevod: `date`"
-#git push
+git add .
+git commit  -m "Dodat prevod: `date`"
+git push
