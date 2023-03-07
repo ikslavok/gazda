@@ -20,11 +20,8 @@
   "column_break_ol7j2",
   "povr\u0161ina_m2",
   "povr\u0161ina_u_arima",
-  "adresa_section",
-  "adresa",
-  "ulica_i_broj",
-  "column_break_rtmul",
-  "mesto",
+  "section_break_gmqid",
+  "opis",
   "stanje_tab",
   "status",
   "u\u017eivalac_nekretnine",
@@ -38,7 +35,10 @@
   "slika_prilaza_nekretnini",
   "kako_do\u0107i_do_nekretnine",
   "column_break_0p8vh",
-  "lokacija_parcele"
+  "lokacija_parcele",
+  "adresa",
+  "ulica_i_broj",
+  "mesto"
  ],
  "fields": [
   {
@@ -81,19 +81,10 @@
    "label": "Povr\u0161ina u arima"
   },
   {
-   "fieldname": "adresa_section",
-   "fieldtype": "Section Break",
-   "label": "Adresa"
-  },
-  {
    "fetch_from": "adresa.address_line1",
    "fieldname": "ulica_i_broj",
    "fieldtype": "Data",
    "label": "Ulica i broj"
-  },
-  {
-   "fieldname": "column_break_rtmul",
-   "fieldtype": "Column Break"
   },
   {
    "fetch_from": "adresa.city",
@@ -199,6 +190,15 @@
    "fieldtype": "Link",
    "label": "Vlasnik",
    "options": "Osoba"
+  },
+  {
+   "fieldname": "section_break_gmqid",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "opis",
+   "fieldtype": "Text",
+   "label": "Opis"
   }
  ],
  "image_field": "slika_prilaza_nekretnini",
@@ -210,7 +210,7 @@
    "link_fieldname": "nekretnina"
   }
  ],
- "modified": "2023-03-07 03:21:09.901242",
+ "modified": "2023-03-07 03:49:00.730944",
  "modified_by": "Administrator",
  "module": "Nekretnine",
  "name": "Nekretnina",
