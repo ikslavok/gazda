@@ -1,0 +1,28 @@
+{
+ "cards": [
+  {
+   "card": "Ukupan broj nekretnina"
+  },
+  {
+   "card": "Na Jovicu se vodi"
+  }
+ ],
+ "charts": [
+  {
+   "chart": "Tro\u0161kovi nekretnina",
+   "width": "Half"
+  }
+ ],
+ "creation": "2023-03-07 02:36:08.671431",
+ "dashboard_name": "Nekretnine",
+ "docstatus": 0,
+ "doctype": "Dashboard",
+ "idx": 0,
+ "is_default": 0,
+ "is_standard": 1,
+ "modified": "2023-03-07 02:49:37.279583",
+ "modified_by": "Administrator",
+ "module": "Gazda",
+ "name": "Nekretnine",
+ "owner": "Administrator"
+}

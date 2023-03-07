@@ -37,8 +37,7 @@
   "slika_prilaza_nekretnini",
   "kako_do\u0107i_do_nekretnine",
   "column_break_0p8vh",
-  "lokacija_parcele",
-  "kod_lokacije"
+  "lokacija_parcele"
  ],
  "fields": [
   {
@@ -191,20 +190,14 @@
   },
   {
    "fieldname": "lokacija_parcele",
-   "fieldtype": "HTML",
-   "label": "Lokacija parcele",
-   "options": "&lt;iframe name=\"embedMap\" title=\"Adaptive EmbedMap\" scrolling=\"no\" frameborder=\"0\" width=\"400px\" height=\"600px\" src=\"https://a3.geosrbija.rs/embedded/9eda377e-23ca-41c3-a978-8a235eeb0b4d\" &gt;&lt;/iframe&gt;"
+   "fieldtype": "HTML Editor",
+   "label": "Lokacija parcele"
   },
   {
    "fieldname": "cena_stanarine",
    "fieldtype": "Currency",
    "label": "Cena Stanarine",
    "precision": "2"
-  },
-  {
-   "fieldname": "kod_lokacije",
-   "fieldtype": "Code",
-   "label": "Kod lokacije"
   }
  ],
  "image_field": "slika_prilaza_nekretnini",
@@ -216,7 +209,7 @@
    "link_fieldname": "nekretnina"
   }
  ],
- "modified": "2023-03-06 23:33:28.586582",
+ "modified": "2023-03-07 00:53:13.030149",
  "modified_by": "Administrator",
  "module": "Nekretnine",
  "name": "Nekretnina",
