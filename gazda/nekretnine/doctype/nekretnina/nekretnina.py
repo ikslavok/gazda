@@ -5,4 +5,6 @@
 from frappe.model.document import Document
 
 class Nekretnina(Document):
-	pass
+	def validate(self):
+		self.db_set('površina_jutro',self.površina_m2 / 5754,64)
+		self.db_set('površina_hektar',self.površina_m2 / 10000)

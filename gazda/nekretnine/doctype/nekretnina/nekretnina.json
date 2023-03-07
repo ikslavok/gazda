@@ -19,7 +19,8 @@
   "broj_parcele",
   "column_break_ol7j2",
   "povr\u0161ina_m2",
-  "povr\u0161ina_u_arima",
+  "povr\u0161ina_jutro",
+  "povr\u0161ina_hektar",
   "section_break_gmqid",
   "opis",
   "stanje_tab",
@@ -72,13 +73,9 @@
   },
   {
    "fieldname": "povr\u0161ina_m2",
-   "fieldtype": "Data",
-   "label": "Povr\u0161ina (m2)"
-  },
-  {
-   "fieldname": "povr\u0161ina_u_arima",
-   "fieldtype": "Data",
-   "label": "Povr\u0161ina u arima"
+   "fieldtype": "Float",
+   "label": "Povr\u0161ina (m2)",
+   "precision": "2"
   },
   {
    "fetch_from": "adresa.address_line1",
@@ -199,6 +196,18 @@
    "fieldname": "opis",
    "fieldtype": "Text",
    "label": "Opis"
+  },
+  {
+   "fieldname": "povr\u0161ina_jutro",
+   "fieldtype": "Float",
+   "label": "Povr\u0161ina (jutro)",
+   "precision": "2"
+  },
+  {
+   "fieldname": "povr\u0161ina_hektar",
+   "fieldtype": "Float",
+   "label": "Povr\u0161ina (hektar)",
+   "precision": "2"
   }
  ],
  "image_field": "slika_prilaza_nekretnini",
@@ -210,7 +219,7 @@
    "link_fieldname": "nekretnina"
   }
  ],
- "modified": "2023-03-07 03:49:00.730944",
+ "modified": "2023-03-07 12:20:13.246991",
  "modified_by": "Administrator",
  "module": "Nekretnine",
  "name": "Nekretnina",

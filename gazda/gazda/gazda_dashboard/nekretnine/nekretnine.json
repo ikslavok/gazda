@@ -7,12 +7,16 @@
    "card": "Na Jovicu se vodi"
   },
   {
-   "card": "Ukupno zemlje"
+   "card": "Povr\u0161ina njiva u jutrima"
   }
  ],
  "charts": [
   {
    "chart": "Tro\u0161kovi nekretnina",
+   "width": "Half"
+  },
+  {
+   "chart": "Povr\u0161ina njiva po vlasniku",
    "width": "Half"
   }
  ],
@@ -23,7 +27,7 @@
  "idx": 0,
  "is_default": 0,
  "is_standard": 1,
- "modified": "2023-03-07 10:52:41.344328",
+ "modified": "2023-03-07 12:33:18.129172",
  "modified_by": "Administrator",
  "module": "Gazda",
  "name": "Nekretnine",
