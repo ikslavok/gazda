@@ -1,5 +1,6 @@
 {
  "actions": [],
+ "allow_import": 1,
  "allow_rename": 1,
  "autoname": "field:naziv_nekretnine",
  "creation": "2023-02-01 01:06:53.902301",
@@ -44,12 +45,6 @@
    "fieldname": "osnovne_informacije_tab",
    "fieldtype": "Tab Break",
    "label": "Osnovne informacije"
-  },
-  {
-   "fieldname": "vlasnik",
-   "fieldtype": "Link",
-   "label": "Vlasnik",
-   "options": "Osoba"
   },
   {
    "fieldname": "column_break_kthyi",
@@ -198,6 +193,12 @@
    "fieldtype": "Currency",
    "label": "Cena Stanarine",
    "precision": "2"
+  },
+  {
+   "fieldname": "vlasnik",
+   "fieldtype": "Link",
+   "label": "Vlasnik",
+   "options": "Osoba"
   }
  ],
  "image_field": "slika_prilaza_nekretnini",
@@ -209,7 +210,7 @@
    "link_fieldname": "nekretnina"
   }
  ],
- "modified": "2023-03-07 00:53:13.030149",
+ "modified": "2023-03-07 03:21:09.901242",
  "modified_by": "Administrator",
  "module": "Nekretnine",
  "name": "Nekretnina",
@@ -241,5 +242,6 @@
    "color": "Red",
    "title": "Koristi se"
   }
- ]
+ ],
+ "track_changes": 1
 }
