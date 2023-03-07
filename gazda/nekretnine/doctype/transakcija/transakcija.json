@@ -78,6 +78,7 @@
    "fieldtype": "Section Break"
   },
   {
+   "allow_in_quick_entry": 1,
    "fieldname": "komentar",
    "fieldtype": "Text",
    "label": "Komentar"
@@ -88,6 +89,7 @@
    "label": "Rok za pla\u0107anje"
   },
   {
+   "allow_in_quick_entry": 1,
    "default": "Today",
    "fieldname": "datum_placanja",
    "fieldtype": "Date",
@@ -135,6 +137,7 @@
    "label": "Naziv"
   },
   {
+   "allow_in_quick_entry": 1,
    "fieldname": "stanje",
    "fieldtype": "Select",
    "in_list_view": 1,
@@ -145,7 +148,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2023-03-07 00:00:55.457907",
+ "modified": "2023-03-07 15:42:12.595199",
  "modified_by": "Administrator",
  "module": "Nekretnine",
  "name": "Transakcija",
@@ -166,6 +169,7 @@
    "write": 1
   }
  ],
+ "quick_entry": 1,
  "show_preview_popup": 1,
  "show_title_field_in_link": 1,
  "sort_field": "modified",

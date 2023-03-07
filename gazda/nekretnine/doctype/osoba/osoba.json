@@ -21,6 +21,7 @@
    "label": "Osnovni podaci"
   },
   {
+   "allow_in_quick_entry": 1,
    "fieldname": "ime",
    "fieldtype": "Data",
    "label": "Ime ",
@@ -45,7 +46,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-03-07 03:01:51.133227",
+ "modified": "2023-03-07 15:40:37.472932",
  "modified_by": "Administrator",
  "module": "Nekretnine",
  "name": "Osoba",

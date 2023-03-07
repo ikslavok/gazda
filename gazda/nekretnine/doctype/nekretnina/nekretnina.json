@@ -13,6 +13,7 @@
   "naziv_nekretnine",
   "section_break_xbgdy",
   "vlasnik",
+  "suvlasnici",
   "column_break_kthyi",
   "tip_nekretnine",
   "geodetski_podaci_section",
@@ -52,10 +53,12 @@
    "fieldtype": "Column Break"
   },
   {
+   "allow_in_quick_entry": 1,
    "fieldname": "tip_nekretnine",
    "fieldtype": "Link",
    "label": "Tip nekretnine",
-   "options": "Tip Nekretnine"
+   "options": "Tip Nekretnine",
+   "reqd": 1
   },
   {
    "fieldname": "geodetski_podaci_section",
@@ -183,6 +186,7 @@
    "precision": "2"
   },
   {
+   "allow_in_quick_entry": 1,
    "fieldname": "vlasnik",
    "fieldtype": "Link",
    "label": "Vlasnik",
@@ -208,6 +212,12 @@
    "fieldtype": "Float",
    "label": "Povr\u0161ina (hektar)",
    "precision": "2"
+  },
+  {
+   "fieldname": "suvlasnici",
+   "fieldtype": "Table MultiSelect",
+   "label": "Suvlasnici",
+   "options": "Vlasnik"
   }
  ],
  "image_field": "slika_prilaza_nekretnini",
@@ -219,7 +229,7 @@
    "link_fieldname": "nekretnina"
   }
  ],
- "modified": "2023-03-07 12:20:13.246991",
+ "modified": "2023-03-07 15:40:15.359657",
  "modified_by": "Administrator",
  "module": "Nekretnine",
  "name": "Nekretnina",
