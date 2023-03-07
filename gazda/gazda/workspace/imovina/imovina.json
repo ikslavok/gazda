@@ -5,7 +5,7 @@
    "label": "Kirije u prethodnih godinu dana"
   }
  ],
- "content": "[{\"id\":\"ts30L6l5gt\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">Imovina</span>\",\"col\":12}},{\"id\":\"sGX22-fDeL\",\"type\":\"chart\",\"data\":{\"chart_name\":\"Kirije u prethodnih godinu dana\",\"col\":12}},{\"id\":\"eLAhvPiYE_\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Nova Kirija\",\"col\":4}},{\"id\":\"wFt9DkfdG3\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Nova Arenda\",\"col\":4}},{\"id\":\"EuEkssAr74\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Novi tro\u0161ak\",\"col\":4}},{\"id\":\"7r5YfZ2YUq\",\"type\":\"quick_list\",\"data\":{\"quick_list_name\":\"Kirije\",\"col\":4}},{\"id\":\"_V-arFZtzl\",\"type\":\"quick_list\",\"data\":{\"quick_list_name\":\"Arenda\",\"col\":4}},{\"id\":\"8MVhq5XhR-\",\"type\":\"quick_list\",\"data\":{\"quick_list_name\":\"Tro\u0161kovi\",\"col\":4}},{\"id\":\"6OUOxBgkDu\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"KpkK3O41At\",\"type\":\"card\",\"data\":{\"card_name\":\"Osnovno\",\"col\":3}},{\"id\":\"DQogAL-5nS\",\"type\":\"card\",\"data\":{\"card_name\":\"Izve\u0161taji\",\"col\":4}},{\"id\":\"YWXVnh_LwG\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Analitika nekretnina\",\"col\":5}}]",
+ "content": "[{\"id\":\"ts30L6l5gt\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">Imovina</span>\",\"col\":12}},{\"id\":\"sGX22-fDeL\",\"type\":\"chart\",\"data\":{\"chart_name\":\"Kirije u prethodnih godinu dana\",\"col\":12}},{\"id\":\"eLAhvPiYE_\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Nova Kirija\",\"col\":4}},{\"id\":\"wFt9DkfdG3\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Nova Arenda\",\"col\":4}},{\"id\":\"EuEkssAr74\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Novi tro\u0161ak\",\"col\":4}},{\"id\":\"7r5YfZ2YUq\",\"type\":\"quick_list\",\"data\":{\"quick_list_name\":\"Kirije\",\"col\":4}},{\"id\":\"_V-arFZtzl\",\"type\":\"quick_list\",\"data\":{\"quick_list_name\":\"Arenda\",\"col\":4}},{\"id\":\"8MVhq5XhR-\",\"type\":\"quick_list\",\"data\":{\"quick_list_name\":\"Tro\u0161kovi\",\"col\":4}},{\"id\":\"6OUOxBgkDu\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"KpkK3O41At\",\"type\":\"card\",\"data\":{\"card_name\":\"Osnovno\",\"col\":3}},{\"id\":\"DQogAL-5nS\",\"type\":\"card\",\"data\":{\"card_name\":\"Izve\u0161taji\",\"col\":4}}]",
  "creation": "2023-02-28 14:26:47.112402",
  "docstatus": 0,
  "doctype": "Workspace",
@@ -73,7 +73,7 @@
    "type": "Link"
   }
  ],
- "modified": "2023-03-07 02:51:24.912077",
+ "modified": "2023-03-07 11:22:55.938705",
  "modified_by": "Administrator",
  "module": "Gazda",
  "name": "Imovina",
@@ -100,13 +100,6 @@
  "roles": [],
  "sequence_id": 1.0,
  "shortcuts": [
-  {
-   "color": "Grey",
-   "doc_view": "List",
-   "label": "Analitika nekretnina",
-   "link_to": "Nekretnine",
-   "type": "Dashboard"
-  },
   {
    "color": "Green",
    "doc_view": "New",
