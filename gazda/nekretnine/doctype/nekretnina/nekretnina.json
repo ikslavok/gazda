@@ -177,6 +177,7 @@
   {
    "fieldname": "lokacija_parcele",
    "fieldtype": "HTML Editor",
+   "ignore_xss_filter": 1,
    "label": "Lokacija parcele"
   },
   {
@@ -229,7 +230,7 @@
    "link_fieldname": "nekretnina"
   }
  ],
- "modified": "2023-03-07 15:40:15.359657",
+ "modified": "2023-03-07 16:11:00.379066",
  "modified_by": "Administrator",
  "module": "Nekretnine",
  "name": "Nekretnina",
