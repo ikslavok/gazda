@@ -73,7 +73,7 @@ class Nekretnina(Document):
 			self.db_set('način_korištenja_i_naziv_objekta_zgr', scrape("#propObjekat_ucLabelPermitionObjekatKoriscenje_lblText"))
 			self.db_set('broj_etaža_nad_zemljom_zgr', scrape("#propObjekat_ucLabelPermitionBrNadzemnihEtaza_lblText"))
 			self.db_set('broj_etaža_potkrovlje_zgr', scrape("#propObjekat_ucLabelPermitionBrPotkrovnihEtaza_lblText"))
-			scrape_vlasnike('imaoci_prava_na_ceo_objekat', 'table:has(#getNosiociPravaNaParceli_lblCaption) + table #ImaocPrava + td')
+			scrape_vlasnike('imaoci_prava_na_ceo_objekat', 'table:has(#getNosiociPravaNaObjektu_lblCaption) + table #ImaocPrava + td')
 			# podaci o posebnom delu objekta, stanu i tako to
 			self.db_set('broj_objekta_stan', scrape("#propObjekatDeo_ucLabelPermitionBrDelaParc_lblText"))
 			self.db_set('naziv_ulice_stan', scrape("#propObjekatDeo_ucLabelPermitionUlicaPotes_lblText"))
