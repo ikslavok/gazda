@@ -36,6 +36,6 @@ class Nekretnina(Document):
 			self.db_set('građevinska_površina_m2', nekretnina.css_first("#propObjekat_ucLabelPermitionPovrsinaGradjevinska_lblText").text())
 			self.db_set('način_korištenja_i_naziv_objekta', cyrillic_to_latin(nekretnina.css_first("#propObjekat_ucLabelPermitionObjekatKoriscenje_lblText").text()))
 			self.db_set('broj_etaža_nad_zemljom', nekretnina.css_first("#propObjekat_ucLabelPermitionBrNadzemnihEtaza_lblText").text())
-			self.db_set('broj_etaža_potkrovlje', nekretnina.css_first("#propObjekat_ucLabelPermitionBrPotkrovnihEtaza_lblText").text())
+			self.db_set('broj_etaža_potkrovlje', nekretnina.css_first("td#ImaocPrava + pd").text())
 
 			
