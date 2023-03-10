@@ -26,7 +26,8 @@
   "opis",
   "stanje_tab",
   "status",
-  "u\u017eivalac_nekretnine",
+  "plodou\u017eivalac_nekretnine",
+  "korisnik_nekretnine",
   "cena_stanarine",
   "korisnik_zadu\u017een_za_nekretninu",
   "column_break_olbef",
@@ -51,21 +52,34 @@
   "katastarska_op\u0161tina",
   "povr\u0161ina",
   "broj_lista_nepokretnosti",
+  "imaoci_prava_na_parcelu",
   "podaci_o_objektima_section",
-  "broj_objekta",
-  "povr\u0161ina_objekta",
-  "korisna_povr\u0161ina_objekta",
-  "pravni_status_objekta",
-  "broj_eta\u017ea_pod_zemljom",
-  "broj_eta\u017ea_prizemlje",
+  "broj_objekta_zgr",
+  "povr\u0161ina_objekta_zgr",
+  "korisna_povr\u0161ina_objekta_zgr",
+  "pravni_status_objekta_zgr",
+  "broj_eta\u017ea_pod_zemljom_zgr",
+  "broj_eta\u017ea_prizemlje_zgr",
   "column_break_b06by",
-  "ulica_i_broj_kat",
-  "gra\u0111evinska_povr\u0161ina_m2",
-  "na\u010din_kori\u0161tenja_i_naziv_objekta",
-  "broj_eta\u017ea_nad_zemljom",
-  "broj_eta\u017ea_potkrovlje",
-  "imaoci_prava_na_objektu_section",
-  "imaoc_prava_na_objekat"
+  "ulica_i_broj_kat_zgr",
+  "gra\u0111evinska_povr\u0161ina_m2_zgr",
+  "na\u010din_kori\u0161tenja_i_naziv_objekta_zgr",
+  "broj_eta\u017ea_nad_zemljom_zgr",
+  "broj_eta\u017ea_potkrovlje_zgr",
+  "imaoci_prava_na_ceo_objekat",
+  "podaci_o_odabranom_delu_objekta_section",
+  "broj_objekta_stan",
+  "naziv_ulice_stan",
+  "broj_ulaza_stan",
+  "ev_broj_stan",
+  "na\u010din_kori\u0161tenja",
+  "column_break_jgvtt",
+  "broj_stana_objekta_stan",
+  "podbroj_stana_objekta_stan",
+  "gra\u0111evinska_povr\u0161ina_stan",
+  "korisna_povr\u0161ina_stan",
+  "na\u010din_utvr\u0111ivanja_korisne_povr\u0161ine_stan",
+  "imaoci_prava_na_posebni_deo_objekta"
  ],
  "fields": [
   {
@@ -100,8 +114,10 @@
    "fieldtype": "Column Break"
   },
   {
+   "depends_on": "eval:doc.tip_nekretnine == \"Njiva\"",
    "fieldname": "povr\u0161ina_m2",
    "fieldtype": "Float",
+   "hidden": 1,
    "label": "Povr\u0161ina (m2)",
    "precision": "2"
   },
@@ -127,12 +143,6 @@
    "fieldtype": "Select",
    "label": "Status",
    "options": "Slobodno\nKoristi se"
-  },
-  {
-   "fieldname": "u\u017eivalac_nekretnine",
-   "fieldtype": "Link",
-   "label": "U\u017eivalac nekretnine",
-   "options": "Osoba"
   },
   {
    "fieldname": "korisnik_zadu\u017een_za_nekretninu",
@@ -228,8 +238,10 @@
    "label": "Opis"
   },
   {
+   "depends_on": "eval:doc.tip_nekretnine == \"Njiva\";",
    "fieldname": "povr\u0161ina_jutro",
    "fieldtype": "Float",
+   "hidden": 1,
    "label": "Povr\u0161ina (jutro)",
    "precision": "2"
   },
@@ -258,9 +270,10 @@
   {
    "fieldname": "podaci_o_objektima_section",
    "fieldtype": "Section Break",
-   "label": "Podaci o objektima"
+   "label": "Podaci o glavnom objektu"
   },
   {
+   "allow_in_quick_entry": 1,
    "fieldname": "katastarska_strana_url",
    "fieldtype": "Data",
    "label": "Katastarska strana (URL)"
@@ -307,85 +320,175 @@
    "read_only": 1
   },
   {
-   "fieldname": "broj_objekta",
+   "fieldname": "column_break_b06by",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "plodou\u017eivalac_nekretnine",
+   "fieldtype": "Link",
+   "label": "Plodou\u017eivalac nekretnine",
+   "options": "Osoba"
+  },
+  {
+   "fieldname": "korisnik_nekretnine",
+   "fieldtype": "Link",
+   "label": "Korisnik_nekretnine",
+   "options": "Osoba"
+  },
+  {
+   "fieldname": "broj_objekta_zgr",
    "fieldtype": "Data",
    "label": "Broj objekta",
    "read_only": 1
   },
   {
-   "fieldname": "povr\u0161ina_objekta",
+   "fieldname": "povr\u0161ina_objekta_zgr",
    "fieldtype": "Data",
    "label": "Povr\u0161ina objekta",
    "precision": "2",
    "read_only": 1
   },
   {
-   "fieldname": "korisna_povr\u0161ina_objekta",
+   "fieldname": "korisna_povr\u0161ina_objekta_zgr",
    "fieldtype": "Data",
    "label": "Korisna povr\u0161ina objekta",
    "precision": "2",
    "read_only": 1
   },
   {
-   "fieldname": "pravni_status_objekta",
+   "fieldname": "pravni_status_objekta_zgr",
    "fieldtype": "Data",
    "label": "Pravni status objekta",
    "read_only": 1
   },
   {
-   "fieldname": "broj_eta\u017ea_pod_zemljom",
+   "fieldname": "broj_eta\u017ea_pod_zemljom_zgr",
    "fieldtype": "Data",
    "label": "Broj eta\u017ea pod zemljom",
    "read_only": 1
   },
   {
-   "fieldname": "broj_eta\u017ea_prizemlje",
+   "fieldname": "broj_eta\u017ea_prizemlje_zgr",
    "fieldtype": "Data",
    "label": "Broj eta\u017ea prizemlje",
    "read_only": 1
   },
   {
-   "fieldname": "column_break_b06by",
-   "fieldtype": "Column Break"
-  },
-  {
-   "fieldname": "ulica_i_broj_kat",
+   "fieldname": "ulica_i_broj_kat_zgr",
    "fieldtype": "Data",
    "label": "Ulica i broj (kat)",
    "read_only": 1
   },
   {
-   "fieldname": "gra\u0111evinska_povr\u0161ina_m2",
+   "fieldname": "gra\u0111evinska_povr\u0161ina_m2_zgr",
    "fieldtype": "Data",
    "label": "Gra\u0111evinska povr\u0161ina (m2)",
    "read_only": 1
   },
   {
-   "fieldname": "na\u010din_kori\u0161tenja_i_naziv_objekta",
+   "fieldname": "na\u010din_kori\u0161tenja_i_naziv_objekta_zgr",
    "fieldtype": "Data",
    "label": "Na\u010din kori\u0161tenja i naziv objekta",
    "read_only": 1
   },
   {
-   "fieldname": "broj_eta\u017ea_nad_zemljom",
+   "fieldname": "broj_eta\u017ea_nad_zemljom_zgr",
    "fieldtype": "Data",
-   "label": "Broj eta\u017ea nad zemljom"
-  },
-  {
-   "fieldname": "broj_eta\u017ea_potkrovlje",
-   "fieldtype": "Data",
-   "label": "Broj eta\u017ea potkrovlje"
-  },
-  {
-   "fieldname": "imaoci_prava_na_objektu_section",
-   "fieldtype": "Section Break",
-   "label": "Imaoci prava na objektu"
-  },
-  {
-   "fieldname": "imaoc_prava_na_objekat",
-   "fieldtype": "Data",
-   "label": "Imaoc prava na objekat",
+   "label": "Broj eta\u017ea nad zemljom",
    "read_only": 1
+  },
+  {
+   "fieldname": "broj_eta\u017ea_potkrovlje_zgr",
+   "fieldtype": "Data",
+   "label": "Broj eta\u017ea potkrovlje",
+   "read_only": 1
+  },
+  {
+   "fieldname": "imaoci_prava_na_parcelu",
+   "fieldtype": "Table MultiSelect",
+   "label": "Imaoci prava na parcelu",
+   "options": "Vlasnik"
+  },
+  {
+   "fieldname": "podaci_o_odabranom_delu_objekta_section",
+   "fieldtype": "Section Break",
+   "label": "Podaci o odabranom delu objekta"
+  },
+  {
+   "fieldname": "broj_objekta_stan",
+   "fieldtype": "Data",
+   "label": "Broj objekta",
+   "read_only": 1
+  },
+  {
+   "fieldname": "naziv_ulice_stan",
+   "fieldtype": "Data",
+   "label": "Naziv ulice",
+   "read_only": 1
+  },
+  {
+   "fieldname": "broj_ulaza_stan",
+   "fieldtype": "Data",
+   "label": "Broj ulaza",
+   "read_only": 1
+  },
+  {
+   "fieldname": "ev_broj_stan",
+   "fieldtype": "Data",
+   "label": "Evidentni broj",
+   "read_only": 1
+  },
+  {
+   "fieldname": "na\u010din_kori\u0161tenja",
+   "fieldtype": "Data",
+   "label": "Na\u010din kori\u0161tenja",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_jgvtt",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "broj_stana_objekta_stan",
+   "fieldtype": "Data",
+   "label": "Broj stana(objekta)",
+   "read_only": 1
+  },
+  {
+   "fieldname": "podbroj_stana_objekta_stan",
+   "fieldtype": "Data",
+   "label": "Podroj stana(objekta)",
+   "read_only": 1
+  },
+  {
+   "fieldname": "gra\u0111evinska_povr\u0161ina_stan",
+   "fieldtype": "Data",
+   "label": "Gra\u0111evinska povr\u0161ina",
+   "read_only": 1
+  },
+  {
+   "fieldname": "korisna_povr\u0161ina_stan",
+   "fieldtype": "Data",
+   "label": "Korisna povr\u0161ina",
+   "read_only": 1
+  },
+  {
+   "fieldname": "na\u010din_utvr\u0111ivanja_korisne_povr\u0161ine_stan",
+   "fieldtype": "Data",
+   "label": "Na\u010din utvr\u0111ivanja korisne povr\u0161ine",
+   "read_only": 1
+  },
+  {
+   "fieldname": "imaoci_prava_na_posebni_deo_objekta",
+   "fieldtype": "Table MultiSelect",
+   "label": "Imaoci prava na posebni deo objekta",
+   "options": "Vlasnik"
+  },
+  {
+   "fieldname": "imaoci_prava_na_ceo_objekat",
+   "fieldtype": "Table MultiSelect",
+   "label": "Imaoci prava na ceo objekat",
+   "options": "Vlasnik"
   }
  ],
  "image_field": "slika_prilaza_nekretnini",
@@ -397,7 +500,7 @@
    "link_fieldname": "nekretnina"
   }
  ],
- "modified": "2023-03-10 04:43:28.620470",
+ "modified": "2023-03-10 17:11:18.495946",
  "modified_by": "Administrator",
  "module": "Nekretnine",
  "name": "Nekretnina",
