@@ -92,10 +92,8 @@ class Nekretnina(Document):
 				self.db_set('vlasnik', self.imaoci_prava_na_parcelu[0].vlasnik)
 				scrape_vlasnike('suvlasnici', 'table:has(#getNosiociPravaNaParceli_lblCaption) + table #ImaocPrava + td')
 			elif self.tip_nekretnine == 'Zgrada':
-				self.db_set('vlasnik', self.imaoci_prava_na_ceo_objekat[0].vlasnik)
-				scrape_vlasnike('suvlasnici', 'table:has(#getNosiociPravaNaParceli_lblCaption) + table #ImaocPrava + td')
+				scrape_vlasnike('suvlasnici', 'table:has(#getNosiociPravaNaObjektu_lblCaption) + table #ImaocPrava + td')
 			else:
-				self.db_set('vlasnik', self.imaoci_prava_na_posebni_deo_objekta[0].vlasnik)
 				scrape_vlasnike('suvlasnici', 'table:has(#getNosiociPravaNaPosebnomDelu_lblCaption) + table #ImaocPrava + td')
 			
 
