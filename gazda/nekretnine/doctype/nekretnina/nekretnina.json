@@ -40,7 +40,32 @@
   "lokacija_parcele",
   "adresa",
   "ulica_i_broj",
-  "mesto"
+  "mesto",
+  "katastar_tab",
+  "katastarska_strana_url",
+  "podaci_o_parceli_section",
+  "op\u0161tina",
+  "potes_ili_ulica",
+  "broj_parcele_kat",
+  "section_break_2k6at",
+  "katastarska_op\u0161tina",
+  "povr\u0161ina",
+  "broj_lista_nepokretnosti",
+  "podaci_o_objektima_section",
+  "broj_objekta",
+  "povr\u0161ina_objekta",
+  "korisna_povr\u0161ina_objekta",
+  "pravni_status_objekta",
+  "broj_eta\u017ea_pod_zemljom",
+  "broj_eta\u017ea_prizemlje",
+  "column_break_b06by",
+  "ulica_i_broj_kat",
+  "gra\u0111evinska_povr\u0161ina_m2",
+  "na\u010din_kori\u0161tenja_i_naziv_objekta",
+  "broj_eta\u017ea_nad_zemljom",
+  "broj_eta\u017ea_potkrovlje",
+  "imaoci_prava_na_objektu_section",
+  "imaoc_prava_na_objekat"
  ],
  "fields": [
   {
@@ -219,6 +244,148 @@
    "fieldtype": "Table MultiSelect",
    "label": "Suvlasnici",
    "options": "Vlasnik"
+  },
+  {
+   "fieldname": "katastar_tab",
+   "fieldtype": "Tab Break",
+   "label": "Katastar"
+  },
+  {
+   "fieldname": "podaci_o_parceli_section",
+   "fieldtype": "Section Break",
+   "label": "Podaci o parceli"
+  },
+  {
+   "fieldname": "podaci_o_objektima_section",
+   "fieldtype": "Section Break",
+   "label": "Podaci o objektima"
+  },
+  {
+   "fieldname": "katastarska_strana_url",
+   "fieldtype": "Data",
+   "label": "Katastarska strana (URL)"
+  },
+  {
+   "fieldname": "op\u0161tina",
+   "fieldtype": "Data",
+   "label": "Op\u0161tina",
+   "read_only": 1
+  },
+  {
+   "fieldname": "potes_ili_ulica",
+   "fieldtype": "Data",
+   "label": "Potes ili ulica",
+   "read_only": 1
+  },
+  {
+   "fieldname": "broj_parcele_kat",
+   "fieldtype": "Data",
+   "label": "Broj parcele",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_2k6at",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "katastarska_op\u0161tina",
+   "fieldtype": "Data",
+   "label": "Katastarska op\u0161tina",
+   "read_only": 1
+  },
+  {
+   "fieldname": "povr\u0161ina",
+   "fieldtype": "Float",
+   "label": "Povr\u0161ina",
+   "precision": "2",
+   "read_only": 1
+  },
+  {
+   "fieldname": "broj_lista_nepokretnosti",
+   "fieldtype": "Data",
+   "label": "Broj lista nepokretnosti",
+   "read_only": 1
+  },
+  {
+   "fieldname": "broj_objekta",
+   "fieldtype": "Data",
+   "label": "Broj objekta",
+   "read_only": 1
+  },
+  {
+   "fieldname": "povr\u0161ina_objekta",
+   "fieldtype": "Data",
+   "label": "Povr\u0161ina objekta",
+   "precision": "2",
+   "read_only": 1
+  },
+  {
+   "fieldname": "korisna_povr\u0161ina_objekta",
+   "fieldtype": "Data",
+   "label": "Korisna povr\u0161ina objekta",
+   "precision": "2",
+   "read_only": 1
+  },
+  {
+   "fieldname": "pravni_status_objekta",
+   "fieldtype": "Data",
+   "label": "Pravni status objekta",
+   "read_only": 1
+  },
+  {
+   "fieldname": "broj_eta\u017ea_pod_zemljom",
+   "fieldtype": "Data",
+   "label": "Broj eta\u017ea pod zemljom",
+   "read_only": 1
+  },
+  {
+   "fieldname": "broj_eta\u017ea_prizemlje",
+   "fieldtype": "Data",
+   "label": "Broj eta\u017ea prizemlje",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_b06by",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "ulica_i_broj_kat",
+   "fieldtype": "Data",
+   "label": "Ulica i broj (kat)",
+   "read_only": 1
+  },
+  {
+   "fieldname": "gra\u0111evinska_povr\u0161ina_m2",
+   "fieldtype": "Data",
+   "label": "Gra\u0111evinska povr\u0161ina (m2)",
+   "read_only": 1
+  },
+  {
+   "fieldname": "na\u010din_kori\u0161tenja_i_naziv_objekta",
+   "fieldtype": "Data",
+   "label": "Na\u010din kori\u0161tenja i naziv objekta",
+   "read_only": 1
+  },
+  {
+   "fieldname": "broj_eta\u017ea_nad_zemljom",
+   "fieldtype": "Data",
+   "label": "Broj eta\u017ea nad zemljom"
+  },
+  {
+   "fieldname": "broj_eta\u017ea_potkrovlje",
+   "fieldtype": "Data",
+   "label": "Broj eta\u017ea potkrovlje"
+  },
+  {
+   "fieldname": "imaoci_prava_na_objektu_section",
+   "fieldtype": "Section Break",
+   "label": "Imaoci prava na objektu"
+  },
+  {
+   "fieldname": "imaoc_prava_na_objekat",
+   "fieldtype": "Data",
+   "label": "Imaoc prava na objekat",
+   "read_only": 1
   }
  ],
  "image_field": "slika_prilaza_nekretnini",
@@ -230,7 +397,7 @@
    "link_fieldname": "nekretnina"
   }
  ],
- "modified": "2023-03-07 16:11:00.379066",
+ "modified": "2023-03-10 04:43:28.620470",
  "modified_by": "Administrator",
  "module": "Nekretnine",
  "name": "Nekretnina",
