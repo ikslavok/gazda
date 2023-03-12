@@ -9,8 +9,7 @@ from frappe.model.document import Document
 class Nekretnina(Document):
 	def before_save(self):
 		def make_request(url):
-			proxies = {'http': '10.185.175.205:8080', 'https': '10.185.175.205:8080'}
-			resp = requests.get(url, proxies=proxies)
+			resp = requests.get(url)
 			html = HTMLParser(resp.text)
 			return html
 		
