@@ -13,7 +13,7 @@ class Nekretnina(Document):
 			return html
 		
 		
-		# Podaci koji se vuku iz katastra
+		# Podaci koji se vuku iz katastr
 		if self.katastarska_strana_url and (self.get_doc_before_save() == None or self.katastarska_strana_url != self.get_doc_before_save().katastarska_strana_url):
 			nekretnina = make_request(self.katastarska_strana_url)
 			
@@ -45,6 +45,10 @@ class Nekretnina(Document):
 									'vlasnik': osoba
 								})
 
+			def get_povrsina(field, selector):
+				povrsina_raw = scrape(selector)
+				if isinstance(povrsina_raw, float):
+					self.db_set(field, povrsina_raw)
 
 			# podaci o parceli
 			self.db_set('opština', scrape('#propNepokretnost_ucLabelPermitionOpstinaNaziv_lblText'))
@@ -55,11 +59,12 @@ class Nekretnina(Document):
 			self.db_set('površina', scrape("#propParcela_ucLabelPermitionPovrsina_lblText"))
 			self.db_set('broj_lista_nepokretnosti', scrape("#propParcela_ucLabelPermitionBrojLN_lblText"))			
 			self.db_set('broj_parcele', scrape("#propParcela_ucLabelPermitionBrParc_lblText"))
-			self.db_set('površina_m2', float(scrape("#propParcela_ucLabelPermitionPovrsina_lblText")))
+			get_povrsina('površina_m2', "#propParcela_ucLabelPermitionPovrsina_lblText")
 			scrape_vlasnike('imaoci_prava_na_parcelu', 'table:has(#getNosiociPravaNaParceli_lblCaption) + table #ImaocPrava + td')
 			# pretvori u jutro i hektar
-			self.db_set('površina_jutro',self.površina_m2 / 5754,64)
-			self.db_set('površina_hektar',self.površina_m2 / 10000)
+			if self.površina_m2:
+				self.db_set('površina_jutro',self.površina_m2 / 5754,64)
+				self.db_set('površina_hektar',self.površina_m2 / 10000)
 			# podaci o celokupnom objektu
 			self.db_set('broj_objekta_zgr', scrape("#propObjekat_ucLabelPermitionBrDelaParc_lblText"))
 			self.db_set('površina_objekta_zgr', scrape("#propObjekat_ucLabelPermitionPovrsina_lblText"))
