@@ -1,3 +1,4 @@
+import re
 import frappe
 import requests
 from selectolax.parser import HTMLParser
@@ -6,13 +7,16 @@ from srtools import cyrillic_to_latin
 from frappe.model.document import Document
 
 class Nekretnina(Document):
-	def validate(self):
+	def before_save(self):
 		def make_request(url):
-			resp = requests.get(url)
+			proxies = {'http': '192.168.124.143:8080', 'https': '192.168.124.143:8080'}
+			resp = requests.get(url, proxies=proxies)
 			html = HTMLParser(resp.text)
 			return html
 		
-		
+		if self.površina_m2:
+				self.db_set('površina_jutro',self.površina_m2 / 5754,64)
+				self.db_set('površina_hektar',self.površina_m2 / 10000)
 		# Podaci koji se vuku iz katastr
 		if self.katastarska_strana_url and (self.get_doc_before_save() == None or self.katastarska_strana_url != self.get_doc_before_save().katastarska_strana_url):
 			nekretnina = make_request(self.katastarska_strana_url)
@@ -30,7 +34,8 @@ class Nekretnina(Document):
 				res = nekretnina.css(selector)
 				if  res != None:
 					for r in res:
-						osoba = cyrillic_to_latin(r.text()).title().replace('"', '').strip()
+						osoba_raw = cyrillic_to_latin(r.text()).title().replace('"', '').strip()
+						osoba = re.sub(r'[(@*&?].*[)@*&?]', '', osoba_raw)
 						if frappe.db.exists("Osoba", osoba):
 							if "Vlasnici" not in osoba:
 								self.append(field, {
@@ -45,26 +50,16 @@ class Nekretnina(Document):
 									'vlasnik': osoba
 								})
 
-			def get_povrsina(field, selector):
-				povrsina_raw = scrape(selector)
-				if isinstance(povrsina_raw, float):
-					self.db_set(field, povrsina_raw)
-
 			# podaci o parceli
 			self.db_set('opština', scrape('#propNepokretnost_ucLabelPermitionOpstinaNaziv_lblText'))
 			self.db_set('potes_ili_ulica', scrape("#propParcela_ucLabelPermitionUlica_lblText"))
 			self.db_set('broj_parcele_kat', scrape("#propParcela_ucLabelPermitionBrParc_lblText"))
 			self.db_set('katastarska_opština', scrape("#propNepokretnost_ucLabelPermitionSluzba_lblText"))
 			self.db_set('mesto', scrape("#propNepokretnost_ucLabelPermitionOpstinaNaziv_lblText"))
-			self.db_set('površina', scrape("#propParcela_ucLabelPermitionPovrsina_lblText"))
+			self.db_set('površina', scrape("#propParcelaDeo_ucLabelPermitionPovrsina_lblText"))
 			self.db_set('broj_lista_nepokretnosti', scrape("#propParcela_ucLabelPermitionBrojLN_lblText"))			
 			self.db_set('broj_parcele', scrape("#propParcela_ucLabelPermitionBrParc_lblText"))
-			get_povrsina('površina_m2', "#propParcela_ucLabelPermitionPovrsina_lblText")
 			scrape_vlasnike('imaoci_prava_na_parcelu', 'table:has(#getNosiociPravaNaParceli_lblCaption) + table #ImaocPrava + td')
-			# pretvori u jutro i hektar
-			if self.površina_m2:
-				self.db_set('površina_jutro',self.površina_m2 / 5754,64)
-				self.db_set('površina_hektar',self.površina_m2 / 10000)
 			# podaci o celokupnom objektu
 			self.db_set('broj_objekta_zgr', scrape("#propObjekat_ucLabelPermitionBrDelaParc_lblText"))
 			self.db_set('površina_objekta_zgr', scrape("#propObjekat_ucLabelPermitionPovrsina_lblText"))
@@ -92,13 +87,19 @@ class Nekretnina(Document):
 			self.db_set('način_utvrđivanja_korisne_površine_stan', scrape("#propObjekatDeo_ucLabelPermitionPovrsinaNacUtv_lblText"))
 			scrape_vlasnike('imaoci_prava_na_posebni_deo_objekta', 'table:has(#getNosiociPravaNaPosebnomDelu_lblCaption) + table #ImaocPrava + td')
 
+
 			# odredi odgovornog vlasnika i suvlasnike pomocu tipa nekretnine
 			if self.tip_nekretnine == 'Njiva':
-				self.db_set('vlasnik', self.imaoci_prava_na_parcelu[0].vlasnik)
+				if self.vlasnik is None:
+					self.db_set('vlasnik', self.imaoci_prava_na_parcelu[0].vlasnik)
 				scrape_vlasnike('suvlasnici', 'table:has(#getNosiociPravaNaParceli_lblCaption) + table #ImaocPrava + td')
-			elif self.tip_nekretnine == 'Zgrada':
+			elif self.tip_nekretnine == 'Zgrada' or self.tip_nekretnine == 'Kuća':
+				if self.vlasnik is None:
+					self.db_set('vlasnik', self.imaoci_prava_na_ceo_objekat[0].vlasnik)
 				scrape_vlasnike('suvlasnici', 'table:has(#getNosiociPravaNaObjektu_lblCaption) + table #ImaocPrava + td')
 			else:
+				if self.vlasnik is None:
+					self.db_set('vlasnik', self.imaoci_prava_na_posebni_deo_objekta[0].vlasnik)
 				scrape_vlasnike('suvlasnici', 'table:has(#getNosiociPravaNaPosebnomDelu_lblCaption) + table #ImaocPrava + td')
 			
 

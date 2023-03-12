@@ -17,10 +17,10 @@
   "column_break_kthyi",
   "tip_nekretnine",
   "geodetski_podaci_section",
-  "broj_parcele",
-  "column_break_ol7j2",
   "povr\u0161ina_m2",
   "povr\u0161ina_jutro",
+  "column_break_ol7j2",
+  "broj_parcele",
   "povr\u0161ina_hektar",
   "section_break_gmqid",
   "opis",
@@ -237,13 +237,6 @@
   },
   {
    "depends_on": "eval:doc.tip_nekretnine == \"Njiva\"",
-   "fieldname": "povr\u0161ina_jutro",
-   "fieldtype": "Float",
-   "label": "Povr\u0161ina (jutro)",
-   "precision": "2"
-  },
-  {
-   "depends_on": "eval:doc.tip_nekretnine == \"Njiva\"",
    "fieldname": "povr\u0161ina_hektar",
    "fieldtype": "Float",
    "label": "Povr\u0161ina (hektar)",
@@ -405,7 +398,8 @@
    "fieldname": "imaoci_prava_na_parcelu",
    "fieldtype": "Table MultiSelect",
    "label": "Imaoci prava na parcelu",
-   "options": "Vlasnik"
+   "options": "Vlasnik",
+   "read_only": 1
   },
   {
    "fieldname": "podaci_o_odabranom_delu_objekta_section",
@@ -480,13 +474,22 @@
    "fieldname": "imaoci_prava_na_posebni_deo_objekta",
    "fieldtype": "Table MultiSelect",
    "label": "Imaoci prava na posebni deo objekta",
-   "options": "Vlasnik"
+   "options": "Vlasnik",
+   "read_only": 1
   },
   {
    "fieldname": "imaoci_prava_na_ceo_objekat",
    "fieldtype": "Table MultiSelect",
    "label": "Imaoci prava na ceo objekat",
-   "options": "Vlasnik"
+   "options": "Vlasnik",
+   "read_only": 1
+  },
+  {
+   "depends_on": "eval:doc.tip_nekretnine == \"Njiva\"",
+   "fieldname": "povr\u0161ina_jutro",
+   "fieldtype": "Float",
+   "label": "Povr\u0161ina (jutro)",
+   "precision": "2"
   }
  ],
  "image_field": "slika_prilaza_nekretnini",
@@ -498,7 +501,7 @@
    "link_fieldname": "nekretnina"
   }
  ],
- "modified": "2023-03-10 17:13:14.066728",
+ "modified": "2023-03-12 23:08:58.373023",
  "modified_by": "Administrator",
  "module": "Nekretnine",
  "name": "Nekretnina",
