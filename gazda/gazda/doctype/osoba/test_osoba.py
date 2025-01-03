@@ -1,9 +1,9 @@
-# Copyright (c) 2023, Filip Ilic and Contributors
+# Copyright (c) 2025, Filip Ilic and Contributors
 # See license.txt
 
 # import frappe
 from frappe.tests.utils import FrappeTestCase
 
 
-class TestAddress(FrappeTestCase):
+class TestOsoba(FrappeTestCase):
 	pass

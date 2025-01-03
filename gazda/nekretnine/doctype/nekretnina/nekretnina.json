@@ -11,11 +11,11 @@
  "field_order": [
   "osnovne_informacije_tab",
   "naziv_nekretnine",
+  "tip_nekretnine",
   "section_break_xbgdy",
   "vlasnik",
-  "suvlasnici",
   "column_break_kthyi",
-  "tip_nekretnine",
+  "suvlasnici",
   "geodetski_podaci_section",
   "povr\u0161ina_m2",
   "povr\u0161ina_jutro",
@@ -26,10 +26,11 @@
   "opis",
   "stanje_tab",
   "status",
-  "plodou\u017eivalac_nekretnine",
-  "korisnik_nekretnine",
-  "cena_stanarine",
-  "korisnik_zadu\u017een_za_nekretninu",
+  "zakupac",
+  "zakupnina",
+  "trenutni_plodouzivalac",
+  "zakonski_plodouzivalac",
+  "odrzava",
   "column_break_olbef",
   "nivo_name\u0161tenosti_stana",
   "opis_name\u0161taja_u_stanu",
@@ -85,7 +86,7 @@
   {
    "fieldname": "osnovne_informacije_tab",
    "fieldtype": "Tab Break",
-   "label": "Osnovne informacije"
+   "label": "Osnovno"
   },
   {
    "fieldname": "column_break_kthyi",
@@ -123,13 +124,15 @@
    "fetch_from": "adresa.address_line1",
    "fieldname": "ulica_i_broj",
    "fieldtype": "Data",
-   "label": "Ulica i broj"
+   "label": "Ulica i broj",
+   "read_only": 1
   },
   {
    "fetch_from": "adresa.city",
    "fieldname": "mesto",
    "fieldtype": "Data",
-   "label": "Mesto"
+   "label": "Mesto",
+   "read_only": 1
   },
   {
    "fieldname": "stanje_tab",
@@ -140,13 +143,7 @@
    "fieldname": "status",
    "fieldtype": "Select",
    "label": "Status",
-   "options": "Slobodno\nKoristi se"
-  },
-  {
-   "fieldname": "korisnik_zadu\u017een_za_nekretninu",
-   "fieldtype": "Link",
-   "label": "Korisnik zadu\u017een za nekretninu",
-   "options": "User"
+   "options": "Slobodno\nZauzeto"
   },
   {
    "fieldname": "column_break_olbef",
@@ -204,7 +201,7 @@
   },
   {
    "fieldname": "opis_name\u0161taja_u_stanu",
-   "fieldtype": "Text",
+   "fieldtype": "Text Editor",
    "label": "Opis name\u0161taja u stanu"
   },
   {
@@ -212,12 +209,6 @@
    "fieldtype": "HTML Editor",
    "ignore_xss_filter": 1,
    "label": "Lokacija parcele"
-  },
-  {
-   "fieldname": "cena_stanarine",
-   "fieldtype": "Currency",
-   "label": "Cena Stanarine",
-   "precision": "2"
   },
   {
    "allow_in_quick_entry": 1,
@@ -313,18 +304,6 @@
   {
    "fieldname": "column_break_b06by",
    "fieldtype": "Column Break"
-  },
-  {
-   "fieldname": "plodou\u017eivalac_nekretnine",
-   "fieldtype": "Link",
-   "label": "Plodou\u017eivalac nekretnine",
-   "options": "Osoba"
-  },
-  {
-   "fieldname": "korisnik_nekretnine",
-   "fieldtype": "Link",
-   "label": "Korisnik_nekretnine",
-   "options": "Osoba"
   },
   {
    "fieldname": "broj_objekta_zgr",
@@ -490,6 +469,35 @@
    "fieldtype": "Float",
    "label": "Povr\u0161ina (jutro)",
    "precision": "2"
+  },
+  {
+   "fieldname": "zakupac",
+   "fieldtype": "Link",
+   "label": "Zakupac",
+   "options": "Osoba"
+  },
+  {
+   "fieldname": "zakupnina",
+   "fieldtype": "Currency",
+   "label": "Zakupnina",
+   "precision": "2"
+  },
+  {
+   "fieldname": "trenutni_plodouzivalac",
+   "fieldtype": "Link",
+   "label": "Trenutni plodou\u017eivalac",
+   "options": "Osoba"
+  },
+  {
+   "fieldname": "zakonski_plodouzivalac",
+   "fieldtype": "Data",
+   "label": "Zakonski plodou\u017eivalac"
+  },
+  {
+   "fieldname": "odrzava",
+   "fieldtype": "Link",
+   "label": "Odr\u017eava",
+   "options": "User"
   }
  ],
  "image_field": "slika_prilaza_nekretnini",
@@ -501,7 +509,7 @@
    "link_fieldname": "nekretnina"
   }
  ],
- "modified": "2023-03-12 23:08:58.373023",
+ "modified": "2025-01-03 15:28:01.258537",
  "modified_by": "Administrator",
  "module": "Nekretnine",
  "name": "Nekretnina",
