@@ -3,8 +3,29 @@
   "docstatus": 0,
   "doctype": "Tip Nekretnine",
   "modified": "2025-01-03 12:14:12.592452",
-  "name": "Stan",
-  "tip_nekretnine": "Stan"
+  "name": "STAN",
+  "tip_nekretnine": "STAN"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Tip Nekretnine",
+  "modified": "2025-01-07 13:54:08.678986",
+  "name": "NJIVA",
+  "tip_nekretnine": "NJIVA"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Tip Nekretnine",
+  "modified": "2025-01-07 13:55:20.891249",
+  "name": "PARCELA",
+  "tip_nekretnine": "PARCELA"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Tip Nekretnine",
+  "modified": "2025-01-07 13:55:29.574626",
+  "name": "LOKAL",
+  "tip_nekretnine": "LOKAL"
  },
  {
   "docstatus": 0,

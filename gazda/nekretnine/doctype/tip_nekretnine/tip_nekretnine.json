@@ -12,6 +12,7 @@
  ],
  "fields": [
   {
+   "allow_in_quick_entry": 1,
    "fieldname": "tip_nekretnine",
    "fieldtype": "Data",
    "label": "Tip Nekretnine",
@@ -20,7 +21,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-02-01 06:26:42.504117",
+ "modified": "2025-01-07 13:54:36.434764",
  "modified_by": "Administrator",
  "module": "Nekretnine",
  "name": "Tip Nekretnine",
@@ -40,6 +41,7 @@
    "write": 1
   }
  ],
+ "quick_entry": 1,
  "sort_field": "modified",
  "sort_order": "DESC",
  "states": []
