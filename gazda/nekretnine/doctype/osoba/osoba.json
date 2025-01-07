@@ -31,7 +31,7 @@
   {
    "allow_in_quick_entry": 1,
    "fieldname": "telefon",
-   "fieldtype": "Phone",
+   "fieldtype": "Data",
    "label": "Telefon"
   },
   {
