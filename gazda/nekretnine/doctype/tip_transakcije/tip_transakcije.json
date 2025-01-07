@@ -1,0 +1,52 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "field:tip_transakcije",
+ "creation": "2025-01-06 01:41:37.227935",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "tip_transakcije",
+  "kretanje_novca"
+ ],
+ "fields": [
+  {
+   "fieldname": "tip_transakcije",
+   "fieldtype": "Data",
+   "label": "Tip transakcije",
+   "unique": 1
+  },
+  {
+   "fieldname": "kretanje_novca",
+   "fieldtype": "Select",
+   "label": "Kretanje novca",
+   "options": "rashod\nprihod\nzapis"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2025-01-06 02:13:41.108595",
+ "modified_by": "Administrator",
+ "module": "Nekretnine",
+ "name": "Tip transakcije",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "title_field": "tip_transakcije"
+}

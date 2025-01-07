@@ -1,7 +1,8 @@
 {
  "charts": [],
- "content": "[{\"id\":\"ts30L6l5gt\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">Imovina</span>\",\"col\":12}},{\"id\":\"sGX22-fDeL\",\"type\":\"chart\",\"data\":{\"chart_name\":\"Kirije u prethodnih godinu dana\",\"col\":12}},{\"id\":\"eLAhvPiYE_\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Nova Kirija\",\"col\":4}},{\"id\":\"wFt9DkfdG3\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Nova Arenda\",\"col\":4}},{\"id\":\"EuEkssAr74\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Novi tro\u0161ak\",\"col\":4}},{\"id\":\"7r5YfZ2YUq\",\"type\":\"quick_list\",\"data\":{\"quick_list_name\":\"Kirije\",\"col\":4}},{\"id\":\"_V-arFZtzl\",\"type\":\"quick_list\",\"data\":{\"quick_list_name\":\"Arenda\",\"col\":4}},{\"id\":\"8MVhq5XhR-\",\"type\":\"quick_list\",\"data\":{\"quick_list_name\":\"Tro\u0161kovi\",\"col\":4}},{\"id\":\"6OUOxBgkDu\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"KpkK3O41At\",\"type\":\"card\",\"data\":{\"card_name\":\"Osnovno\",\"col\":3}},{\"id\":\"DQogAL-5nS\",\"type\":\"card\",\"data\":{\"card_name\":\"Izve\u0161taji\",\"col\":4}}]",
+ "content": "[{\"id\":\"KpkK3O41At\",\"type\":\"card\",\"data\":{\"card_name\":\"Osnovno\",\"col\":3}}]",
  "creation": "2023-02-28 14:26:47.112402",
+ "custom_blocks": [],
  "docstatus": 0,
  "doctype": "Workspace",
  "for_user": "",
@@ -50,57 +51,17 @@
    "type": "Link"
   }
  ],
- "modified": "2023-03-07 13:12:31.842930",
+ "modified": "2025-01-05 11:22:38.281781",
  "modified_by": "Administrator",
  "module": "Gazda",
  "name": "Imovina",
+ "number_cards": [],
  "owner": "Administrator",
  "parent_page": "",
  "public": 1,
- "quick_lists": [
-  {
-   "document_type": "Transakcija",
-   "label": "Tro\u0161kovi",
-   "quick_list_filter": "{\"tip_transakcije\":[\"=\",\"Renovacije\"]}"
-  },
-  {
-   "document_type": "Transakcija",
-   "label": "Kirije",
-   "quick_list_filter": "{\"tip_transakcije\":[\"=\",\"Kirija\"]}"
-  },
-  {
-   "document_type": "Transakcija",
-   "label": "Arenda",
-   "quick_list_filter": "{\"tip_transakcije\":[\"=\",\"Arenda\"]}"
-  }
- ],
+ "quick_lists": [],
  "roles": [],
  "sequence_id": 1.0,
- "shortcuts": [
-  {
-   "color": "Green",
-   "doc_view": "New",
-   "label": "Novi tro\u0161ak",
-   "link_to": "Transakcija",
-   "stats_filter": "{\"tip_transakcije\":[\"=\",\"Grejanje\"]}",
-   "type": "DocType"
-  },
-  {
-   "color": "Red",
-   "doc_view": "New",
-   "label": "Nova Kirija",
-   "link_to": "Transakcija",
-   "stats_filter": "{\"tip_transakcije\":[\"=\",\"Kirija\"]}",
-   "type": "DocType"
-  },
-  {
-   "color": "Grey",
-   "doc_view": "New",
-   "label": "Nova Arenda",
-   "link_to": "Transakcija",
-   "stats_filter": "{\"tip_transakcije\":[\"=\",\"Arenda\"]}",
-   "type": "DocType"
-  }
- ],
+ "shortcuts": [],
  "title": "Imovina"
 }

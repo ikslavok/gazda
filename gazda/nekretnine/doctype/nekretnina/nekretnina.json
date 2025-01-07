@@ -9,22 +9,13 @@
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
-  "osnovne_informacije_tab",
+  "osnovno_tab",
   "naziv_nekretnine",
   "tip_nekretnine",
-  "section_break_xbgdy",
+  "column_break_ecwc",
   "vlasnik",
-  "column_break_kthyi",
   "suvlasnici",
-  "geodetski_podaci_section",
-  "povr\u0161ina_m2",
-  "povr\u0161ina_jutro",
-  "column_break_ol7j2",
-  "broj_parcele",
-  "povr\u0161ina_hektar",
-  "section_break_gmqid",
-  "opis",
-  "stanje_tab",
+  "section_break_xkck",
   "status",
   "zakupac",
   "zakupnina",
@@ -32,9 +23,9 @@
   "zakonski_plodouzivalac",
   "odrzava",
   "column_break_olbef",
-  "nivo_name\u0161tenosti_stana",
-  "opis_name\u0161taja_u_stanu",
-  "slika_i_lokacija_tab",
+  "nivo_namestenosti_stana",
+  "opis_namestaja_u_stanu",
+  "detalji_tab",
   "slika_prilaza_nekretnini_display",
   "slika_prilaza_nekretnini",
   "kako_do\u0107i_do_nekretnine",
@@ -43,6 +34,14 @@
   "adresa",
   "ulica_i_broj",
   "mesto",
+  "section_break_gmqid",
+  "opis",
+  "geodetski_podaci_section",
+  "povr\u0161ina_m2",
+  "povr\u0161ina_jutro",
+  "column_break_ol7j2",
+  "broj_parcele",
+  "povr\u0161ina_hektar",
   "katastar_tab",
   "katastarska_strana_url",
   "podaci_o_parceli_section",
@@ -83,15 +82,6 @@
   "imaoci_prava_na_posebni_deo_objekta"
  ],
  "fields": [
-  {
-   "fieldname": "osnovne_informacije_tab",
-   "fieldtype": "Tab Break",
-   "label": "Osnovno"
-  },
-  {
-   "fieldname": "column_break_kthyi",
-   "fieldtype": "Column Break"
-  },
   {
    "allow_in_quick_entry": 1,
    "fieldname": "tip_nekretnine",
@@ -135,11 +125,6 @@
    "read_only": 1
   },
   {
-   "fieldname": "stanje_tab",
-   "fieldtype": "Tab Break",
-   "label": "Stanje"
-  },
-  {
    "fieldname": "status",
    "fieldtype": "Select",
    "label": "Status",
@@ -148,18 +133,6 @@
   {
    "fieldname": "column_break_olbef",
    "fieldtype": "Column Break"
-  },
-  {
-   "default": "Poluname\u0161ten",
-   "fieldname": "nivo_name\u0161tenosti_stana",
-   "fieldtype": "Select",
-   "label": "Nivo name\u0161tenosti stana",
-   "options": "Nename\u0161ten\nPoluname\u0161ten\nName\u0161ten"
-  },
-  {
-   "fieldname": "slika_i_lokacija_tab",
-   "fieldtype": "Tab Break",
-   "label": "Slika i lokacija"
   },
   {
    "fieldname": "slika_prilaza_nekretnini_display",
@@ -196,15 +169,6 @@
    "unique": 1
   },
   {
-   "fieldname": "section_break_xbgdy",
-   "fieldtype": "Section Break"
-  },
-  {
-   "fieldname": "opis_name\u0161taja_u_stanu",
-   "fieldtype": "Text Editor",
-   "label": "Opis name\u0161taja u stanu"
-  },
-  {
    "fieldname": "lokacija_parcele",
    "fieldtype": "HTML Editor",
    "ignore_xss_filter": 1,
@@ -235,9 +199,8 @@
   },
   {
    "fieldname": "suvlasnici",
-   "fieldtype": "Table MultiSelect",
-   "label": "Suvlasnici",
-   "options": "Vlasnik"
+   "fieldtype": "Data",
+   "label": "Suvlasnici"
   },
   {
    "fieldname": "katastar_tab",
@@ -375,9 +338,8 @@
   },
   {
    "fieldname": "imaoci_prava_na_parcelu",
-   "fieldtype": "Table MultiSelect",
+   "fieldtype": "Data",
    "label": "Imaoci prava na parcelu",
-   "options": "Vlasnik",
    "read_only": 1
   },
   {
@@ -451,14 +413,14 @@
   },
   {
    "fieldname": "imaoci_prava_na_posebni_deo_objekta",
-   "fieldtype": "Table MultiSelect",
+   "fieldtype": "Data",
    "label": "Imaoci prava na posebni deo objekta",
    "options": "Vlasnik",
    "read_only": 1
   },
   {
    "fieldname": "imaoci_prava_na_ceo_objekat",
-   "fieldtype": "Table MultiSelect",
+   "fieldtype": "Data",
    "label": "Imaoci prava na ceo objekat",
    "options": "Vlasnik",
    "read_only": 1
@@ -498,6 +460,36 @@
    "fieldtype": "Link",
    "label": "Odr\u017eava",
    "options": "User"
+  },
+  {
+   "fieldname": "osnovno_tab",
+   "fieldtype": "Tab Break",
+   "label": "Osnovno"
+  },
+  {
+   "fieldname": "column_break_ecwc",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_xkck",
+   "fieldtype": "Section Break"
+  },
+  {
+   "default": "Poluname\u0161ten",
+   "fieldname": "nivo_namestenosti_stana",
+   "fieldtype": "Select",
+   "label": "Nivo name\u0161tenosti stana",
+   "options": "Nename\u0161ten\nPoluname\u0161ten\nName\u0161ten"
+  },
+  {
+   "fieldname": "opis_namestaja_u_stanu",
+   "fieldtype": "Text Editor",
+   "label": "Opis name\u0161taja u stanu"
+  },
+  {
+   "fieldname": "detalji_tab",
+   "fieldtype": "Tab Break",
+   "label": "Detalji"
   }
  ],
  "image_field": "slika_prilaza_nekretnini",
@@ -509,7 +501,7 @@
    "link_fieldname": "nekretnina"
   }
  ],
- "modified": "2025-01-03 15:28:01.258537",
+ "modified": "2025-01-06 03:32:34.587192",
  "modified_by": "Administrator",
  "module": "Nekretnine",
  "name": "Nekretnina",

@@ -9,19 +9,17 @@
  "engine": "InnoDB",
  "field_order": [
   "naming_series",
-  "stanje",
-  "nekretnina",
-  "rok_za_pla\u0107anje",
-  "column_break_j5xvd",
   "tip_transakcije",
-  "osoba",
-  "datum_placanja",
+  "nekretnina",
+  "uplatilac",
+  "column_break_j5xvd",
+  "period",
+  "status",
+  "rok_za_pla\u0107anje",
   "section_break_4jsn0",
-  "pocetak_perioda",
-  "prihod",
+  "datum_placanja",
   "column_break_nko3c",
-  "krej_perioda",
-  "rashod",
+  "vrednost",
   "section_break_mxdwy",
   "komentar",
   "naziv",
@@ -29,9 +27,11 @@
  ],
  "fields": [
   {
+   "default": "TRA-.YY.MM.",
    "fieldname": "naming_series",
    "fieldtype": "Select",
-   "label": "Broj transakcije",
+   "hidden": 1,
+   "label": "\u0160ablon broja",
    "no_copy": 1,
    "options": "TRA-.YY.MM.",
    "reqd": 1
@@ -49,16 +49,6 @@
    "fieldtype": "Column Break"
   },
   {
-   "allow_in_quick_entry": 1,
-   "fetch_from": "nekretnina.u\u017eivalac_nekretnine",
-   "fetch_if_empty": 1,
-   "fieldname": "osoba",
-   "fieldtype": "Link",
-   "in_list_view": 1,
-   "label": "Platilac",
-   "options": "Osoba"
-  },
-  {
    "fieldname": "section_break_4jsn0",
    "fieldtype": "Section Break"
   },
@@ -67,18 +57,10 @@
    "fieldtype": "Column Break"
   },
   {
-   "allow_in_quick_entry": 1,
-   "fieldname": "rashod",
-   "fieldtype": "Float",
-   "label": "Rashod",
-   "precision": "2"
-  },
-  {
    "fieldname": "section_break_mxdwy",
    "fieldtype": "Section Break"
   },
   {
-   "allow_in_quick_entry": 1,
    "fieldname": "komentar",
    "fieldtype": "Text",
    "label": "Komentar"
@@ -106,23 +88,6 @@
    "reqd": 1
   },
   {
-   "fieldname": "prihod",
-   "fieldtype": "Currency",
-   "label": "Prihod",
-   "precision": "2"
-  },
-  {
-   "fieldname": "pocetak_perioda",
-   "fieldtype": "Date",
-   "hide_seconds": 1,
-   "label": "Po\u010detak perioda"
-  },
-  {
-   "fieldname": "krej_perioda",
-   "fieldtype": "Date",
-   "label": "Krej perioda"
-  },
-  {
    "fieldname": "amended_from",
    "fieldtype": "Link",
    "label": "Amended From",
@@ -138,7 +103,30 @@
   },
   {
    "allow_in_quick_entry": 1,
-   "fieldname": "stanje",
+   "fetch_from": "nekretnina.zakupac",
+   "fetch_if_empty": 1,
+   "fieldname": "uplatilac",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Uplatilac",
+   "options": "Osoba"
+  },
+  {
+   "fieldname": "period",
+   "fieldtype": "Date",
+   "hide_seconds": 1,
+   "label": "Period"
+  },
+  {
+   "allow_in_quick_entry": 1,
+   "fetch_from": "nekretnina.zakupnina",
+   "fieldname": "vrednost",
+   "fieldtype": "Currency",
+   "label": "Vrednost",
+   "precision": "2"
+  },
+  {
+   "fieldname": "status",
    "fieldtype": "Select",
    "in_list_view": 1,
    "label": "Stanje",
@@ -148,11 +136,10 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2023-03-07 15:42:12.595199",
+ "modified": "2025-01-05 11:43:20.157978",
  "modified_by": "Administrator",
  "module": "Nekretnine",
  "name": "Transakcija",
- "name_case": "UPPER CASE",
  "naming_rule": "By \"Naming Series\" field",
  "owner": "Administrator",
  "permissions": [
