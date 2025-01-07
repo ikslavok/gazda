@@ -7,12 +7,7 @@ app_description = "Aplikacija za upravljanje nekretninama"
 app_email = "filip@filipili.com"
 app_license = "MIT"
 
-fixtures = [
-    {"doctype": "Client Script"},
-    {"doctype": "Tip Nekretnine"},
-    {"doctype": "Tip transakcije"},
-    {"doctype": "Workspace"},
-]
+
 # Includes in <head>
 # ------------------
 
