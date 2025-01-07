@@ -13,13 +13,13 @@
    "fieldname": "transakcije",
    "fieldtype": "Link",
    "label": "Transakcije",
-   "options": "Tip transakcije"
+   "options": "Tip Transakcije"
   }
  ],
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2025-01-07 13:19:54.116169",
+ "modified": "2025-01-07 22:37:02.811963",
  "modified_by": "Administrator",
  "module": "Nekretnine",
  "name": "Nekretnina Transakcije Pratimo",

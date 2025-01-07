@@ -5,5 +5,5 @@
 from frappe.tests.utils import FrappeTestCase
 
 
-class TestTiptransakcije(FrappeTestCase):
+class TestTipTransakcije(FrappeTestCase):
 	pass

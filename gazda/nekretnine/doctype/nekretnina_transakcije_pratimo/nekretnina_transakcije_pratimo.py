@@ -5,5 +5,5 @@
 from frappe.model.document import Document
 
 
-class TipTransakcije(Document):
+class NekretninaTransakcijePratimo(Document):
 	pass

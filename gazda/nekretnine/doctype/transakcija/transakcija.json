@@ -73,7 +73,7 @@
    "fieldname": "tip_transakcije",
    "fieldtype": "Link",
    "label": "Tip Transakcije",
-   "options": "Tip transakcije",
+   "options": "Tip Transakcije",
    "reqd": 1
   },
   {
@@ -143,7 +143,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2025-01-07 13:46:11.985360",
+ "modified": "2025-01-07 22:37:03.007685",
  "modified_by": "Administrator",
  "module": "Nekretnine",
  "name": "Transakcija",
