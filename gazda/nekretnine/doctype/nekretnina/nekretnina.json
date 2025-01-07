@@ -417,7 +417,7 @@
   },
   {
    "fieldname": "imaoci_prava_na_posebni_deo_objekta",
-   "fieldtype": "Data",
+   "fieldtype": "Table MultiSelect",
    "label": "Imaoci prava na posebni deo objekta",
    "options": "Nekretnina Suvlasnici",
    "read_only": 1
@@ -509,7 +509,7 @@
  "image_field": "slika_prilaza_nekretnini",
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-01-07 21:27:02.709505",
+ "modified": "2025-01-07 21:56:03.666272",
  "modified_by": "Administrator",
  "module": "Nekretnine",
  "name": "Nekretnina",
