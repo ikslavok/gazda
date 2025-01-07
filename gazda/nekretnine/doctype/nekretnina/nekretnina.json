@@ -162,6 +162,7 @@
    "options": "Address"
   },
   {
+   "allow_in_quick_entry": 1,
    "fieldname": "naziv_nekretnine",
    "fieldtype": "Data",
    "in_list_view": 1,
@@ -436,12 +437,14 @@
    "precision": "2"
   },
   {
+   "allow_in_quick_entry": 1,
    "fieldname": "zakupac",
    "fieldtype": "Link",
    "label": "Zakupac",
    "options": "Osoba"
   },
   {
+   "allow_in_quick_entry": 1,
    "fieldname": "zakupnina",
    "fieldtype": "Currency",
    "label": "Zakupnina",
@@ -459,6 +462,7 @@
    "label": "Zakonski plodou\u017eivalac"
   },
   {
+   "allow_in_quick_entry": 1,
    "fieldname": "odrzava",
    "fieldtype": "Link",
    "label": "Odr\u017eava",
@@ -505,7 +509,7 @@
  "image_field": "slika_prilaza_nekretnini",
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-01-07 13:59:26.543248",
+ "modified": "2025-01-07 21:27:02.709505",
  "modified_by": "Administrator",
  "module": "Nekretnine",
  "name": "Nekretnina",
