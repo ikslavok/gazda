@@ -11,9 +11,9 @@
  "field_order": [
   "osnovni_podaci_tab",
   "ime",
-  "adresa",
+  "telefon",
   "column_break_g4pxi",
-  "kontakt"
+  "adresa"
  ],
  "fields": [
   {
@@ -29,29 +29,28 @@
    "unique": 1
   },
   {
-   "fieldname": "adresa",
-   "fieldtype": "Link",
-   "label": "Adresa",
-   "options": "Address"
+   "allow_in_quick_entry": 1,
+   "fieldname": "telefon",
+   "fieldtype": "Phone",
+   "label": "Telefon"
   },
   {
    "fieldname": "column_break_g4pxi",
    "fieldtype": "Column Break"
   },
   {
-   "fieldname": "kontakt",
+   "fieldname": "adresa",
    "fieldtype": "Link",
-   "label": "Kontakt",
-   "options": "Contact"
+   "label": "Adresa",
+   "options": "Address"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-03-14 14:28:07.645444",
+ "modified": "2025-01-07 23:47:49.020654",
  "modified_by": "Administrator",
  "module": "Nekretnine",
  "name": "Osoba",
- "name_case": "Title Case",
  "naming_rule": "By fieldname",
  "owner": "Administrator",
  "permissions": [
