@@ -110,10 +110,12 @@
   {
    "allow_in_quick_entry": 1,
    "fetch_from": "nekretnina.zakupnina",
+   "fetch_if_empty": 1,
    "fieldname": "vrednost",
    "fieldtype": "Currency",
    "label": "Vrednost",
-   "precision": "2"
+   "precision": "2",
+   "reqd": 1
   },
   {
    "fetch_from": "nekretnina.odrzava",
@@ -143,7 +145,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2025-01-07 22:37:03.007685",
+ "modified": "2025-01-08 00:29:29.866499",
  "modified_by": "Administrator",
  "module": "Nekretnine",
  "name": "Transakcija",
