@@ -458,8 +458,9 @@
   },
   {
    "fieldname": "zakonski_plodouzivalac",
-   "fieldtype": "Data",
-   "label": "Zakonski plodou\u017eivalac"
+   "fieldtype": "Link",
+   "label": "Zakonski plodou\u017eivalac",
+   "options": "Osoba"
   },
   {
    "allow_in_quick_entry": 1,
@@ -509,7 +510,7 @@
  "image_field": "slika_prilaza_nekretnini",
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-01-07 23:30:14.975028",
+ "modified": "2025-01-07 23:50:27.488008",
  "modified_by": "Administrator",
  "module": "Nekretnine",
  "name": "Nekretnina",
