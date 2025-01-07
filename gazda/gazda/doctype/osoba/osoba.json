@@ -13,8 +13,7 @@
   "ime",
   "telefon",
   "column_break_g4pxi",
-  "adresa",
-  "jmbg"
+  "adresa"
  ],
  "fields": [
   {
@@ -26,7 +25,9 @@
    "allow_in_quick_entry": 1,
    "fieldname": "ime",
    "fieldtype": "Data",
+   "in_list_view": 1,
    "label": "Ime ",
+   "reqd": 1,
    "unique": 1
   },
   {
@@ -44,16 +45,11 @@
    "fieldtype": "Link",
    "label": "Adresa",
    "options": "Address"
-  },
-  {
-   "fieldname": "jmbg",
-   "fieldtype": "Data",
-   "label": "JMBG"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-01-03 15:23:07.817338",
+ "modified": "2025-01-07 13:06:06.526530",
  "modified_by": "Administrator",
  "module": "Gazda",
  "name": "Osoba",
@@ -76,5 +72,6 @@
  "quick_entry": 1,
  "sort_field": "modified",
  "sort_order": "DESC",
- "states": []
+ "states": [],
+ "title_field": "ime"
 }

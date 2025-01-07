@@ -22,6 +22,7 @@
   "trenutni_plodouzivalac",
   "zakonski_plodouzivalac",
   "odrzava",
+  "pratimo_transakcije",
   "column_break_olbef",
   "nivo_namestenosti_stana",
   "opis_namestaja_u_stanu",
@@ -199,8 +200,9 @@
   },
   {
    "fieldname": "suvlasnici",
-   "fieldtype": "Data",
-   "label": "Suvlasnici"
+   "fieldtype": "Table MultiSelect",
+   "label": "Suvlasnici",
+   "options": "Nekretnina Suvlasnici"
   },
   {
    "fieldname": "katastar_tab",
@@ -338,8 +340,9 @@
   },
   {
    "fieldname": "imaoci_prava_na_parcelu",
-   "fieldtype": "Data",
+   "fieldtype": "Table MultiSelect",
    "label": "Imaoci prava na parcelu",
+   "options": "Nekretnina Suvlasnici",
    "read_only": 1
   },
   {
@@ -415,14 +418,14 @@
    "fieldname": "imaoci_prava_na_posebni_deo_objekta",
    "fieldtype": "Data",
    "label": "Imaoci prava na posebni deo objekta",
-   "options": "Vlasnik",
+   "options": "Nekretnina Suvlasnici",
    "read_only": 1
   },
   {
    "fieldname": "imaoci_prava_na_ceo_objekat",
-   "fieldtype": "Data",
+   "fieldtype": "Table MultiSelect",
    "label": "Imaoci prava na ceo objekat",
-   "options": "Vlasnik",
+   "options": "Nekretnina Suvlasnici",
    "read_only": 1
   },
   {
@@ -472,7 +475,8 @@
   },
   {
    "fieldname": "section_break_xkck",
-   "fieldtype": "Section Break"
+   "fieldtype": "Section Break",
+   "label": "Stanje"
   },
   {
    "default": "Poluname\u0161ten",
@@ -490,18 +494,18 @@
    "fieldname": "detalji_tab",
    "fieldtype": "Tab Break",
    "label": "Detalji"
+  },
+  {
+   "fieldname": "pratimo_transakcije",
+   "fieldtype": "Table MultiSelect",
+   "label": "Pratimo transakcije",
+   "options": "Nekretnina Transakcije Pratimo"
   }
  ],
  "image_field": "slika_prilaza_nekretnini",
  "index_web_pages_for_search": 1,
- "links": [
-  {
-   "group": "Ra\u010dunovo\u0111stvo",
-   "link_doctype": "Transakcija",
-   "link_fieldname": "nekretnina"
-  }
- ],
- "modified": "2025-01-06 03:32:34.587192",
+ "links": [],
+ "modified": "2025-01-07 13:51:43.431097",
  "modified_by": "Administrator",
  "module": "Nekretnine",
  "name": "Nekretnina",
@@ -531,7 +535,7 @@
   },
   {
    "color": "Red",
-   "title": "Koristi se"
+   "title": "Zauzeto"
   }
  ],
  "track_changes": 1

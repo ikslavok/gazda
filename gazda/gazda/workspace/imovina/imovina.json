@@ -1,6 +1,6 @@
 {
  "charts": [],
- "content": "[{\"id\":\"KpkK3O41At\",\"type\":\"card\",\"data\":{\"card_name\":\"Osnovno\",\"col\":3}}]",
+ "content": "[{\"id\":\"XwGin6ibRw\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Nova transakcija\",\"col\":3}},{\"id\":\"yybSVk5Nxl\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"KpkK3O41At\",\"type\":\"card\",\"data\":{\"card_name\":\"Osnovno\",\"col\":3}}]",
  "creation": "2023-02-28 14:26:47.112402",
  "custom_blocks": [],
  "docstatus": 0,
@@ -51,7 +51,7 @@
    "type": "Link"
   }
  ],
- "modified": "2025-01-05 11:22:38.281781",
+ "modified": "2025-01-07 13:53:03.821870",
  "modified_by": "Administrator",
  "module": "Gazda",
  "name": "Imovina",

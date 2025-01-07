@@ -10,18 +10,18 @@
  "field_order": [
   "naming_series",
   "tip_transakcije",
+  "kretanje_novca",
   "nekretnina",
-  "uplatilac",
   "column_break_j5xvd",
+  "uplatilac",
+  "primalac",
   "period",
-  "status",
-  "rok_za_pla\u0107anje",
   "section_break_4jsn0",
-  "datum_placanja",
-  "column_break_nko3c",
   "vrednost",
+  "valuta",
+  "column_break_nko3c",
+  "datum_placanja",
   "section_break_mxdwy",
-  "komentar",
   "naziv",
   "amended_from"
  ],
@@ -61,30 +61,19 @@
    "fieldtype": "Section Break"
   },
   {
-   "fieldname": "komentar",
-   "fieldtype": "Text",
-   "label": "Komentar"
-  },
-  {
-   "fieldname": "rok_za_pla\u0107anje",
-   "fieldtype": "Date",
-   "label": "Rok za pla\u0107anje"
-  },
-  {
    "allow_in_quick_entry": 1,
    "default": "Today",
    "fieldname": "datum_placanja",
    "fieldtype": "Date",
-   "label": "Datum pla\u0107anja",
-   "options": "Today"
+   "label": "Datum pla\u0107anja"
   },
   {
    "allow_in_quick_entry": 1,
    "default": "Kirija",
    "fieldname": "tip_transakcije",
-   "fieldtype": "Select",
+   "fieldtype": "Link",
    "label": "Tip Transakcije",
-   "options": "Kirija\nArenda\nPorez\nVoda\nStruja\nGas\nGrejanje\nRenovacije",
+   "options": "Tip transakcije",
    "reqd": 1
   },
   {
@@ -112,6 +101,7 @@
    "options": "Osoba"
   },
   {
+   "allow_in_quick_entry": 1,
    "fieldname": "period",
    "fieldtype": "Date",
    "hide_seconds": 1,
@@ -126,17 +116,34 @@
    "precision": "2"
   },
   {
-   "fieldname": "status",
-   "fieldtype": "Select",
-   "in_list_view": 1,
-   "label": "Stanje",
-   "options": "NIJE PLA\u0106ENO\nPLA\u0106ENO"
+   "fetch_from": "nekretnina.odrzava",
+   "fetch_if_empty": 1,
+   "fieldname": "primalac",
+   "fieldtype": "Link",
+   "label": "Primalac",
+   "options": "Osoba"
+  },
+  {
+   "allow_in_quick_entry": 1,
+   "default": "RSD",
+   "fieldname": "valuta",
+   "fieldtype": "Link",
+   "label": "Valuta",
+   "options": "Currency"
+  },
+  {
+   "fetch_from": "tip_transakcije.kretanje_novca",
+   "fieldname": "kretanje_novca",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Kretanje novca",
+   "options": "\nprihod\nrashod\nzapis"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2025-01-05 11:43:20.157978",
+ "modified": "2025-01-07 13:46:11.985360",
  "modified_by": "Administrator",
  "module": "Nekretnine",
  "name": "Transakcija",
