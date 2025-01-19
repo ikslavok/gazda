@@ -8,4 +8,3 @@ class Transakcija(Document):
 	def before_submit(self):
 		# self.db_set('state','PLAĆENO')
 		self.naziv = f"{self.uplatilac} - {self.tip_transakcije} ({self.nekretnina})"
-		self.save()
