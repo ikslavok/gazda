@@ -11,6 +11,7 @@
  "field_order": [
   "osnovno_tab",
   "naziv_nekretnine",
+  "skracenica",
   "tip_nekretnine",
   "column_break_ecwc",
   "vlasnik",
@@ -505,12 +506,19 @@
    "fieldtype": "Table MultiSelect",
    "label": "Pratimo transakcije",
    "options": "Nekretnina Transakcije Pratimo"
+  },
+  {
+   "allow_in_quick_entry": 1,
+   "fieldname": "skracenica",
+   "fieldtype": "Data",
+   "label": "Skra\u0107enica",
+   "unique": 1
   }
  ],
  "image_field": "slika_prilaza_nekretnini",
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-01-07 23:50:27.488008",
+ "modified": "2025-02-13 19:00:26.430354",
  "modified_by": "Administrator",
  "module": "Nekretnine",
  "name": "Nekretnina",

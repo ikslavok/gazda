@@ -1,7 +1,7 @@
 {
  "charts": [],
- "content": "[{\"id\":\"XwGin6ibRw\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Nova transakcija\",\"col\":3}},{\"id\":\"yybSVk5Nxl\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"KpkK3O41At\",\"type\":\"card\",\"data\":{\"card_name\":\"Osnovno\",\"col\":3}}]",
- "creation": "2023-02-28 14:26:47.112402",
+ "content": "[{\"id\":\"KpkK3O41At\",\"type\":\"card\",\"data\":{\"card_name\":\"Osnovno\",\"col\":3}}]",
+ "creation": "2025-02-13 20:06:39.653540",
  "custom_blocks": [],
  "docstatus": 0,
  "doctype": "Workspace",
@@ -16,9 +16,20 @@
    "hidden": 0,
    "is_query_report": 0,
    "label": "Osnovno",
-   "link_count": 3,
+   "link_count": 4,
+   "link_type": "DocType",
    "onboard": 0,
    "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Ra\u010duni",
+   "link_count": 0,
+   "link_to": "Racun",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
   },
   {
    "hidden": 0,
@@ -51,7 +62,7 @@
    "type": "Link"
   }
  ],
- "modified": "2025-01-07 13:53:03.821870",
+ "modified": "2025-02-14 09:45:10.145374",
  "modified_by": "Administrator",
  "module": "Gazda",
  "name": "Imovina",

@@ -1,14 +1,112 @@
 {
  "actions": [],
  "allow_rename": 1,
+ "autoname": "hash",
  "creation": "2025-01-03 15:55:37.832750",
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
   "section_break_wjtu",
-  "amended_from"
+  "amended_from",
+  "naming_series",
+  "tip_transakcije",
+  "naziv",
+  "status",
+  "column_break_j5xvd",
+  "nekretnina",
+  "uplatilac",
+  "section_break_mxdwy",
+  "rok_placanja",
+  "period",
+  "kretanje_novca",
+  "column_break_kmzm",
+  "vrednost",
+  "valuta",
+  "dinarska_protivrednost"
  ],
  "fields": [
+  {
+   "default": "RACUN-.YY.MM.",
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "hidden": 1,
+   "label": "\u0160ablon broja",
+   "no_copy": 1,
+   "options": "RACUN-.YY.MM.",
+   "reqd": 1
+  },
+  {
+   "allow_in_quick_entry": 1,
+   "fieldname": "nekretnina",
+   "fieldtype": "Link",
+   "label": "Nekretnina",
+   "options": "Nekretnina",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_j5xvd",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_mxdwy",
+   "fieldtype": "Section Break"
+  },
+  {
+   "allow_in_quick_entry": 1,
+   "fieldname": "rok_placanja",
+   "fieldtype": "Date",
+   "label": "Rok za naplatu"
+  },
+  {
+   "allow_in_quick_entry": 1,
+   "default": "Kirija",
+   "fieldname": "tip_transakcije",
+   "fieldtype": "Link",
+   "label": "Tip Transakcije",
+   "options": "Tip Transakcije",
+   "reqd": 1
+  },
+  {
+   "allow_in_quick_entry": 1,
+   "fetch_from": "nekretnina.zakupac",
+   "fetch_if_empty": 1,
+   "fieldname": "uplatilac",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Uplatilac",
+   "options": "Osoba"
+  },
+  {
+   "allow_in_quick_entry": 1,
+   "fieldname": "period",
+   "fieldtype": "Data",
+   "hide_seconds": 1,
+   "label": "Period"
+  },
+  {
+   "allow_in_quick_entry": 1,
+   "fieldname": "vrednost",
+   "fieldtype": "Currency",
+   "label": "Vrednost",
+   "precision": "2",
+   "reqd": 1
+  },
+  {
+   "allow_in_quick_entry": 1,
+   "default": "RSD",
+   "fieldname": "valuta",
+   "fieldtype": "Link",
+   "label": "Valuta",
+   "options": "Currency"
+  },
+  {
+   "fetch_from": "tip_transakcije.kretanje_novca",
+   "fieldname": "kretanje_novca",
+   "fieldtype": "Read Only",
+   "hidden": 1,
+   "label": "Kretanje novca",
+   "options": "\nprihod\nrashod\nzapis"
+  },
   {
    "fieldname": "section_break_wjtu",
    "fieldtype": "Section Break"
@@ -22,15 +120,38 @@
    "print_hide": 1,
    "read_only": 1,
    "search_index": 1
+  },
+  {
+   "fieldname": "column_break_kmzm",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "naziv",
+   "fieldtype": "Data",
+   "label": "Naziv"
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "status"
+  },
+  {
+   "depends_on": "eval:doc.valuta != \"RSD\"",
+   "fieldname": "dinarska_protivrednost",
+   "fieldtype": "Read Only",
+   "label": "Dinarska protivrednost",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2025-01-03 15:55:37.832750",
+ "modified": "2025-02-20 09:02:27.672501",
  "modified_by": "Administrator",
  "module": "Nekretnine",
  "name": "Racun",
+ "naming_rule": "Random",
  "owner": "Administrator",
  "permissions": [
   {
@@ -47,7 +168,9 @@
    "write": 1
   }
  ],
+ "show_title_field_in_link": 1,
  "sort_field": "modified",
  "sort_order": "DESC",
- "states": []
+ "states": [],
+ "title_field": "naziv"
 }

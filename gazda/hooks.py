@@ -119,23 +119,13 @@ fixtures = [
 # Scheduled Tasks
 # ---------------
 
-# scheduler_events = {
-#	"all": [
-#		"gazda.tasks.all"
-#	],
-#	"daily": [
-#		"gazda.tasks.daily"
-#	],
-#	"hourly": [
-#		"gazda.tasks.hourly"
-#	],
-#	"weekly": [
-#		"gazda.tasks.weekly"
-#	],
-#	"monthly": [
-#		"gazda.tasks.monthly"
-#	],
-# }
+scheduler_events = {
+	"cron": {
+        "54 19 * * *": [
+            "gazda.nekretnine.api.create_racun"
+        ]
+    }
+}
 
 # Testing
 # -------
