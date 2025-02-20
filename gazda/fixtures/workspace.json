@@ -1307,7 +1307,7 @@
     "parent": "Users",
     "parentfield": "links",
     "parenttype": "Workspace",
-    "report_ref_doctype": null,
+    "report_ref_doctype": "DocShare",
     "type": "Link"
    },
    {
@@ -1902,9 +1902,9 @@
     "icon": null,
     "is_query_report": 0,
     "label": "Osnovno",
-    "link_count": 3,
+    "link_count": 4,
     "link_to": null,
-    "link_type": null,
+    "link_type": "DocType",
     "onboard": 0,
     "only_for": null,
     "parent": "Imovina",
@@ -1912,6 +1912,24 @@
     "parenttype": "Workspace",
     "report_ref_doctype": null,
     "type": "Card Break"
+   },
+   {
+    "dependencies": null,
+    "description": null,
+    "hidden": 0,
+    "icon": null,
+    "is_query_report": 0,
+    "label": "Računi",
+    "link_count": 0,
+    "link_to": "Racun",
+    "link_type": "DocType",
+    "onboard": 0,
+    "only_for": null,
+    "parent": "Imovina",
+    "parentfield": "links",
+    "parenttype": "Workspace",
+    "report_ref_doctype": null,
+    "type": "Link"
    },
    {
     "dependencies": null,
@@ -1968,7 +1986,7 @@
     "type": "Link"
    }
   ],
-  "modified": "2025-01-05 11:22:38.281781",
+  "modified": "2025-02-14 09:45:10.145374",
   "module": "Gazda",
   "name": "Imovina",
   "number_cards": [],

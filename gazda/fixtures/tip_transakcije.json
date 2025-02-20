@@ -10,22 +10,6 @@
  {
   "docstatus": 0,
   "doctype": "Tip Transakcije",
-  "kretanje_novca": "prihod",
-  "modified": "2025-01-06 01:50:02.133651",
-  "name": "KIRIJA",
-  "tip_transakcije": "KIRIJA"
- },
- {
-  "docstatus": 0,
-  "doctype": "Tip Transakcije",
-  "kretanje_novca": "prihod",
-  "modified": "2025-01-06 01:50:30.557033",
-  "name": "ARENDA",
-  "tip_transakcije": "ARENDA"
- },
- {
-  "docstatus": 0,
-  "doctype": "Tip Transakcije",
   "kretanje_novca": "zapis",
   "modified": "2025-01-06 02:15:19.248366",
   "name": "STRUJA",
@@ -43,25 +27,9 @@
   "docstatus": 0,
   "doctype": "Tip Transakcije",
   "kretanje_novca": "zapis",
-  "modified": "2025-01-06 02:22:22.709015",
-  "name": "GAS",
-  "tip_transakcije": "GAS"
- },
- {
-  "docstatus": 0,
-  "doctype": "Tip Transakcije",
-  "kretanje_novca": "zapis",
   "modified": "2025-01-06 02:22:44.340008",
   "name": "VODOVOD",
   "tip_transakcije": "VODOVOD"
- },
- {
-  "docstatus": 0,
-  "doctype": "Tip Transakcije",
-  "kretanje_novca": "zapis",
-  "modified": "2025-01-06 02:22:56.518469",
-  "name": "KOMUNALIJE",
-  "tip_transakcije": "KOMUNALIJE"
  },
  {
   "docstatus": 0,
@@ -86,5 +54,37 @@
   "modified": "2025-01-06 02:23:48.753069",
   "name": "RENOVACIJE",
   "tip_transakcije": "RENOVACIJE"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Tip Transakcije",
+  "kretanje_novca": "zapis",
+  "modified": "2025-01-06 02:22:22.709015",
+  "name": "GAS",
+  "tip_transakcije": "GAS"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Tip Transakcije",
+  "kretanje_novca": "zapis",
+  "modified": "2025-01-06 02:22:56.518469",
+  "name": "KOMUNALIJE",
+  "tip_transakcije": "KOMUNALIJE"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Tip Transakcije",
+  "kretanje_novca": "prihod",
+  "modified": "2025-01-06 01:50:30.557033",
+  "name": "ARENDA",
+  "tip_transakcije": "ARENDA"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Tip Transakcije",
+  "kretanje_novca": "prihod",
+  "modified": "2025-01-06 01:50:02.133651",
+  "name": "KIRIJA",
+  "tip_transakcije": "KIRIJA"
  }
 ]

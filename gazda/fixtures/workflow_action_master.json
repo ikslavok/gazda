@@ -1,0 +1,37 @@
+[
+ {
+  "docstatus": 0,
+  "doctype": "Workflow Action Master",
+  "modified": "2025-01-02 20:53:37.327224",
+  "name": "Reject",
+  "workflow_action_name": "Reject"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow Action Master",
+  "modified": "2025-01-02 20:53:37.327834",
+  "name": "Review",
+  "workflow_action_name": "Review"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow Action Master",
+  "modified": "2025-01-02 20:53:37.326362",
+  "name": "Approve",
+  "workflow_action_name": "Approve"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow Action Master",
+  "modified": "2025-02-20 00:12:20.060432",
+  "name": "Poništi",
+  "workflow_action_name": "Poništi"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow Action Master",
+  "modified": "2025-02-20 00:11:54.078739",
+  "name": "Plati",
+  "workflow_action_name": "Plati"
+ }
+]

@@ -11,6 +11,9 @@ fixtures = [
     {"doctype": "Client Script"},
     {"doctype": "Tip Nekretnine"},
     {"doctype": "Tip Transakcije"},
+    {"doctype": "Workflow Action Master"},
+    {"doctype": "Workflow State"},
+    {"doctype": "Workflow"},
     {"doctype": "Workspace"},
 ]
 # Includes in <head>

@@ -1,0 +1,56 @@
+[
+ {
+  "docstatus": 0,
+  "doctype": "Workflow State",
+  "icon": "question-sign",
+  "modified": "2025-01-02 20:53:37.315252",
+  "name": "Pending",
+  "style": "",
+  "workflow_state_name": "Pending"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow State",
+  "icon": "ok-sign",
+  "modified": "2025-01-02 20:53:37.316375",
+  "name": "Approved",
+  "style": "Success",
+  "workflow_state_name": "Approved"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow State",
+  "icon": "remove",
+  "modified": "2025-01-02 20:53:37.316909",
+  "name": "Rejected",
+  "style": "Danger",
+  "workflow_state_name": "Rejected"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow State",
+  "icon": "",
+  "modified": "2025-02-20 00:23:38.024141",
+  "name": "Poništeno",
+  "style": "Inverse",
+  "workflow_state_name": "Poništeno"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow State",
+  "icon": "",
+  "modified": "2025-02-20 00:19:33.803457",
+  "name": "Neplaćeno",
+  "style": "Danger",
+  "workflow_state_name": "Neplaćeno"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow State",
+  "icon": "",
+  "modified": "2025-02-20 00:19:59.000598",
+  "name": "Plaćeno",
+  "style": "Success",
+  "workflow_state_name": "Plaćeno"
+ }
+]
