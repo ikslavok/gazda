@@ -2,34 +2,64 @@
 // For license information, please see license.txt
 
 frappe.ui.form.on('Transakcija', {
-	// refresh: function(frm) {
-
-	// }
-	"state": function(frm) {
+	onload(frm) {
+        setTimeout(() => {
+                $('.col-lg-2.layout-side-section').css('display', 'none');
+        }, 10);
+        },
+	refresh(frm) {
+		frm.page.set_primary_action(__('ARHIVIRAJ'), function() {
+            frm.submit();
+        });
+				if (frm.doc.docstatus === 0) {
+            // Change the display of the status field
+            frm.set_df_property('status', 'options', ['OTVORENO']);
+            frm.refresh_field('status');
+        }
+        setTimeout(() => {
+                $('.form-assignments').hide();
+                $('.form-attachments').hide();
+                $('.form-tags').hide();
+                $('.form-shared').hide();
+                $('.followed-by-section').hide();
+                $('.form-sidebar-stats').hide();
+                
+        }, 10);
+	},
+	nekretnina: function(frm) {
+			frm.save();
+	},
+	rok_za_plaćanje: function(frm) {
+			frm.save();
+	},
+	datum_plaćanja: function(frm) {
 			if (!frm.is_new()) {
 				frm.save();
 			}
 	},
-	"nekretnina": function(frm) {
-			frm.save();
-	},
-	"rok_za_plaćanje": function(frm) {
-			frm.save();
-	},
-	"datum_plaćanja": function(frm) {
+	tip_transakcije: function(frm) {
 			if (!frm.is_new()) {
 				frm.save();
 			}
 	},
-	"tip_transakcije": function(frm) {
-			if (!frm.is_new()) {
-				frm.save();
-			}
+	vrednost: function(frm) {
+			calculate_dinarska_protivrednost(frm);
 	},
-	"prihod": function(frm) {
-			frm.save();
-	},
-	"rashod": function(frm) {
-			frm.save();
+	
+	valuta: function(frm) {
+			calculate_dinarska_protivrednost(frm);
 	}
 });
+
+function calculate_dinarska_protivrednost(frm) {
+    if (!frm.doc.vrednost) {
+        frm.set_value('dinarska_protivrednost', 0);
+        return;
+    }
+    
+    if (frm.doc.valuta === 'RSD') {
+        frm.set_value('dinarska_protivrednost', frm.doc.vrednost);
+    } else if (frm.doc.valuta === 'EUR') {
+        frm.set_value('dinarska_protivrednost', frm.doc.vrednost * 117);
+    }
+}

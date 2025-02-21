@@ -3,6 +3,52 @@ from datetime import datetime, timedelta
 from calendar import monthrange
 
 @frappe.whitelist()
+def otvori_transakciju(**kwargs):
+    tip_transakcije = kwargs.get('tip_transakcije')
+    nekretnina = kwargs.get('nekretnina')
+    uplatilac = kwargs.get('uplatilac')
+    period = kwargs.get('period')
+    name = kwargs.get('name')
+    vrednost = kwargs.get('vrednost')
+    valuta = kwargs.get('valuta')
+    dinarska_protivrednost = kwargs.get('dinarska_protivrednost')
+    naziv = kwargs.get('naziv')
+    proveri_transakciju = frappe.get_all(
+        'Transakcija',
+        filters={
+            'tip_transakcije': tip_transakcije,
+            'nekretnina': nekretnina,
+            'uplatilac': uplatilac,
+            'period': period
+        },
+        limit=1
+    )
+    
+    if proveri_transakciju:
+        frappe.set_value('Racun', name, 'uplata', proveri_transakciju[0].name)
+        frappe.set_value('Transakcija', proveri_transakciju[0].name, 'racun', name)
+        return proveri_transakciju[0].name
+    else:
+        doc = frappe.new_doc('Transakcija')
+        doc.tip_transakcije = tip_transakcije
+        doc.kretanje_novca = frappe.get_value('Tip Transakcije', tip_transakcije, 'kretanje_novca')
+        doc.nekretnina = nekretnina
+        doc.uplatilac = uplatilac
+        doc.period = period
+        doc.naziv = naziv
+        if vrednost:
+            doc.vrednost = vrednost
+        if valuta:
+            doc.valuta = valuta
+        doc.racun = name
+        if dinarska_protivrednost:
+            doc.dinarska_protivrednost = dinarska_protivrednost
+        doc.save()
+        frappe.set_value('Racun', name, 'uplata', doc.name)
+        
+        return doc.name
+    
+@frappe.whitelist()
 def create_racun():
     def get_period_string():
         today = datetime.now()
@@ -30,11 +76,11 @@ def create_racun():
         doc.uplatilac = uplatilac
         doc.tip_transakcije = transakcija
         doc.period = period
-        doc.rok_placanja = rok
+        doc.rok_placanja = rok 
         doc.vrednost = vrednost
         doc.valuta = valuta
         doc.kretanje_novca = kretanje_novca
-        doc.naziv = f"{doc.tip_transakcije} za {mesec} - {doc.uplatilac.split('-')[-1].upper()} ({skracenica})"
+        doc.naziv = f"{doc.tip_transakcije} za {mesec} - {doc.uplatilac.split(' ')[0].upper()} ({skracenica})"
         doc.insert()
     
     zauzete_nekretnine_lista = frappe.get_list(

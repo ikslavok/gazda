@@ -10,7 +10,6 @@
   "amended_from",
   "naming_series",
   "tip_transakcije",
-  "naziv",
   "status",
   "column_break_j5xvd",
   "nekretnina",
@@ -19,10 +18,13 @@
   "rok_placanja",
   "period",
   "kretanje_novca",
+  "naziv",
   "column_break_kmzm",
   "vrednost",
   "valuta",
-  "dinarska_protivrednost"
+  "dinarska_protivrednost",
+  "uplata",
+  "connections_tab"
  ],
  "fields": [
   {
@@ -140,14 +142,33 @@
    "depends_on": "eval:doc.valuta != \"RSD\"",
    "fieldname": "dinarska_protivrednost",
    "fieldtype": "Read Only",
+   "hidden": 1,
    "label": "Dinarska protivrednost",
    "read_only": 1
+  },
+  {
+   "fieldname": "uplata",
+   "fieldtype": "Link",
+   "hidden": 1,
+   "label": "Uplata",
+   "options": "Transakcija",
+   "read_only": 1
+  },
+  {
+   "fieldname": "connections_tab",
+   "fieldtype": "Tab Break",
+   "label": "Connections"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
- "links": [],
- "modified": "2025-02-20 09:02:27.672501",
+ "links": [
+  {
+   "link_doctype": "Transakcija",
+   "link_fieldname": "racun"
+  }
+ ],
+ "modified": "2025-02-21 15:48:04.000564",
  "modified_by": "Administrator",
  "module": "Nekretnine",
  "name": "Racun",

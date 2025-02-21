@@ -1,41 +1,32 @@
 {
  "actions": [],
  "allow_rename": 1,
- "autoname": "naming_series:naming_series",
+ "autoname": "hash",
  "creation": "2023-02-01 12:44:46.610497",
  "default_view": "List",
  "doctype": "DocType",
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
-  "naming_series",
   "tip_transakcije",
   "kretanje_novca",
-  "nekretnina",
   "column_break_j5xvd",
+  "nekretnina",
   "uplatilac",
   "primalac",
-  "period",
   "section_break_4jsn0",
+  "datum_placanja",
+  "period",
+  "column_break_nko3c",
   "vrednost",
   "valuta",
-  "column_break_nko3c",
-  "datum_placanja",
+  "dinarska_protivrednost",
+  "racun",
   "section_break_mxdwy",
   "naziv",
   "amended_from"
  ],
  "fields": [
-  {
-   "default": "TRA-.YY.MM.",
-   "fieldname": "naming_series",
-   "fieldtype": "Select",
-   "hidden": 1,
-   "label": "\u0160ablon broja",
-   "no_copy": 1,
-   "options": "TRA-.YY.MM.",
-   "reqd": 1
-  },
   {
    "allow_in_quick_entry": 1,
    "fieldname": "nekretnina",
@@ -88,6 +79,7 @@
   {
    "fieldname": "naziv",
    "fieldtype": "Read Only",
+   "hidden": 1,
    "label": "Naziv"
   },
   {
@@ -103,7 +95,7 @@
   {
    "allow_in_quick_entry": 1,
    "fieldname": "period",
-   "fieldtype": "Date",
+   "fieldtype": "Data",
    "hide_seconds": 1,
    "label": "Period"
   },
@@ -140,16 +132,35 @@
    "hidden": 1,
    "label": "Kretanje novca",
    "options": "\nprihod\nrashod\nzapis"
+  },
+  {
+   "fieldname": "racun",
+   "fieldtype": "Link",
+   "hidden": 1,
+   "label": "Racun",
+   "options": "Racun",
+   "read_only": 1
+  },
+  {
+   "depends_on": "eval:doc.valuta != \"RSD\"",
+   "fieldname": "dinarska_protivrednost",
+   "fieldtype": "Read Only",
+   "label": "Dinarska protivrednost"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
- "links": [],
- "modified": "2025-01-08 00:29:29.866499",
+ "links": [
+  {
+   "link_doctype": "Racun",
+   "link_fieldname": "uplata"
+  }
+ ],
+ "modified": "2025-02-21 15:48:23.437645",
  "modified_by": "Administrator",
  "module": "Nekretnine",
  "name": "Transakcija",
- "naming_rule": "By \"Naming Series\" field",
+ "naming_rule": "Random",
  "owner": "Administrator",
  "permissions": [
   {

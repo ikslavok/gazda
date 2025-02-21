@@ -124,7 +124,7 @@ fixtures = [
 
 scheduler_events = {
 	"cron": {
-        "54 19 * * *": [
+        "56 22 * * *": [
             "gazda.nekretnine.api.create_racun"
         ]
     }
