@@ -130,12 +130,12 @@
   {
    "fieldname": "naziv",
    "fieldtype": "Data",
+   "hidden": 1,
    "label": "Naziv"
   },
   {
    "fieldname": "status",
    "fieldtype": "Data",
-   "hidden": 1,
    "label": "status"
   },
   {
@@ -168,7 +168,7 @@
    "link_fieldname": "racun"
   }
  ],
- "modified": "2025-02-21 15:48:04.000564",
+ "modified": "2025-02-21 15:57:34.266986",
  "modified_by": "Administrator",
  "module": "Nekretnine",
  "name": "Racun",

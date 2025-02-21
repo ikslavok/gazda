@@ -8,14 +8,11 @@ frappe.ui.form.on('Transakcija', {
         }, 10);
         },
 	refresh(frm) {
-		frm.page.set_primary_action(__('ARHIVIRAJ'), function() {
-            frm.submit();
-        });
-				if (frm.doc.docstatus === 0) {
-            // Change the display of the status field
-            frm.set_df_property('status', 'options', ['OTVORENO']);
-            frm.refresh_field('status');
-        }
+		if (frm.doc.docstatus === 0) {
+			frm.page.set_primary_action(__('ARHIVIRAJ'), function() {
+				frm.save('Submit')
+			});
+		}
         setTimeout(() => {
                 $('.form-assignments').hide();
                 $('.form-attachments').hide();

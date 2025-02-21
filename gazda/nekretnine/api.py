@@ -43,6 +43,8 @@ def otvori_transakciju(**kwargs):
         doc.racun = name
         if dinarska_protivrednost:
             doc.dinarska_protivrednost = dinarska_protivrednost
+        else:
+            doc.dinarska_protivrednost = vrednost * 117 if valuta == 'EUR' else vrednost
         doc.save()
         frappe.set_value('Racun', name, 'uplata', doc.name)
         
