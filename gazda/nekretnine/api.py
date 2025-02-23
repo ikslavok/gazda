@@ -141,9 +141,22 @@ def create_racun(**kwargs):
                     
 @frappe.whitelist()
 def update_all_abbreviations():
-    nekretnine = frappe.get_all('Nekretnina', fields=['name'])
+    nekretnine = frappe.get_all('Nekretnina', fields=['name', 'naziv_nekretnine'])
     for n in nekretnine:
         doc = frappe.get_doc('Nekretnina', n.name)
-        doc.create_abbr()
-        doc.save()
+        if doc.naziv_nekretnine:
+            # Replace non-alphanumeric chars with space
+            cleaned_name = ''.join(char if char.isalnum() else ' ' for char in doc.naziv_nekretnine)
+            abbr = ''
+            words = cleaned_name.split()
+            for word in words:
+                for char in word:
+                    if char.isdigit():  # Keep all numbers
+                        abbr += word
+                        break
+                    elif char.isalpha():  # First letter if it's alphabetic
+                        abbr += char.upper()
+                        break
+            doc.skracenica = abbr
+            doc.save()
                     
