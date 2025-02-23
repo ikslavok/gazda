@@ -508,17 +508,17 @@
    "options": "Nekretnina Transakcije Pratimo"
   },
   {
-   "allow_in_quick_entry": 1,
    "fieldname": "skracenica",
    "fieldtype": "Data",
    "label": "Skra\u0107enica",
+   "read_only": 1,
    "unique": 1
   }
  ],
  "image_field": "slika_prilaza_nekretnini",
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-02-13 19:00:26.430354",
+ "modified": "2025-02-23 16:11:02.829926",
  "modified_by": "Administrator",
  "module": "Nekretnine",
  "name": "Nekretnina",
