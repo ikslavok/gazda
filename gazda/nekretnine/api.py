@@ -139,3 +139,11 @@ def create_racun(**kwargs):
                         doc.naziv = f"{doc.tip_transakcije} za {mesec} {godina} - {doc.uplatilac.split(' ')[0].upper()} ({nekretnina.skracenica})"
                         doc.insert()
                     
+@frappe.whitelist()
+def update_all_abbreviations():
+    nekretnine = frappe.get_all('Nekretnina', fields=['name'])
+    for n in nekretnine:
+        doc = frappe.get_doc('Nekretnina', n.name)
+        doc.create_abbr()
+        doc.save()
+                    

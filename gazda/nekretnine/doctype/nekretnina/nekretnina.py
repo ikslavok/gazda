@@ -18,12 +18,11 @@ class Nekretnina(Document):
                     if char.isdigit():  # Keep all numbers
                         abbr += word
                         break
-                    elif char.isalpha():  # First letter if it's alphabetic
+                    elif char.isalpha():  
                         abbr += char.upper()
                         break
-                    # Skip special characters and continue to next char
-            self.skracenica = abbr  # Directly set the field instead of using db_set
-    
+            self.skracenica = abbr
+
     
 
     def autoname(self):
