@@ -27,7 +27,7 @@ frappe.ui.form.on("Racun", {
             console.log('Spans found:', $(this).find('span').length);
             console.log('Spans with "1":', $(this).find('span:contains("1")').length);
             // Check if the clicked element contains a span with content "1"
-            if ($(this).find('span:contains("1")').length > 0) {
+            if ($(this).find('span:containscrea("1")').length > 0) {
                 frappe.set_route('Form', 'Transakcija', frm.doc.uplata);
                 return false;
             }

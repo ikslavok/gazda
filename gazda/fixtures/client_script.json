@@ -9,16 +9,5 @@
   "name": "Nekretnine",
   "script": "frappe.ui.form.on('Nekretnine', {\n    refresh: function(frm) {\n        // Fetch options from 'Tip transakcije' and initialize the multiselect\n        frappe.call({\n            method: 'frappe.client.get_list',\n            args: {\n                doctype: 'Osoba',\n                fields: ['suvlasnici']\n            },\n            callback: function(r) {\n                if (r.message) {\n                    let options = r.message.map(d => d.name);\n                    initializeMultiselect(frm, options);\n                }\n            }\n        });\n    }\n});\n\nfunction initializeMultiselect(frm, options) {\n    // Create a multiselect input\n    $(frm.fields_dict['suvlasnici'].wrapper).empty().append('<input type=\"text\" id=\"multiselect-suvlasnici\" class=\"form-control\">');\n\n    $('#multiselect-suvlasnici').select2({\n        placeholder: \"Odaberi suvlasnike\",\n        multiple: true,\n        data: options.map(option => ({ id: option, text: option })),\n        allowClear: true\n    });\n\n    // Set initial values if any\n    if (frm.doc.suvlasnici) {\n        $('#multiselect-transakcije').val(frm.doc.suvlasnici.split(',')).trigger('change');\n    }\n\n    // Update the form field when selections change\n    $('#multiselect-suvlasnici').on('change', function() {\n        const selectedValues = $(this).val();\n        frm.set_value('suvlasnici', selectedValues ? selectedValues.join(',') : '');\n    });\n}\n",
   "view": "Form"
- },
- {
-  "docstatus": 0,
-  "doctype": "Client Script",
-  "dt": "Racun",
-  "enabled": 1,
-  "modified": "2025-02-19 23:08:55.481391",
-  "module": "Gazda",
-  "name": "Test create racun",
-  "script": "frappe.listview_settings['Racun'] = {\n    onload: function(listview) {\n        listview.page.add_inner_button('azuriraj racune', function() {\n            frappe.call({\n                method: 'gazda.nekretnine.api.create_racun',\n                callback: function(response) {\n                    if (response.message) {\n                        frappe.msgprint(response.message);\n                        listview.refresh();\n                    }\n                }\n            });\n        });\n    }\n};\n\n",
-  "view": "List"
  }
 ]

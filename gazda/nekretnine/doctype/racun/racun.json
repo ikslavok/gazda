@@ -142,7 +142,6 @@
    "depends_on": "eval:doc.valuta != \"RSD\"",
    "fieldname": "dinarska_protivrednost",
    "fieldtype": "Read Only",
-   "hidden": 1,
    "label": "Dinarska protivrednost",
    "read_only": 1
   },
@@ -168,7 +167,7 @@
    "link_fieldname": "racun"
   }
  ],
- "modified": "2025-02-21 15:57:34.266986",
+ "modified": "2025-02-23 17:18:11.810392",
  "modified_by": "Administrator",
  "module": "Nekretnine",
  "name": "Racun",

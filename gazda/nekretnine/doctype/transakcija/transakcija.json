@@ -144,8 +144,9 @@
   {
    "depends_on": "eval:doc.valuta != \"RSD\"",
    "fieldname": "dinarska_protivrednost",
-   "fieldtype": "Read Only",
-   "label": "Dinarska protivrednost"
+   "fieldtype": "Currency",
+   "label": "Dinarska protivrednost",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
@@ -156,7 +157,7 @@
    "link_fieldname": "uplata"
   }
  ],
- "modified": "2025-02-21 15:48:23.437645",
+ "modified": "2025-02-23 17:34:08.873993",
  "modified_by": "Administrator",
  "module": "Nekretnine",
  "name": "Transakcija",

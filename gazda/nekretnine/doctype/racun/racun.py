@@ -6,4 +6,7 @@ from frappe.model.document import Document
 
 
 class Racun(Document):
-	pass
+	def before_delete(self):
+		if self.uplata:
+			import frappe
+			frappe.delete_doc('Transakcija', self.uplata)
