@@ -52,7 +52,9 @@ def otvori_transakciju(**kwargs):
     
 @frappe.whitelist()
 def create_racun():
-    def get_period_string():
+    def get_period_string(tip_transakcije, datum):
+        # default današnji mesec, ako se pokreće sa dugmetom može se izabrati od kog datuma do danas proveriti da li postoje računi
+        # ako se radi o bilo čemu drugom osim renovacija i arende period za plaćanje je 20 dana. Posle toga treba dz ide obaveštenje
         today = datetime.now()
         first_day = 1
         _, last_day = monthrange(today.year, today.month)
