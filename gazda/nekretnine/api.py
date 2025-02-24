@@ -150,13 +150,16 @@ def update_all_abbreviations():
             abbr = ''
             words = cleaned_name.split()
             for word in words:
-                for char in word:
-                    if char.isdigit():  # Keep all numbers
-                        abbr += word
-                        break
-                    elif char.isalpha():  # First letter if it's alphabetic
-                        abbr += char.upper()
-                        break
+                if len(word) < 5 and word.isupper():
+                    abbr += word
+                else:
+                    for char in word:
+                        if char.isdigit():  # Keep all numbers
+                            abbr += word
+                            break
+                        elif char.isalpha():
+                            abbr += char.upper()
+                            break
             doc.skracenica = abbr
             doc.save()
                     

@@ -14,22 +14,23 @@ class Nekretnina(Document):
             abbr = ''
             words = cleaned_name.split()
             for word in words:
-                for char in word:
-                    if char.isdigit():  # Keep all numbers
-                        abbr += word
-                        break
-                    elif char.isalpha():  
-                        abbr += char.upper()
-                        break
+                if len(word) < 5 and word.isupper():
+                    abbr += word
+                else:
+                    for char in word:
+                        if char.isdigit():  # Keep all numbers
+                            abbr += word
+                            break
+                        elif char.isalpha():
+                            abbr += char.upper()
+                            break
             self.skracenica = abbr
 
     
 
-    def autoname(self):
-        self.create_abbr()
-
-    def before_insert(self):
-        self.create_abbr()
+    def validate(self):
+        if self.has_value_changed('naziv_nekretnine'):
+            self.create_abbr()
   
     def before_save(self):
         def make_request(url):
