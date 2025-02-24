@@ -5,8 +5,7 @@ import frappe
 from frappe.model.document import Document
 
 class Transakcija(Document):
-	def before_submit(self):
-		# self.db_set('state','PLAĆENO')
+	def before_save(self):
 		naziv_racuna = frappe.get_value('Racun', self.racun, 'naziv')
 		self.naziv = naziv_racuna if naziv_racuna else f"{self.tip_transakcije} za {self.period} - {self.uplatilac.split(' ')[0].upper()} ({self.nekretnina.skracenica})"
 		
