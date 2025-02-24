@@ -19,7 +19,7 @@ frappe.query_reports["Transakcije koje pratimo"] = {
 		},
 		{
 			"fieldname": "transakcije",
-			"label": __("Transakcije"),
+			"label": __("Pratimo ove transakcije"),
 			"fieldtype": "Data",
 			"width": "350px"
 		}
