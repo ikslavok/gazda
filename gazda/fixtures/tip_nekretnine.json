@@ -2,13 +2,6 @@
  {
   "docstatus": 0,
   "doctype": "Tip Nekretnine",
-  "modified": "2025-01-03 12:14:12.592452",
-  "name": "STAN",
-  "tip_nekretnine": "STAN"
- },
- {
-  "docstatus": 0,
-  "doctype": "Tip Nekretnine",
   "modified": "2025-01-07 13:54:08.678986",
   "name": "NJIVA",
   "tip_nekretnine": "NJIVA"
@@ -33,5 +26,12 @@
   "modified": "2025-01-03 12:56:19.533230",
   "name": "KUĆA",
   "tip_nekretnine": "KUĆA"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Tip Nekretnine",
+  "modified": "2025-01-03 12:14:12.592452",
+  "name": "STAN",
+  "tip_nekretnine": "STAN"
  }
 ]

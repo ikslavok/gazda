@@ -1,7 +1,7 @@
 {
  "charts": [],
- "content": "[{\"id\":\"KpkK3O41At\",\"type\":\"card\",\"data\":{\"card_name\":\"Osnovno\",\"col\":3}}]",
- "creation": "2025-02-13 20:06:39.653540",
+ "content": "[{\"id\":\"KpkK3O41At\",\"type\":\"card\",\"data\":{\"card_name\":\"Osnovno\",\"col\":3}},{\"id\":\"U7f6gRDfeQ\",\"type\":\"card\",\"data\":{\"card_name\":\"Administracija\",\"col\":4}}]",
+ "creation": "2025-02-23 20:36:35.625034",
  "custom_blocks": [],
  "docstatus": 0,
  "doctype": "Workspace",
@@ -60,9 +60,28 @@
    "link_type": "DocType",
    "onboard": 0,
    "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Administracija",
+   "link_count": 1,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Transakcije koje pratimo",
+   "link_count": 0,
+   "link_to": "Transakcije koje pratimo",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
   }
  ],
- "modified": "2025-02-14 09:45:10.145374",
+ "modified": "2025-02-24 13:29:24.615661",
  "modified_by": "Administrator",
  "module": "Gazda",
  "name": "Imovina",
