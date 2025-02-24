@@ -16,6 +16,19 @@ frappe.ui.form.on('Nekretnina', {
 			frm.set_value('status', 'Slobodno');
 		}
 	},
-
-	
+	naziv_nekretnine: function(frm) {
+		if (frm.doc.naziv_nekretnine) {
+			frappe.call({
+				method: 'gazda.nekretnine.api.create_abbr',
+				args: {
+					'naziv_nekretnine': frm.doc.naziv_nekretnine
+				},
+				callback: function(response) {
+					if (response.message) {
+						frm.reload_doc();
+					}
+				}
+			});
+		}
+	},
 });

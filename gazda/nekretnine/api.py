@@ -163,3 +163,23 @@ def update_all_abbreviations():
             doc.skracenica = abbr
             doc.save()
                     
+@frappe.whitelist()
+def create_abbr(naziv_nekretnine):
+    # Replace non-alphanumeric chars with space
+    cleaned_name = ''.join(char if char.isalnum() else ' ' for char in naziv_nekretnine)
+    abbr = ''
+    words = cleaned_name.split()
+    for word in words:
+        if len(word) < 5 and word.isupper():
+            abbr += word
+        else:
+            for char in word:
+                if char.isdigit():  # Keep all numbers
+                    abbr += word
+                    break
+                elif char.isalpha():
+                    abbr += char.upper()
+                    break
+    frappe.db.set_value('Nekretnina', {'naziv_nekretnine': naziv_nekretnine}, 'skracenica', abbr)
+    return True
+                    

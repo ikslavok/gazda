@@ -7,30 +7,6 @@ from srtools import cyrillic_to_latin
 from frappe.model.document import Document
 
 class Nekretnina(Document):
-    def create_abbr(self):
-        if self.naziv_nekretnine:
-            # Replace non-alphanumeric chars with space
-            cleaned_name = ''.join(char if char.isalnum() else ' ' for char in self.naziv_nekretnine)
-            abbr = ''
-            words = cleaned_name.split()
-            for word in words:
-                if len(word) < 5 and word.isupper():
-                    abbr += word
-                else:
-                    for char in word:
-                        if char.isdigit():  # Keep all numbers
-                            abbr += word
-                            break
-                        elif char.isalpha():
-                            abbr += char.upper()
-                            break
-            self.skracenica = abbr
-
-    
-
-    def validate(self):
-        if self.has_value_changed('naziv_nekretnine'):
-            self.create_abbr()
   
     def before_save(self):
         def make_request(url):
