@@ -167,7 +167,7 @@
    "link_fieldname": "racun"
   }
  ],
- "modified": "2025-02-23 17:18:11.810392",
+ "modified": "2025-02-24 19:12:20.019310",
  "modified_by": "Administrator",
  "module": "Nekretnine",
  "name": "Racun",
@@ -188,6 +188,7 @@
    "write": 1
   }
  ],
+ "search_fields": "uplatilac",
  "show_title_field_in_link": 1,
  "sort_field": "modified",
  "sort_order": "DESC",
