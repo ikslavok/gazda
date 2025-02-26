@@ -15,8 +15,7 @@ frappe.ui.form.on("Racun", {
                 $('.form-shared').hide();
                 $('.followed-by-section').hide();
                 $('.form-sidebar-stats').hide();
-                $('.btn-secondary').removeClass('hide');
-                $('.actions-btn-group').hide();
+                
 
                 
         }, 10);

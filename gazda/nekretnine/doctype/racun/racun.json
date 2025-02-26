@@ -139,19 +139,18 @@
    "label": "status"
   },
   {
-   "depends_on": "eval:doc.valuta != \"RSD\"",
    "fieldname": "dinarska_protivrednost",
    "fieldtype": "Read Only",
    "label": "Dinarska protivrednost",
    "read_only": 1
   },
   {
+   "allow_on_submit": 1,
    "fieldname": "uplata",
    "fieldtype": "Link",
    "hidden": 1,
    "label": "Uplata",
-   "options": "Transakcija",
-   "read_only": 1
+   "options": "Transakcija"
   },
   {
    "fieldname": "connections_tab",
@@ -167,7 +166,7 @@
    "link_fieldname": "racun"
   }
  ],
- "modified": "2025-02-24 19:12:20.019310",
+ "modified": "2025-02-26 18:11:47.087097",
  "modified_by": "Administrator",
  "module": "Nekretnine",
  "name": "Racun",

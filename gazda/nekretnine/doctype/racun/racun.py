@@ -23,3 +23,21 @@ class Racun(Document):
 		else:
 			datum_t = ""
 		self.naziv = f"{self.tip_transakcije} {datum_t} - {self.uplatilac.split(' ')[0].upper()} ({frappe.get_value('Nekretnina', self.nekretnina, 'skracenica')})"
+
+	def on_trash(self):
+		if self.uplata:
+			trans_doc = frappe.get_doc('Transakcija', self.uplata)
+			if trans_doc.docstatus == 1:  # If submitted
+				trans_doc.cancel()
+			trans_doc.delete()
+	
+	def on_cancel(self):
+		if self.uplata:
+			trans_doc = frappe.get_doc('Transakcija', self.uplata)
+			self.db_set('uplata', None)
+			if trans_doc.docstatus == 1:  
+				frappe.has_permission('Transakcija', 'cancel', throw=True)
+				trans_doc.flags.ignore_permissions = True
+				if self.period:
+					trans_doc.period = self.period + " - PONISTENO"
+				trans_doc.cancel()
