@@ -1,7 +1,7 @@
 {
  "charts": [],
  "content": "[{\"id\":\"KpkK3O41At\",\"type\":\"card\",\"data\":{\"card_name\":\"Osnovno\",\"col\":3}},{\"id\":\"U7f6gRDfeQ\",\"type\":\"card\",\"data\":{\"card_name\":\"Administracija\",\"col\":4}}]",
- "creation": "2025-02-23 20:36:35.625034",
+ "creation": "2025-02-26 17:57:32.723330",
  "custom_blocks": [],
  "docstatus": 0,
  "doctype": "Workspace",
@@ -65,7 +65,7 @@
    "hidden": 0,
    "is_query_report": 0,
    "label": "Administracija",
-   "link_count": 1,
+   "link_count": 2,
    "link_type": "DocType",
    "onboard": 0,
    "type": "Card Break"
@@ -79,9 +79,19 @@
    "link_type": "Report",
    "onboard": 0,
    "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Zarada po mesecu",
+   "link_count": 0,
+   "link_to": "Zarada po mesecu",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
   }
  ],
- "modified": "2025-02-24 13:29:24.615661",
+ "modified": "2025-02-27 17:47:47.019717",
  "modified_by": "Administrator",
  "module": "Gazda",
  "name": "Imovina",
