@@ -21,6 +21,20 @@ def execute(filters=None):
 			"width": 200
 		},
 		{
+			"fieldname": "u_eurima",
+			"label": "U eurima (EUR)",
+			"fieldtype": "Currency",
+			"options": "EUR",
+			"width": 150
+		},
+		{
+			"fieldname": "u_dinarima",
+			"label": "U dinarima (RSD)",
+			"fieldtype": "Currency",
+			"options": "RSD",
+			"width": 150
+		},
+		{
 			"fieldname": "ukupno",
 			"label": "Ukupno (RSD)",
 			"fieldtype": "Currency",
@@ -66,11 +80,11 @@ def execute(filters=None):
 				date_obj = datetime.strptime(period_end, '%d.%m.%Y')
 				period_key = date_obj.strftime('%Y-%m')
 				
-				# Calculate value in RSD
-				if racun.dinarska_protivrednost:
-					vrednost_rsd = float(racun.dinarska_protivrednost)
-				else:
-					vrednost_rsd = float(racun.vrednost) * 117 if racun.valuta == 'EUR' else float(racun.vrednost)
+				# Calculate values based on currency
+				vrednost = float(racun.vrednost) if racun.vrednost else 0
+				vrednost_eur = vrednost if racun.valuta == 'EUR' else 0
+				vrednost_rsd = vrednost if racun.valuta == 'RSD' else 0
+				ukupno_rsd = float(racun.dinarska_protivrednost) if racun.dinarska_protivrednost else (vrednost * 117 if racun.valuta == 'EUR' else vrednost)
 				
 				# Get payment date from linked Transakcija
 				datum_placanja = None
@@ -92,7 +106,9 @@ def execute(filters=None):
 						is_on_time = 1
 				
 				if period_key in monthly_totals:
-					monthly_totals[period_key]['ukupno'] += vrednost_rsd
+					monthly_totals[period_key]['u_eurima'] += vrednost_eur
+					monthly_totals[period_key]['u_dinarima'] += vrednost_rsd
+					monthly_totals[period_key]['ukupno'] += ukupno_rsd
 					monthly_totals[period_key]['na_vreme'] += is_on_time
 					monthly_totals[period_key]['kasnili'] += is_late
 				else:
@@ -100,7 +116,9 @@ def execute(filters=None):
 					monthly_totals[period_key] = {
 						'period': period_key,
 						'mesec_godina': mesec_godina,
-						'ukupno': vrednost_rsd,
+						'u_eurima': vrednost_eur,
+						'u_dinarima': vrednost_rsd,
+						'ukupno': ukupno_rsd,
 						'na_vreme': is_on_time,
 						'kasnili': is_late
 					}
