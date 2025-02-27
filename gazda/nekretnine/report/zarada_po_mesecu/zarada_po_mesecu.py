@@ -52,6 +52,12 @@ def execute(filters=None):
 			"label": "Kasnili",
 			"fieldtype": "Int",
 			"width": 100
+		},
+		{
+			"fieldname": "ocekivano_racuna",
+			"label": "Očekivano računa",
+			"fieldtype": "Int",
+			"width": 150
 		}
 	]
 	
@@ -62,7 +68,17 @@ def execute(filters=None):
 		9: 'SEPTEMBAR', 10: 'OKTOBAR', 11: 'NOVEMBAR', 12: 'DECEMBAR'
 	}
 	
-	racuni = frappe.get_all(
+	# Get all income bills (both paid and unpaid)
+	svi_racuni = frappe.get_all(
+		'Racun',
+		filters={
+			'kretanje_novca': 'prihod'
+		},
+		fields=['period', 'status']
+	)
+	
+	# Get paid bills for totals
+	placeni_racuni = frappe.get_all(
 		'Racun',
 		filters={
 			'status': 'Plaćeno',
@@ -72,12 +88,49 @@ def execute(filters=None):
 	)
 	
 	monthly_totals = {}
+	expected_bills = {}
 	
-	for racun in racuni:
+	from_date = None
+	to_date = None
+	if filters:
+		if filters.get('from_date'):
+			from_date = datetime.strptime(filters.get('from_date'), '%Y-%m-%d')
+		if filters.get('to_date'):
+			to_date = datetime.strptime(filters.get('to_date'), '%Y-%m-%d')
+	
+	# First count expected bills per period
+	for racun in svi_racuni:
 		if racun.period:
 			try:
 				period_end = racun.period.split('-')[-1].strip()
 				date_obj = datetime.strptime(period_end, '%d.%m.%Y')
+				
+				# Skip if outside filter range
+				if from_date and to_date:
+					if date_obj.date() < from_date.date() or date_obj.date() > to_date.date():
+						continue
+				
+				period_key = date_obj.strftime('%Y-%m')
+				
+				if period_key in expected_bills:
+					expected_bills[period_key] += 1
+				else:
+					expected_bills[period_key] = 1
+			except Exception:
+				continue
+	
+	# Then process paid bills
+	for racun in placeni_racuni:
+		if racun.period:
+			try:
+				period_end = racun.period.split('-')[-1].strip()
+				date_obj = datetime.strptime(period_end, '%d.%m.%Y')
+				
+				# Skip if outside filter range
+				if from_date and to_date:
+					if date_obj.date() < from_date.date() or date_obj.date() > to_date.date():
+						continue
+				
 				period_key = date_obj.strftime('%Y-%m')
 				
 				# Calculate values based on currency
@@ -120,11 +173,16 @@ def execute(filters=None):
 						'u_dinarima': vrednost_rsd,
 						'ukupno': ukupno_rsd,
 						'na_vreme': is_on_time,
-						'kasnili': is_late
+						'kasnili': is_late,
+						'ocekivano_racuna': 0  # Will be filled from expected_bills
 					}
 			except Exception as e:
 				frappe.msgprint(f"Error processing record: {str(e)}")
 				continue
+	
+	# Add expected bills count to the totals
+	for period_key in monthly_totals:
+		monthly_totals[period_key]['ocekivano_racuna'] = expected_bills.get(period_key, 0)
 	
 	data = list(monthly_totals.values())
 	data.sort(key=lambda x: x['period'], reverse=True)
