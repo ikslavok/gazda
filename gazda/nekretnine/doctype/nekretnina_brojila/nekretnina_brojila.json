@@ -1,0 +1,47 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "hash",
+ "creation": "2025-03-02 21:50:55.978900",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "tip_brojila",
+  "column_break_ggaz",
+  "broj_brojila"
+ ],
+ "fields": [
+  {
+   "fieldname": "tip_brojila",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Tip brojila",
+   "link_filters": "[[\"Tip Transakcije\",\"ima_brojilo\",\"=\",1]]",
+   "options": "Tip Transakcije"
+  },
+  {
+   "fieldname": "column_break_ggaz",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "broj_brojila",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Broj brojila"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2025-03-02 21:59:01.341434",
+ "modified_by": "Administrator",
+ "module": "Nekretnine",
+ "name": "Nekretnina Brojila",
+ "naming_rule": "Random",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

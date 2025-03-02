@@ -32,11 +32,11 @@
   "slika_prilaza_nekretnini",
   "kako_do\u0107i_do_nekretnine",
   "column_break_0p8vh",
-  "lokacija_parcele",
   "adresa",
   "ulica_i_broj",
   "mesto",
   "section_break_gmqid",
+  "table_hwqr",
   "opis",
   "geodetski_podaci_section",
   "povr\u0161ina_m2",
@@ -170,12 +170,6 @@
    "label": "Naziv Nekretnine",
    "reqd": 1,
    "unique": 1
-  },
-  {
-   "fieldname": "lokacija_parcele",
-   "fieldtype": "HTML Editor",
-   "ignore_xss_filter": 1,
-   "label": "Lokacija parcele"
   },
   {
    "allow_in_quick_entry": 1,
@@ -513,12 +507,17 @@
    "label": "Skra\u0107enica",
    "read_only": 1,
    "unique": 1
+  },
+  {
+   "fieldname": "table_hwqr",
+   "fieldtype": "Table",
+   "options": "Nekretnina Brojila"
   }
  ],
  "image_field": "slika_prilaza_nekretnini",
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-02-23 16:11:02.829926",
+ "modified": "2025-03-02 21:55:07.024197",
  "modified_by": "Administrator",
  "module": "Nekretnine",
  "name": "Nekretnina",
