@@ -1,7 +1,7 @@
 {
  "charts": [],
  "content": "[{\"id\":\"KpkK3O41At\",\"type\":\"card\",\"data\":{\"card_name\":\"Osnovno\",\"col\":3}},{\"id\":\"U7f6gRDfeQ\",\"type\":\"card\",\"data\":{\"card_name\":\"Administracija\",\"col\":4}}]",
- "creation": "2025-02-26 17:57:32.723330",
+ "creation": "2025-03-03 15:09:47.858075",
  "custom_blocks": [],
  "docstatus": 0,
  "doctype": "Workspace",
@@ -65,7 +65,7 @@
    "hidden": 0,
    "is_query_report": 0,
    "label": "Administracija",
-   "link_count": 2,
+   "link_count": 3,
    "link_type": "DocType",
    "onboard": 0,
    "type": "Card Break"
@@ -89,9 +89,19 @@
    "link_type": "Report",
    "onboard": 0,
    "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Brojila",
+   "link_count": 0,
+   "link_to": "Brojila",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
   }
  ],
- "modified": "2025-02-27 17:47:47.019717",
+ "modified": "2025-03-03 15:40:18.149707",
  "modified_by": "Administrator",
  "module": "Gazda",
  "name": "Imovina",

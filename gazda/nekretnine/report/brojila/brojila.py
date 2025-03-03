@@ -23,8 +23,7 @@ def execute(filters=None):
 		{
 			"fieldname": "tip_brojila",
 			"label": "Tip brojila",
-			"fieldtype": "Link",
-			"options": "Tip Transakcije",
+			"fieldtype": "Data",
 			"width": 150
 		},
 		{
@@ -48,7 +47,7 @@ def execute(filters=None):
 		WHERE 
 			b.tip_brojila IS NOT NULL
 		ORDER BY 
-			n.naziv_nekretnine, b.tip_brojila
+			n.naziv_nekretnine DESC, b.tip_brojila
 	""", as_dict=1)
 
 	return columns, data
