@@ -7,6 +7,9 @@ frappe.query_reports["Brojila"] = {
 		if (column.fieldname === "tip_brojila") {
 			return `<div class="pill">${value}</div>`;
 		}
+		if (column.fieldname === "broj_brojila") {
+			return `<div class="selectable">${value || ''}</div>`;
+		}
 		return default_formatter(value, row, column, data);
 	},
 	onload: function(report) {
@@ -21,6 +24,10 @@ frappe.query_reports["Brojila"] = {
 					border-radius: 12px;
 					font-size: 14px;
 					white-space: nowrap;
+				}
+				.selectable {
+					user-select: text;
+					cursor: text;
 				}
 			</style>
 		`);
