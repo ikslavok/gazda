@@ -88,8 +88,7 @@ def create_racun(**kwargs):
                         doc.vrednost = vrednost_check
                         doc.valuta = valuta_check
                         doc.kretanje_novca = kretanje_novca
-                        doc.dinarska_protivrednost = izracunaj_protivrednost(doc.valuta, doc.vrednost)
-                        doc.preostalo = doc.dinarska_protivrednost   
+                        doc.dinarska_protivrednost = frappe.call('gazda.nekretnine.api.izracunaj_protivrednost', valuta=doc.valuta, vrednost=doc.vrednost)
                         doc.naziv = f"{doc.tip_transakcije} za {mesec} {godina} - {doc.uplatilac.split(' ')[0].upper()} ({nekretnina.skracenica})"
                         doc.insert()
                     
