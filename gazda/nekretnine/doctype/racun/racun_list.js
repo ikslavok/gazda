@@ -1,6 +1,6 @@
 frappe.listview_settings["Racun"] = {
     refresh: function(listview) {
-        listview.page.add_inner_button('Kreiraj račune', function() {
+        listview.page.add_menu_item('Kreiraj račune', function() {
             frappe.prompt([
                 {
                     label: 'Od datuma',
@@ -23,18 +23,34 @@ frappe.listview_settings["Racun"] = {
                 });
             }, 'Od kojeg datuma do danas, da kreiram račune?', 'Kreiraj račune');
         });
-    },
-    hide_name_column: true,
-    button: {
-      show: function(doc) {
-        return doc.reference_name;
-      },
-      get_description: function() {
-        return __("Uplati", null, "Access");
-      },
-      action: function(doc) {
-        // frappe.set_route("Form", "Transakcija", doc.uplata);
-      },
+        listview.page.add_action_item('Obriši izabrano', function() {
+            let names=[];
+            $.each(listview.get_checked_items(), function(key, value) {
+                names.push(value.name);
+            });
+            if (names.length === 0) {
+                frappe.throw(__("No rows selected."));
+            }
+            frappe.confirm(
+                'Stvarno hoćeš da obrišeš ' + names.length + ' računa?',
+                function() {
+                    frappe.call({
+                        method: 'gazda.nekretnine.api.delete_racun',
+                        args: {
+                            'names': names,
+                        },
+                        callback: function(r) {
+                            listview.refresh();
+                            frappe.show_alert({
+                                message: __('Obrisano ' + names.length + ' računa'),
+                                indicator: 'green'
+                            });
+                        }
+                    });
+                }
+            );
+            
+        });
     }
   };
 

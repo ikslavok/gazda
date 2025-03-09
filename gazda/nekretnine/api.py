@@ -157,5 +157,33 @@ def izracunaj_protivrednost(valuta, vrednost):
             frappe.msgprint(f"Error getting exchange rate: {str(e)}")
             return 0
                     
-
+@frappe.whitelist()
+def delete_racun(names):
+    try:
+        # Convert string to list if needed
+        if isinstance(names, str):
+            import json
+            try:
+                names = json.loads(names)
+            except:
+                names = [names]  # If it's a single name as string
+        
+        # Ensure names is a list
+        if not isinstance(names, list):
+            names = [names]
+            
+        deleted_count = 0
+        for name in names:
+            if frappe.db.exists("Racun", name):
+                frappe.delete_doc('Racun', name, force=1)
+                deleted_count += 1
+                
+        return {
+            "success": True,
+            "message": f"Successfully deleted {deleted_count} records",
+            "count": deleted_count
+        }
+    except Exception as e:
+        frappe.log_error(frappe.get_traceback(), "Error in delete_racun")
+        frappe.throw(f"Error deleting records: {str(e)}")
                     
