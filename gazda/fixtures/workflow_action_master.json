@@ -23,6 +23,13 @@
  {
   "docstatus": 0,
   "doctype": "Workflow Action Master",
+  "modified": "2025-03-09 17:38:56.734464",
+  "name": "Obriši",
+  "workflow_action_name": "Obriši"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow Action Master",
   "modified": "2025-02-20 00:12:20.060432",
   "name": "Poništi",
   "workflow_action_name": "Poništi"

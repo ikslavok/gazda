@@ -1,7 +1,7 @@
 {
  "charts": [],
  "content": "[{\"id\":\"KpkK3O41At\",\"type\":\"card\",\"data\":{\"card_name\":\"Osnovno\",\"col\":3}},{\"id\":\"U7f6gRDfeQ\",\"type\":\"card\",\"data\":{\"card_name\":\"Administracija\",\"col\":4}}]",
- "creation": "2025-03-03 15:09:47.858075",
+ "creation": "2025-03-08 23:04:49.885145",
  "custom_blocks": [],
  "docstatus": 0,
  "doctype": "Workspace",
@@ -12,45 +12,6 @@
  "is_hidden": 0,
  "label": "Imovina",
  "links": [
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Administracija",
-   "link_count": 3,
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Card Break"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 1,
-   "label": "Transakcije koje pratimo",
-   "link_count": 0,
-   "link_to": "Transakcije koje pratimo",
-   "link_type": "Report",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 1,
-   "label": "Zarada po mesecu",
-   "link_count": 0,
-   "link_to": "Zarada po mesecu",
-   "link_type": "Report",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 1,
-   "label": "Brojila",
-   "link_count": 0,
-   "link_to": "Brojila",
-   "link_type": "Report",
-   "onboard": 0,
-   "type": "Link"
-  },
   {
    "hidden": 0,
    "is_query_report": 0,
@@ -89,9 +50,58 @@
    "link_type": "DocType",
    "onboard": 0,
    "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Administracija",
+   "link_count": 4,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Transakcije koje pratimo",
+   "link_count": 0,
+   "link_to": "Transakcije koje pratimo",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Zarada po mesecu",
+   "link_count": 0,
+   "link_to": "Zarada po mesecu",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Brojila",
+   "link_count": 0,
+   "link_to": "Brojila",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Du\u017enici",
+   "link_count": 0,
+   "link_to": "Du\u017enici",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
   }
  ],
- "modified": "2025-03-04 18:34:50.855685",
+ "modified": "2025-03-09 18:31:06.383106",
  "modified_by": "Administrator",
  "module": "Gazda",
  "name": "Imovina",
