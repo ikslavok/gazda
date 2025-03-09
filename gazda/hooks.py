@@ -9,6 +9,8 @@ app_license = "MIT"
 
 fixtures = [
     {"doctype": "Client Script"},
+    {"doctype": "Role"},
+    {"doctype": "Role Profile"},
     {"doctype": "Tip Nekretnine"},
     {"doctype": "Tip Transakcije"},
     {"doctype": "Workflow Action Master"},

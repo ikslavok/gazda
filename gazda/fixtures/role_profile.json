@@ -1,0 +1,17 @@
+[
+ {
+  "docstatus": 0,
+  "doctype": "Role Profile",
+  "modified": "2025-03-09 15:57:12.933450",
+  "name": "Upravnik stanova",
+  "role_profile": "Upravnik stanova",
+  "roles": [
+   {
+    "parent": "Upravnik stanova",
+    "parentfield": "roles",
+    "parenttype": "Role Profile",
+    "role": "Nekretnine SVE"
+   }
+  ]
+ }
+]

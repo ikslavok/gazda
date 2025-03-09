@@ -516,7 +516,7 @@
    "link_fieldname": "nekretnina"
   }
  ],
- "modified": "2025-03-09 15:44:53.487715",
+ "modified": "2025-03-09 15:52:26.082707",
  "modified_by": "Administrator",
  "module": "Nekretnine",
  "name": "Nekretnina",
@@ -532,6 +532,19 @@
    "read": 1,
    "report": 1,
    "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Upravnik stanova",
+   "select": 1,
    "share": 1,
    "write": 1
   }

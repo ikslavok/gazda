@@ -32,7 +32,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-03-02 21:57:40.602906",
+ "modified": "2025-03-09 15:54:03.805848",
  "modified_by": "Administrator",
  "module": "Nekretnine",
  "name": "Tip Transakcije",
@@ -50,6 +50,16 @@
    "role": "System Manager",
    "share": 1,
    "write": 1
+  },
+  {
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Upravnik stanova",
+   "select": 1,
+   "share": 1
   }
  ],
  "sort_field": "modified",
