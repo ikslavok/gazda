@@ -13,7 +13,8 @@
   "ime",
   "telefon",
   "column_break_g4pxi",
-  "adresa"
+  "adresa",
+  "rok_za_pla\u0107anje_u_danima"
  ],
  "fields": [
   {
@@ -43,11 +44,16 @@
    "fieldtype": "Link",
    "label": "Adresa",
    "options": "Address"
+  },
+  {
+   "fieldname": "rok_za_pla\u0107anje_u_danima",
+   "fieldtype": "Int",
+   "label": "Rok za pla\u0107anje u danima"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-01-07 23:47:49.020654",
+ "modified": "2025-03-09 15:47:33.210221",
  "modified_by": "Administrator",
  "module": "Nekretnine",
  "name": "Osoba",
