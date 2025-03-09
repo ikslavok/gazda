@@ -509,8 +509,13 @@
  ],
  "image_field": "slika_prilaza_nekretnini",
  "index_web_pages_for_search": 1,
- "links": [],
- "modified": "2025-03-09 12:14:17.397714",
+ "links": [
+  {
+   "link_doctype": "Racun",
+   "link_fieldname": "nekretnina"
+  }
+ ],
+ "modified": "2025-03-09 15:40:35.317561",
  "modified_by": "Administrator",
  "module": "Nekretnine",
  "name": "Nekretnina",

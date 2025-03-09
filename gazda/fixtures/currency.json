@@ -2058,20 +2058,6 @@
   "symbol_on_right": 0
  },
  {
-  "currency_name": "RSD",
-  "docstatus": 0,
-  "doctype": "Currency",
-  "enabled": 1,
-  "fraction": "Para",
-  "fraction_units": 100,
-  "modified": "2025-02-27 17:46:52.679140",
-  "name": "RSD",
-  "number_format": "#,###.##",
-  "smallest_currency_fraction_value": 0.0,
-  "symbol": "din.",
-  "symbol_on_right": 1
- },
- {
   "currency_name": "EUR",
   "docstatus": 0,
   "doctype": "Currency",
@@ -2084,5 +2070,19 @@
   "smallest_currency_fraction_value": 0.01,
   "symbol": "€",
   "symbol_on_right": 0
+ },
+ {
+  "currency_name": "RSD",
+  "docstatus": 0,
+  "doctype": "Currency",
+  "enabled": 1,
+  "fraction": "Para",
+  "fraction_units": 100,
+  "modified": "2025-02-27 17:46:52.679140",
+  "name": "RSD",
+  "number_format": "#,###.##",
+  "smallest_currency_fraction_value": 0.0,
+  "symbol": "din.",
+  "symbol_on_right": 1
  }
 ]
