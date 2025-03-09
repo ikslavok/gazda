@@ -15,6 +15,8 @@ fixtures = [
     {"doctype": "Workflow State"},
     {"doctype": "Workflow"},
     {"doctype": "Workspace"},
+    {"doctype": "Currency Exchange"},
+    {"doctype": "Currency"},
 ]
 # Includes in <head>
 # ------------------

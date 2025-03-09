@@ -1,0 +1,98 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "hash",
+ "creation": "2025-03-04 18:36:43.091198",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "uplaceno",
+  "valuta",
+  "datum",
+  "column_break_tpwn",
+  "primio",
+  "potvrdjeno",
+  "dinarska_protivrednost",
+  "potvrdi"
+ ],
+ "fields": [
+  {
+   "columns": 2,
+   "fieldname": "uplaceno",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Upla\u0107eno",
+   "mandatory_depends_on": "eval:doc.potvrdjeno==1;",
+   "precision": "2",
+   "reqd": 1
+  },
+  {
+   "columns": 2,
+   "default": "Today",
+   "fieldname": "datum",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Datum",
+   "read_only_depends_on": "eval:doc.potvrdjeno==1;",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_tpwn",
+   "fieldtype": "Column Break"
+  },
+  {
+   "columns": 2,
+   "fieldname": "primio",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Primio",
+   "options": "Osoba",
+   "read_only_depends_on": "eval:doc.potvrdjeno==1;"
+  },
+  {
+   "columns": 2,
+   "default": "RSD",
+   "fieldname": "valuta",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Valuta",
+   "mandatory_depends_on": "eval:doc.potvrdjeno==1;",
+   "options": "Currency",
+   "reqd": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "potvrdjeno",
+   "fieldtype": "Check",
+   "label": "potvrdjeno"
+  },
+  {
+   "columns": 2,
+   "fieldname": "potvrdi",
+   "fieldtype": "Button",
+   "in_list_view": 1,
+   "label": "POTVRDI",
+   "read_only_depends_on": "eval:doc.potvrdjeno==1;"
+  },
+  {
+   "fieldname": "dinarska_protivrednost",
+   "fieldtype": "Currency",
+   "label": "Dinarska protivrednost",
+   "read_only": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2025-03-09 14:29:55.463314",
+ "modified_by": "Administrator",
+ "module": "Nekretnine",
+ "name": "Racun Uplaceno",
+ "naming_rule": "Random",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

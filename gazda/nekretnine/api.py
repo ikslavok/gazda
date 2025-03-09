@@ -2,54 +2,6 @@ import frappe
 from datetime import datetime, timedelta
 from calendar import monthrange
 from dateutil.relativedelta import relativedelta
-
-@frappe.whitelist()
-def otvori_transakciju(**kwargs):
-    tip_transakcije = kwargs.get('tip_transakcije')
-    nekretnina = kwargs.get('nekretnina')
-    uplatilac = kwargs.get('uplatilac')
-    period = kwargs.get('period')
-    name = kwargs.get('name')
-    vrednost = kwargs.get('vrednost')
-    valuta = kwargs.get('valuta')
-    dinarska_protivrednost = kwargs.get('dinarska_protivrednost')
-    naziv = kwargs.get('naziv')
-    proveri_transakciju = frappe.get_all(
-        'Transakcija',
-        filters={
-            'tip_transakcije': tip_transakcije,
-            'nekretnina': nekretnina,
-            'uplatilac': uplatilac,
-            'period': period
-        },
-        limit=1
-    )
-    
-    if proveri_transakciju:
-        frappe.set_value('Racun', name, 'uplata', proveri_transakciju[0].name)
-        frappe.set_value('Transakcija', proveri_transakciju[0].name, 'racun', name)
-        return proveri_transakciju[0].name
-    else:
-        doc = frappe.new_doc('Transakcija')
-        doc.tip_transakcije = tip_transakcije
-        doc.kretanje_novca = frappe.get_value('Tip Transakcije', tip_transakcije, 'kretanje_novca')
-        doc.nekretnina = nekretnina
-        doc.uplatilac = uplatilac
-        doc.period = period
-        doc.naziv = naziv
-        if vrednost:
-            doc.vrednost = float(vrednost)
-        if valuta:
-            doc.valuta = valuta
-        doc.racun = name
-        if dinarska_protivrednost:
-            doc.dinarska_protivrednost = float(dinarska_protivrednost)
-        else:
-            doc.dinarska_protivrednost = float(vrednost) * 117 if valuta == 'EUR' else float(vrednost)
-        doc.save()
-        frappe.set_value('Racun', name, 'uplata', doc.name)
-        
-        return doc.name
     
 @frappe.whitelist()
 def create_racun(**kwargs):
@@ -182,4 +134,28 @@ def create_abbr(naziv_nekretnine):
                     break
     frappe.db.set_value('Nekretnina', {'naziv_nekretnine': naziv_nekretnine}, 'skracenica', abbr)
     return True
+
+@frappe.whitelist()
+def izracunaj_protivrednost(valuta, vrednost):
+    system_currency = frappe.get_cached_value('System Settings', 'System Settings', 'currency')
+    if not vrednost:
+            return 0
+    vrednost = float(vrednost)
+    if valuta == system_currency:
+            return vrednost
+            
+    try:
+            exchange_doc = frappe.get_last_doc('Currency Exchange', 
+                    filters={
+                            "from_currency": valuta, 
+                            "to_currency": system_currency, 
+                            "for_selling": 1
+                    }
+            )
+            return exchange_doc.exchange_rate * vrednost
+    except Exception as e:
+            frappe.msgprint(f"Error getting exchange rate: {str(e)}")
+            return 0
+                    
+
                     

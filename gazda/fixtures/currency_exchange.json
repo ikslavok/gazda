@@ -1,0 +1,14 @@
+[
+ {
+  "date": "2025-03-05",
+  "docstatus": 0,
+  "doctype": "Currency Exchange",
+  "exchange_rate": 117.0,
+  "for_buying": 0,
+  "for_selling": 1,
+  "from_currency": "EUR",
+  "modified": "2025-03-05 14:43:33.346047",
+  "name": "2025-03-05-EUR-RSD-Selling",
+  "to_currency": "RSD"
+ }
+]

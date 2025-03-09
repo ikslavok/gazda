@@ -5,5 +5,5 @@
 from frappe.model.document import Document
 
 
-class Osoba(Document):
+class RacunUplaceno(Document):
 	pass

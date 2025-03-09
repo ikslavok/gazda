@@ -4,7 +4,7 @@
   "doctype": "Workflow",
   "document_type": "Racun",
   "is_active": 1,
-  "modified": "2025-02-20 00:21:41.639442",
+  "modified": "2025-03-05 13:14:20.733784",
   "name": "Racun",
   "override_status": 0,
   "send_email_alert": 0,
@@ -23,6 +23,21 @@
     "update_field": null,
     "update_value": null,
     "workflow_builder_id": "1"
+   },
+   {
+    "allow_edit": "All",
+    "avoid_status_override": 0,
+    "doc_status": "1",
+    "is_optional_state": 0,
+    "message": null,
+    "next_action_email_template": null,
+    "parent": "Racun",
+    "parentfield": "states",
+    "parenttype": "Workflow",
+    "state": "Delimično plaćeno",
+    "update_field": null,
+    "update_value": null,
+    "workflow_builder_id": null
    },
    {
     "allow_edit": "All",
@@ -67,6 +82,18 @@
     "parenttype": "Workflow",
     "state": "Neplaćeno",
     "workflow_builder_id": "action-1"
+   },
+   {
+    "action": "Plati",
+    "allow_self_approval": 1,
+    "allowed": "All",
+    "condition": null,
+    "next_state": "Delimično plaćeno",
+    "parent": "Racun",
+    "parentfield": "transitions",
+    "parenttype": "Workflow",
+    "state": "Neplaćeno",
+    "workflow_builder_id": null
    },
    {
     "action": "Poništi",

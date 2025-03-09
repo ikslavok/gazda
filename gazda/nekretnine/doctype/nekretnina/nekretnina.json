@@ -20,9 +20,8 @@
   "status",
   "zakupac",
   "zakupnina",
-  "trenutni_plodouzivalac",
-  "zakonski_plodouzivalac",
   "odrzava",
+  "trenutni_plodouzivalac",
   "pratimo_transakcije",
   "column_break_olbef",
   "nivo_namestenosti_stana",
@@ -452,12 +451,6 @@
    "options": "Osoba"
   },
   {
-   "fieldname": "zakonski_plodouzivalac",
-   "fieldtype": "Link",
-   "label": "Zakonski plodou\u017eivalac",
-   "options": "Osoba"
-  },
-  {
    "allow_in_quick_entry": 1,
    "fieldname": "odrzava",
    "fieldtype": "Link",
@@ -517,7 +510,7 @@
  "image_field": "slika_prilaza_nekretnini",
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-03-03 15:18:31.739768",
+ "modified": "2025-03-09 12:14:17.397714",
  "modified_by": "Administrator",
  "module": "Nekretnine",
  "name": "Nekretnina",

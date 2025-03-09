@@ -83,6 +83,24 @@
  {
   "docstatus": 0,
   "doctype": "Tip Transakcije",
+  "ima_brojilo": 0,
+  "kretanje_novca": "rashod",
+  "modified": "2025-01-06 02:23:48.753069",
+  "name": "RENOVACIJE",
+  "tip_transakcije": "RENOVACIJE"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Tip Transakcije",
+  "ima_brojilo": 1,
+  "kretanje_novca": "zapis",
+  "modified": "2025-03-02 22:00:07.797661",
+  "name": "STRUJA",
+  "tip_transakcije": "STRUJA"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Tip Transakcije",
   "ima_brojilo": 1,
   "kretanje_novca": "zapis",
   "modified": "2025-03-02 22:00:01.021880",
@@ -93,27 +111,9 @@
   "docstatus": 0,
   "doctype": "Tip Transakcije",
   "ima_brojilo": 0,
-  "kretanje_novca": "rashod",
-  "modified": "2025-01-06 02:23:48.753069",
-  "name": "RENOVACIJE",
-  "tip_transakcije": "RENOVACIJE"
- },
- {
-  "docstatus": 0,
-  "doctype": "Tip Transakcije",
-  "ima_brojilo": 0,
   "kretanje_novca": "prihod",
   "modified": "2025-01-06 01:50:02.133651",
   "name": "KIRIJA",
   "tip_transakcije": "KIRIJA"
- },
- {
-  "docstatus": 0,
-  "doctype": "Tip Transakcije",
-  "ima_brojilo": 1,
-  "kretanje_novca": "zapis",
-  "modified": "2025-03-02 22:00:07.797661",
-  "name": "STRUJA",
-  "tip_transakcije": "STRUJA"
  }
 ]

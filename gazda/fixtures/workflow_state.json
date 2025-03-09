@@ -52,5 +52,14 @@
   "name": "Plaćeno",
   "style": "Success",
   "workflow_state_name": "Plaćeno"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow State",
+  "icon": "",
+  "modified": "2025-03-05 13:02:57.325114",
+  "name": "Delimično plaćeno",
+  "style": "Warning",
+  "workflow_state_name": "Delimično plaćeno"
  }
 ]

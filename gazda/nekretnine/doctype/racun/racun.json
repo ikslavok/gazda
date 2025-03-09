@@ -23,7 +23,11 @@
   "vrednost",
   "valuta",
   "dinarska_protivrednost",
-  "uplata",
+  "section_break_hezs",
+  "uplate",
+  "column_break_iiim",
+  "uplaceno",
+  "preostalo",
   "connections_tab"
  ],
  "fields": [
@@ -76,7 +80,8 @@
    "fieldtype": "Link",
    "in_list_view": 1,
    "label": "Uplatilac",
-   "options": "Osoba"
+   "options": "Osoba",
+   "reqd": 1
   },
   {
    "allow_in_quick_entry": 1,
@@ -140,33 +145,45 @@
   },
   {
    "fieldname": "dinarska_protivrednost",
-   "fieldtype": "Read Only",
+   "fieldtype": "Currency",
    "label": "Dinarska protivrednost",
    "read_only": 1
-  },
-  {
-   "allow_on_submit": 1,
-   "fieldname": "uplata",
-   "fieldtype": "Link",
-   "hidden": 1,
-   "label": "Uplata",
-   "options": "Transakcija"
   },
   {
    "fieldname": "connections_tab",
    "fieldtype": "Tab Break",
    "label": "Connections"
+  },
+  {
+   "fieldname": "section_break_hezs",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "uplaceno",
+   "fieldtype": "Currency",
+   "label": "Upla\u0107eno",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_iiim",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "uplate",
+   "fieldtype": "Table",
+   "options": "Racun Uplaceno"
+  },
+  {
+   "fieldname": "preostalo",
+   "fieldtype": "Currency",
+   "label": "Preostalo",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
- "links": [
-  {
-   "link_doctype": "Transakcija",
-   "link_fieldname": "racun"
-  }
- ],
- "modified": "2025-02-26 18:11:47.087097",
+ "links": [],
+ "modified": "2025-03-09 12:33:10.804484",
  "modified_by": "Administrator",
  "module": "Nekretnine",
  "name": "Racun",
