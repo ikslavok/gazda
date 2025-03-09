@@ -78,7 +78,6 @@ def create_racun(**kwargs):
                         valuta_check = 'EUR' if trans.transakcije in ['KIRIJA', 'ARENDA'] else 'RSD'
                         vrednost_check = nekretnina.zakupnina if trans.transakcije in ['KIRIJA', 'ARENDA'] else 0
                         kretanje_novca = frappe.get_value('Tip Transakcije', trans.transakcije, 'kretanje_novca')
-                        dinarska_protivrednost = frappe.call('gazda.nekretnine.api.izracunaj_protivrednost', valuta=valuta_check, vrednost=vrednost_check)
                         
                         doc = frappe.new_doc('Racun')
                         doc.nekretnina = nekretnina.name
@@ -89,8 +88,8 @@ def create_racun(**kwargs):
                         doc.vrednost = vrednost_check
                         doc.valuta = valuta_check
                         doc.kretanje_novca = kretanje_novca
-                        doc.dinarska_protivrednost = dinarska_protivrednost
-                        doc.preostalo = dinarska_protivrednost
+                        doc.dinarska_protivrednost = izracunaj_protivrednost(doc.valuta, doc.vrednost)
+                        doc.preostalo = doc.dinarska_protivrednost   
                         doc.naziv = f"{doc.tip_transakcije} za {mesec} {godina} - {doc.uplatilac.split(' ')[0].upper()} ({nekretnina.skracenica})"
                         doc.insert()
                     

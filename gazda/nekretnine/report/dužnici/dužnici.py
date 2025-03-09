@@ -34,7 +34,7 @@ def get_columns():
 			"fieldname": "racuni",
 			"label": _("Računi"),
 			"fieldtype": "HTML",
-			"width": 400
+			"width": 800
 		}
 	]
 
