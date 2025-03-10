@@ -230,8 +230,8 @@ PageContent = Class.extend({
 		
 		// Build filters object
 		let filters = {};
-		if (typeFilter) filters.tip_nekretnine = typeFilter;
-		if (statusFilter) filters.status = statusFilter;
+		if (typeFilter && typeFilter !== "") filters.tip_nekretnine = typeFilter;
+		if (statusFilter && statusFilter !== "") filters.status = statusFilter;
 		
 		frappe.call({
 			method: "frappe.client.get_list",
@@ -239,7 +239,8 @@ PageContent = Class.extend({
 				doctype: "Nekretnina",
 				fields: ["name", "naziv_nekretnine", "tip_nekretnine", "status", "latitude", "longitude", 
 				         "adresa", "mesto", "zakupac", "zakupnina", "odrzava", "slika_prilaza_nekretnini"],
-				filters: filters
+				filters: filters,
+				limit: 0 // Remove any limit to get all records
 			},
 			callback: (r) => {
 				if (r.message) {
