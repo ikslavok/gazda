@@ -70,6 +70,7 @@ PageContent = Class.extend({
 				}
 				.dt-instance-1 {
 					margin: 0 !important;
+					margin-left: 0 !important;
 				}
 				/* Force first column width */
 				.dt-cell--0 {
