@@ -1,0 +1,22 @@
+{
+ "content": null,
+ "creation": "2025-03-10 04:32:42.914987",
+ "docstatus": 0,
+ "doctype": "Page",
+ "idx": 0,
+ "modified": "2025-03-10 04:32:42.914987",
+ "modified_by": "Administrator",
+ "module": "Nekretnine",
+ "name": "lokacije-imovine",
+ "owner": "Administrator",
+ "page_name": "lokacije-imovine",
+ "roles": [
+  {
+   "role": "Nekretnine SVE"
+  }
+ ],
+ "script": null,
+ "standard": "Yes",
+ "style": null,
+ "system_page": 0
+}
