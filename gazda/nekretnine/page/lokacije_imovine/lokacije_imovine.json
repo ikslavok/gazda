@@ -4,7 +4,7 @@
  "docstatus": 0,
  "doctype": "Page",
  "idx": 0,
- "modified": "2025-03-10 04:32:42.914987",
+ "modified": "2025-03-10 21:52:09.016295",
  "modified_by": "Administrator",
  "module": "Nekretnine",
  "name": "lokacije-imovine",
@@ -13,6 +13,9 @@
  "roles": [
   {
    "role": "Nekretnine SVE"
+  },
+  {
+   "role": "System Manager"
   }
  ],
  "script": null,
