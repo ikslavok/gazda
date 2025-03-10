@@ -1,0 +1,731 @@
+# Translations template for Gazda.
+# Copyright (C) 2025 Filip Ilic
+# This file is distributed under the same license as the Gazda project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Gazda VERSION\n"
+"Report-Msgid-Bugs-To: filip@filipili.com\n"
+"POT-Creation-Date: 2025-03-10 10:47+0000\n"
+"PO-Revision-Date: 2025-03-10 10:47+0000\n"
+"Last-Translator: filip@filipili.com\n"
+"Language-Team: filip@filipili.com\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.13.1\n"
+
+#. Label of a Card Break in the Imovina Workspace
+#: gazda/gazda/workspace/imovina/imovina.json
+msgid "Administracija"
+msgstr ""
+
+#. Label of a Link field in DocType 'Nekretnina'
+#. Label of a Link field in DocType 'Osoba'
+#: gazda/nekretnine/doctype/nekretnina/nekretnina.json
+#: gazda/nekretnine/doctype/osoba/osoba.json
+msgid "Adresa"
+msgstr ""
+
+#. Label of a Link field in DocType 'Racun'
+#: gazda/nekretnine/doctype/racun/racun.json
+msgid "Amended From"
+msgstr ""
+
+#. Label of a Data field in DocType 'Nekretnina Brojila'
+#: gazda/nekretnine/doctype/nekretnina_brojila/nekretnina_brojila.json
+msgid "Broj brojila"
+msgstr ""
+
+#. Label of a Data field in DocType 'Nekretnina'
+#: gazda/nekretnine/doctype/nekretnina/nekretnina.json
+msgid "Broj etaža nad zemljom"
+msgstr ""
+
+#. Label of a Data field in DocType 'Nekretnina'
+#: gazda/nekretnine/doctype/nekretnina/nekretnina.json
+msgid "Broj etaža pod zemljom"
+msgstr ""
+
+#. Label of a Data field in DocType 'Nekretnina'
+#: gazda/nekretnine/doctype/nekretnina/nekretnina.json
+msgid "Broj etaža potkrovlje"
+msgstr ""
+
+#. Label of a Data field in DocType 'Nekretnina'
+#: gazda/nekretnine/doctype/nekretnina/nekretnina.json
+msgid "Broj etaža prizemlje"
+msgstr ""
+
+#. Label of a Data field in DocType 'Nekretnina'
+#: gazda/nekretnine/doctype/nekretnina/nekretnina.json
+msgid "Broj lista nepokretnosti"
+msgstr ""
+
+#. Label of a Data field in DocType 'Nekretnina'
+#: gazda/nekretnine/doctype/nekretnina/nekretnina.json
+msgid "Broj objekta"
+msgstr ""
+
+#. Label of a Data field in DocType 'Nekretnina'
+#: gazda/nekretnine/doctype/nekretnina/nekretnina.json
+msgid "Broj parcele"
+msgstr ""
+
+#: gazda/nekretnine/report/dužnici/dužnici.py:29
+msgid "Broj računa"
+msgstr ""
+
+#. Label of a Data field in DocType 'Nekretnina'
+#: gazda/nekretnine/doctype/nekretnina/nekretnina.json
+msgid "Broj stana(objekta)"
+msgstr ""
+
+#. Label of a Data field in DocType 'Nekretnina'
+#: gazda/nekretnine/doctype/nekretnina/nekretnina.json
+msgid "Broj ulaza"
+msgstr ""
+
+#. Label of a Link in the Imovina Workspace
+#. Name of a report
+#: gazda/gazda/workspace/imovina/imovina.json
+#: gazda/nekretnine/report/brojila/brojila.json
+msgid "Brojila"
+msgstr ""
+
+#. Label of a Tab Break field in DocType 'Racun'
+#: gazda/nekretnine/doctype/racun/racun.json
+msgid "Connections"
+msgstr ""
+
+#. Name of a DocType
+#: gazda/nekretnine/doctype/currency_exchange/currency_exchange.json
+msgid "Currency Exchange"
+msgstr ""
+
+#: gazda/nekretnine/doctype/currency_exchange/currency_exchange.py:55
+msgid "Currency Exchange must be applicable for Buying or for Selling."
+msgstr ""
+
+#. Label of a Date field in DocType 'Currency Exchange'
+#: gazda/nekretnine/doctype/currency_exchange/currency_exchange.json
+msgid "Date"
+msgstr ""
+
+#. Label of a Date field in DocType 'Racun Uplaceno'
+#: gazda/nekretnine/doctype/racun_uplaceno/racun_uplaceno.json
+msgid "Datum"
+msgstr ""
+
+#. Label of a Tab Break field in DocType 'Nekretnina'
+#: gazda/nekretnine/doctype/nekretnina/nekretnina.json
+msgid "Detalji"
+msgstr ""
+
+#. Label of a Currency field in DocType 'Racun'
+#. Label of a Currency field in DocType 'Racun Uplaceno'
+#: gazda/nekretnine/doctype/racun/racun.json
+#: gazda/nekretnine/doctype/racun_uplaceno/racun_uplaceno.json
+msgid "Dinarska protivrednost"
+msgstr ""
+
+#. Label of a Link in the Imovina Workspace
+#. Name of a report
+#: gazda/gazda/workspace/imovina/imovina.json
+#: gazda/nekretnine/report/dužnici/dužnici.json
+msgid "Dužnici"
+msgstr ""
+
+#. Label of a Data field in DocType 'Nekretnina'
+#: gazda/nekretnine/doctype/nekretnina/nekretnina.json
+msgid "Evidentni broj"
+msgstr ""
+
+#. Label of a Float field in DocType 'Currency Exchange'
+#: gazda/nekretnine/doctype/currency_exchange/currency_exchange.json
+msgid "Exchange Rate"
+msgstr ""
+
+#. Label of a Check field in DocType 'Currency Exchange'
+#: gazda/nekretnine/doctype/currency_exchange/currency_exchange.json
+msgid "For Buying"
+msgstr ""
+
+#. Label of a Check field in DocType 'Currency Exchange'
+#: gazda/nekretnine/doctype/currency_exchange/currency_exchange.json
+msgid "For Selling"
+msgstr ""
+
+#. Label of a Link field in DocType 'Currency Exchange'
+#: gazda/nekretnine/doctype/currency_exchange/currency_exchange.json
+msgid "From Currency"
+msgstr ""
+
+#: gazda/nekretnine/doctype/currency_exchange/currency_exchange.py:52
+msgid "From Currency and To Currency cannot be same"
+msgstr ""
+
+#: gazda/config/desktop.py:8
+msgid "Gazda"
+msgstr ""
+
+#. Label of a Section Break field in DocType 'Nekretnina'
+#: gazda/nekretnine/doctype/nekretnina/nekretnina.json
+msgid "Geodetski podaci"
+msgstr ""
+
+#. Label of a Data field in DocType 'Nekretnina'
+#: gazda/nekretnine/doctype/nekretnina/nekretnina.json
+msgid "Građevinska površina"
+msgstr ""
+
+#. Label of a Data field in DocType 'Nekretnina'
+#: gazda/nekretnine/doctype/nekretnina/nekretnina.json
+msgid "Građevinska površina (m2)"
+msgstr ""
+
+#. Label of a Check field in DocType 'Tip Transakcije'
+#: gazda/nekretnine/doctype/tip_transakcije/tip_transakcije.json
+msgid "Ima brojilo"
+msgstr ""
+
+#. Label of a Table MultiSelect field in DocType 'Nekretnina'
+#: gazda/nekretnine/doctype/nekretnina/nekretnina.json
+msgid "Imaoci prava na ceo objekat"
+msgstr ""
+
+#. Label of a Table MultiSelect field in DocType 'Nekretnina'
+#: gazda/nekretnine/doctype/nekretnina/nekretnina.json
+msgid "Imaoci prava na parcelu"
+msgstr ""
+
+#. Label of a Table MultiSelect field in DocType 'Nekretnina'
+#: gazda/nekretnine/doctype/nekretnina/nekretnina.json
+msgid "Imaoci prava na posebni deo objekta"
+msgstr ""
+
+#. Label of a Data field in DocType 'Osoba'
+#: gazda/nekretnine/doctype/osoba/osoba.json
+msgid "Ime "
+msgstr ""
+
+#. Name of a Workspace
+#: gazda/gazda/workspace/imovina/imovina.json
+msgid "Imovina"
+msgstr ""
+
+#. Label of a Text field in DocType 'Nekretnina'
+#: gazda/nekretnine/doctype/nekretnina/nekretnina.json
+msgid "Kako doći do nekretnine"
+msgstr ""
+
+#. Label of a Tab Break field in DocType 'Nekretnina'
+#: gazda/nekretnine/doctype/nekretnina/nekretnina.json
+msgid "Katastar"
+msgstr ""
+
+#. Label of a Data field in DocType 'Nekretnina'
+#: gazda/nekretnine/doctype/nekretnina/nekretnina.json
+msgid "Katastarska opština"
+msgstr ""
+
+#. Label of a Data field in DocType 'Nekretnina'
+#: gazda/nekretnine/doctype/nekretnina/nekretnina.json
+msgid "Katastarska strana (URL)"
+msgstr ""
+
+#. Label of a Data field in DocType 'Nekretnina'
+#: gazda/nekretnine/doctype/nekretnina/nekretnina.json
+msgid "Korisna površina"
+msgstr ""
+
+#. Label of a Data field in DocType 'Nekretnina'
+#: gazda/nekretnine/doctype/nekretnina/nekretnina.json
+msgid "Korisna površina objekta"
+msgstr ""
+
+#. Label of a Read Only field in DocType 'Racun'
+#. Label of a Select field in DocType 'Tip Transakcije'
+#: gazda/nekretnine/doctype/racun/racun.json
+#: gazda/nekretnine/doctype/tip_transakcije/tip_transakcije.json
+msgid "Kretanje novca"
+msgstr ""
+
+#. Label of a Data field in DocType 'Nekretnina'
+#: gazda/nekretnine/doctype/nekretnina/nekretnina.json
+msgid "Mesto"
+msgstr ""
+
+#: gazda/nekretnine/report/dužnici/dužnici.js:8
+msgid "Minimalni iznos"
+msgstr ""
+
+#. Option for the 'Nivo nameštenosti stana' (Select) field in DocType
+#. 'Nekretnina'
+#: gazda/nekretnine/doctype/nekretnina/nekretnina.json
+msgid "Namešten"
+msgstr ""
+
+#. Label of a Data field in DocType 'Racun'
+#: gazda/nekretnine/doctype/racun/racun.json
+msgid "Naziv"
+msgstr ""
+
+#. Label of a Data field in DocType 'Nekretnina'
+#: gazda/nekretnine/doctype/nekretnina/nekretnina.json
+msgid "Naziv Nekretnine"
+msgstr ""
+
+#. Label of a Data field in DocType 'Nekretnina'
+#: gazda/nekretnine/doctype/nekretnina/nekretnina.json
+msgid "Naziv ulice"
+msgstr ""
+
+#. Label of a Data field in DocType 'Nekretnina'
+#: gazda/nekretnine/doctype/nekretnina/nekretnina.json
+msgid "Način korištenja"
+msgstr ""
+
+#. Label of a Data field in DocType 'Nekretnina'
+#: gazda/nekretnine/doctype/nekretnina/nekretnina.json
+msgid "Način korištenja i naziv objekta"
+msgstr ""
+
+#. Label of a Data field in DocType 'Nekretnina'
+#: gazda/nekretnine/doctype/nekretnina/nekretnina.json
+msgid "Način utvrđivanja korisne površine"
+msgstr ""
+
+#. Name of a DocType
+#. Label of a Link field in DocType 'Racun'
+#: gazda/nekretnine/doctype/nekretnina/nekretnina.json
+#: gazda/nekretnine/doctype/racun/racun.json
+#: gazda/nekretnine/report/transakcije_koje_pratimo/transakcije_koje_pratimo.js:8
+msgid "Nekretnina"
+msgstr ""
+
+#. Name of a DocType
+#: gazda/nekretnine/doctype/nekretnina_brojila/nekretnina_brojila.json
+msgid "Nekretnina Brojila"
+msgstr ""
+
+#. Name of a DocType
+#: gazda/nekretnine/doctype/nekretnina_suvlasnici/nekretnina_suvlasnici.json
+msgid "Nekretnina Suvlasnici"
+msgstr ""
+
+#. Name of a DocType
+#: gazda/nekretnine/doctype/nekretnina_transakcije_pratimo/nekretnina_transakcije_pratimo.json
+msgid "Nekretnina Transakcije Pratimo"
+msgstr ""
+
+#. Label of a Link in the Imovina Workspace
+#: gazda/gazda/workspace/imovina/imovina.json
+msgid "Nekretnine"
+msgstr ""
+
+#. Name of a role
+#: gazda/nekretnine/doctype/racun/racun.json
+msgid "Nekretnine SVE"
+msgstr ""
+
+#. Option for the 'Nivo nameštenosti stana' (Select) field in DocType
+#. 'Nekretnina'
+#: gazda/nekretnine/doctype/nekretnina/nekretnina.json
+msgid "Nenamešten"
+msgstr ""
+
+#. Label of a Select field in DocType 'Nekretnina'
+#: gazda/nekretnine/doctype/nekretnina/nekretnina.json
+msgid "Nivo nameštenosti stana"
+msgstr ""
+
+#: gazda/nekretnine/doctype/racun/racun_list.js:32
+msgid "No rows selected."
+msgstr ""
+
+#: gazda/nekretnine/doctype/racun/racun_list.js:45
+msgid "Obrisano  računa"
+msgstr ""
+
+#. Label of a Link field in DocType 'Nekretnina'
+#: gazda/nekretnine/doctype/nekretnina/nekretnina.json
+msgid "Održava"
+msgstr ""
+
+#. Label of a Text field in DocType 'Nekretnina'
+#: gazda/nekretnine/doctype/nekretnina/nekretnina.json
+msgid "Opis"
+msgstr ""
+
+#. Label of a Text Editor field in DocType 'Nekretnina'
+#: gazda/nekretnine/doctype/nekretnina/nekretnina.json
+msgid "Opis nameštaja u stanu"
+msgstr ""
+
+#. Label of a Data field in DocType 'Nekretnina'
+#: gazda/nekretnine/doctype/nekretnina/nekretnina.json
+msgid "Opština"
+msgstr ""
+
+#. Label of a Tab Break field in DocType 'Osoba'
+#: gazda/nekretnine/doctype/osoba/osoba.json
+msgid "Osnovni podaci"
+msgstr ""
+
+#. Label of a Card Break in the Imovina Workspace
+#. Label of a Tab Break field in DocType 'Nekretnina'
+#: gazda/gazda/workspace/imovina/imovina.json
+#: gazda/nekretnine/doctype/nekretnina/nekretnina.json
+msgid "Osnovno"
+msgstr ""
+
+#. Name of a DocType
+#: gazda/nekretnine/doctype/osoba/osoba.json
+msgid "Osoba"
+msgstr ""
+
+#. Label of a Link in the Imovina Workspace
+#: gazda/gazda/workspace/imovina/imovina.json
+msgid "Osobe"
+msgstr ""
+
+#. Label of a Button field in DocType 'Racun Uplaceno'
+#: gazda/nekretnine/doctype/racun_uplaceno/racun_uplaceno.json
+msgid "POTVRDI"
+msgstr ""
+
+#. Label of a Data field in DocType 'Racun'
+#: gazda/nekretnine/doctype/racun/racun.json
+msgid "Period"
+msgstr ""
+
+#. Label of a Section Break field in DocType 'Nekretnina'
+#: gazda/nekretnine/doctype/nekretnina/nekretnina.json
+msgid "Podaci o glavnom objektu"
+msgstr ""
+
+#. Label of a Section Break field in DocType 'Nekretnina'
+#: gazda/nekretnine/doctype/nekretnina/nekretnina.json
+msgid "Podaci o odabranom delu objekta"
+msgstr ""
+
+#. Label of a Section Break field in DocType 'Nekretnina'
+#: gazda/nekretnine/doctype/nekretnina/nekretnina.json
+msgid "Podaci o parceli"
+msgstr ""
+
+#. Label of a Data field in DocType 'Nekretnina'
+#: gazda/nekretnine/doctype/nekretnina/nekretnina.json
+msgid "Podroj stana(objekta)"
+msgstr ""
+
+#. Option for the 'Nivo nameštenosti stana' (Select) field in DocType
+#. 'Nekretnina'
+#: gazda/nekretnine/doctype/nekretnina/nekretnina.json
+msgid "Polunamešten"
+msgstr ""
+
+#. Label of a Data field in DocType 'Nekretnina'
+#: gazda/nekretnine/doctype/nekretnina/nekretnina.json
+msgid "Potes ili ulica"
+msgstr ""
+
+#. Label of a Float field in DocType 'Nekretnina'
+#: gazda/nekretnine/doctype/nekretnina/nekretnina.json
+msgid "Površina"
+msgstr ""
+
+#. Label of a Float field in DocType 'Nekretnina'
+#: gazda/nekretnine/doctype/nekretnina/nekretnina.json
+msgid "Površina (hektar)"
+msgstr ""
+
+#. Label of a Float field in DocType 'Nekretnina'
+#: gazda/nekretnine/doctype/nekretnina/nekretnina.json
+msgid "Površina (jutro)"
+msgstr ""
+
+#. Label of a Float field in DocType 'Nekretnina'
+#: gazda/nekretnine/doctype/nekretnina/nekretnina.json
+msgid "Površina (m2)"
+msgstr ""
+
+#. Label of a Data field in DocType 'Nekretnina'
+#: gazda/nekretnine/doctype/nekretnina/nekretnina.json
+msgid "Površina objekta"
+msgstr ""
+
+#: gazda/nekretnine/report/transakcije_koje_pratimo/transakcije_koje_pratimo.js:22
+msgid "Pratimo ove transakcije"
+msgstr ""
+
+#. Label of a Table MultiSelect field in DocType 'Nekretnina'
+#: gazda/nekretnine/doctype/nekretnina/nekretnina.json
+msgid "Pratimo transakcije"
+msgstr ""
+
+#. Label of a Data field in DocType 'Nekretnina'
+#: gazda/nekretnine/doctype/nekretnina/nekretnina.json
+msgid "Pravni status objekta"
+msgstr ""
+
+#. Label of a Currency field in DocType 'Racun'
+#: gazda/nekretnine/doctype/racun/racun.json
+msgid "Preostalo"
+msgstr ""
+
+#. Label of a Link field in DocType 'Racun Uplaceno'
+#: gazda/nekretnine/doctype/racun_uplaceno/racun_uplaceno.json
+msgid "Primio"
+msgstr ""
+
+#. Linked DocType in Nekretnina's connections
+#. Name of a DocType
+#: gazda/nekretnine/doctype/nekretnina/nekretnina.json
+#: gazda/nekretnine/doctype/racun/racun.json
+msgid "Racun"
+msgstr ""
+
+#. Name of a DocType
+#: gazda/nekretnine/doctype/racun_uplaceno/racun_uplaceno.json
+msgid "Racun Uplaceno"
+msgstr ""
+
+#. Label of a Link in the Imovina Workspace
+#: gazda/gazda/workspace/imovina/imovina.json
+#: gazda/nekretnine/report/dužnici/dužnici.py:35
+msgid "Računi"
+msgstr ""
+
+#. Label of a Date field in DocType 'Racun'
+#: gazda/nekretnine/doctype/racun/racun.json
+msgid "Rok za naplatu"
+msgstr ""
+
+#. Label of a Int field in DocType 'Osoba'
+#: gazda/nekretnine/doctype/osoba/osoba.json
+msgid "Rok za plaćanje u danima"
+msgstr ""
+
+#. Label of a Data field in DocType 'Nekretnina'
+#: gazda/nekretnine/doctype/nekretnina/nekretnina.json
+msgid "Skraćenica"
+msgstr ""
+
+#. Label of a Attach Image field in DocType 'Nekretnina'
+#: gazda/nekretnine/doctype/nekretnina/nekretnina.json
+msgid "Slika prilaza nekretnini"
+msgstr ""
+
+#. Label of a Image field in DocType 'Nekretnina'
+#: gazda/nekretnine/doctype/nekretnina/nekretnina.json
+msgid "Slika prilaza nekretnini display"
+msgstr ""
+
+#. Option for the 'Status' (Select) field in DocType 'Nekretnina'
+#: gazda/nekretnine/doctype/nekretnina/nekretnina.json
+msgid "Slobodno"
+msgstr ""
+
+#. Description of a DocType
+#: gazda/nekretnine/doctype/currency_exchange/currency_exchange.json
+msgid "Specify Exchange Rate to convert one currency into another"
+msgstr ""
+
+#. Label of a Section Break field in DocType 'Nekretnina'
+#: gazda/nekretnine/doctype/nekretnina/nekretnina.json
+msgid "Stanje"
+msgstr ""
+
+#. Label of a Select field in DocType 'Nekretnina'
+#: gazda/nekretnine/doctype/nekretnina/nekretnina.json
+msgid "Status"
+msgstr ""
+
+#. Label of a Table MultiSelect field in DocType 'Nekretnina'
+#: gazda/nekretnine/doctype/nekretnina/nekretnina.json
+msgid "Suvlasnici"
+msgstr ""
+
+#. Label of a Link field in DocType 'Nekretnina Suvlasnici'
+#: gazda/nekretnine/doctype/nekretnina_suvlasnici/nekretnina_suvlasnici.json
+msgid "Suvlasnik"
+msgstr ""
+
+#. Name of a role
+#: gazda/nekretnine/doctype/currency_exchange/currency_exchange.json
+#: gazda/nekretnine/doctype/nekretnina/nekretnina.json
+#: gazda/nekretnine/doctype/osoba/osoba.json
+#: gazda/nekretnine/doctype/racun/racun.json
+#: gazda/nekretnine/doctype/tip_nekretnine/tip_nekretnine.json
+#: gazda/nekretnine/doctype/tip_transakcije/tip_transakcije.json
+msgid "System Manager"
+msgstr ""
+
+#. Label of a Data field in DocType 'Osoba'
+#: gazda/nekretnine/doctype/osoba/osoba.json
+msgid "Telefon"
+msgstr ""
+
+#. Name of a DocType
+#. Label of a Data field in DocType 'Tip Nekretnine'
+#: gazda/nekretnine/doctype/tip_nekretnine/tip_nekretnine.json
+msgid "Tip Nekretnine"
+msgstr ""
+
+#. Label of a Link field in DocType 'Racun'
+#. Name of a DocType
+#: gazda/nekretnine/doctype/racun/racun.json
+#: gazda/nekretnine/doctype/tip_transakcije/tip_transakcije.json
+msgid "Tip Transakcije"
+msgstr ""
+
+#. Label of a Link field in DocType 'Nekretnina Brojila'
+#: gazda/nekretnine/doctype/nekretnina_brojila/nekretnina_brojila.json
+msgid "Tip brojila"
+msgstr ""
+
+#. Label of a Link field in DocType 'Nekretnina'
+#: gazda/nekretnine/doctype/nekretnina/nekretnina.json
+msgid "Tip nekretnine"
+msgstr ""
+
+#. Label of a Data field in DocType 'Tip Transakcije'
+#: gazda/nekretnine/doctype/tip_transakcije/tip_transakcije.json
+msgid "Tip transakcije"
+msgstr ""
+
+#. Label of a Link field in DocType 'Currency Exchange'
+#: gazda/nekretnine/doctype/currency_exchange/currency_exchange.json
+msgid "To Currency"
+msgstr ""
+
+#. Label of a Link field in DocType 'Nekretnina Transakcije Pratimo'
+#: gazda/nekretnine/doctype/nekretnina_transakcije_pratimo/nekretnina_transakcije_pratimo.json
+msgid "Transakcije"
+msgstr ""
+
+#. Label of a Link in the Imovina Workspace
+#. Name of a report
+#: gazda/gazda/workspace/imovina/imovina.json
+#: gazda/nekretnine/report/transakcije_koje_pratimo/transakcije_koje_pratimo.json
+msgid "Transakcije koje pratimo"
+msgstr ""
+
+#. Label of a Link field in DocType 'Nekretnina'
+#: gazda/nekretnine/doctype/nekretnina/nekretnina.json
+msgid "Trenutni plodouživalac"
+msgstr ""
+
+#: gazda/nekretnine/report/dužnici/dužnici.js:14
+msgid "Uključi delimično plaćene"
+msgstr ""
+
+#: gazda/nekretnine/report/dužnici/dužnici.py:23
+msgid "Ukupno preostalo (RSD)"
+msgstr ""
+
+#. Label of a Data field in DocType 'Nekretnina'
+#: gazda/nekretnine/doctype/nekretnina/nekretnina.json
+msgid "Ulica i broj"
+msgstr ""
+
+#. Label of a Data field in DocType 'Nekretnina'
+#: gazda/nekretnine/doctype/nekretnina/nekretnina.json
+msgid "Ulica i broj (kat)"
+msgstr ""
+
+#. Label of a Link field in DocType 'Racun'
+#: gazda/nekretnine/doctype/racun/racun.json
+#: gazda/nekretnine/report/dužnici/dužnici.py:16
+msgid "Uplatilac"
+msgstr ""
+
+#. Label of a Currency field in DocType 'Racun'
+#. Label of a Currency field in DocType 'Racun Uplaceno'
+#: gazda/nekretnine/doctype/racun/racun.json
+#: gazda/nekretnine/doctype/racun_uplaceno/racun_uplaceno.json
+msgid "Uplaćeno"
+msgstr ""
+
+#. Name of a role
+#: gazda/nekretnine/doctype/currency_exchange/currency_exchange.json
+#: gazda/nekretnine/doctype/nekretnina/nekretnina.json
+#: gazda/nekretnine/doctype/osoba/osoba.json
+#: gazda/nekretnine/doctype/tip_nekretnine/tip_nekretnine.json
+#: gazda/nekretnine/doctype/tip_transakcije/tip_transakcije.json
+msgid "Upravnik stanova"
+msgstr ""
+
+#. Label of a Link field in DocType 'Racun'
+#. Label of a Link field in DocType 'Racun Uplaceno'
+#: gazda/nekretnine/doctype/racun/racun.json
+#: gazda/nekretnine/doctype/racun_uplaceno/racun_uplaceno.json
+msgid "Valuta"
+msgstr ""
+
+#. Label of a Link field in DocType 'Nekretnina'
+#: gazda/nekretnine/doctype/nekretnina/nekretnina.json
+msgid "Vlasnik"
+msgstr ""
+
+#. Label of a Currency field in DocType 'Racun'
+#: gazda/nekretnine/doctype/racun/racun.json
+msgid "Vrednost"
+msgstr ""
+
+#. Label of a Link field in DocType 'Nekretnina'
+#: gazda/nekretnine/doctype/nekretnina/nekretnina.json
+#: gazda/nekretnine/report/transakcije_koje_pratimo/transakcije_koje_pratimo.js:15
+msgid "Zakupac"
+msgstr ""
+
+#. Label of a Currency field in DocType 'Nekretnina'
+#: gazda/nekretnine/doctype/nekretnina/nekretnina.json
+msgid "Zakupnina"
+msgstr ""
+
+#. Label of a Link in the Imovina Workspace
+#. Name of a report
+#: gazda/gazda/workspace/imovina/imovina.json
+#: gazda/nekretnine/report/zarada_po_mesecu/zarada_po_mesecu.json
+msgid "Zarada po mesecu"
+msgstr ""
+
+#. Option for the 'Status' (Select) field in DocType 'Nekretnina'
+#: gazda/nekretnine/doctype/nekretnina/nekretnina.json
+msgid "Zauzeto"
+msgstr ""
+
+#. Label of a Check field in DocType 'Racun Uplaceno'
+#: gazda/nekretnine/doctype/racun_uplaceno/racun_uplaceno.json
+msgid "potvrdjeno"
+msgstr ""
+
+#. Option for the 'Kretanje novca' (Select) field in DocType 'Tip Transakcije'
+#: gazda/nekretnine/doctype/tip_transakcije/tip_transakcije.json
+msgid "prihod"
+msgstr ""
+
+#. Option for the 'Kretanje novca' (Select) field in DocType 'Tip Transakcije'
+#: gazda/nekretnine/doctype/tip_transakcije/tip_transakcije.json
+msgid "rashod"
+msgstr ""
+
+#. Label of a Data field in DocType 'Racun'
+#: gazda/nekretnine/doctype/racun/racun.json
+msgid "status"
+msgstr ""
+
+#. Option for the 'Kretanje novca' (Select) field in DocType 'Tip Transakcije'
+#: gazda/nekretnine/doctype/tip_transakcije/tip_transakcije.json
+msgid "zapis"
+msgstr ""
+
+#. Label of a Select field in DocType 'Racun'
+#: gazda/nekretnine/doctype/racun/racun.json
+msgid "Šablon broja"
+msgstr ""
+

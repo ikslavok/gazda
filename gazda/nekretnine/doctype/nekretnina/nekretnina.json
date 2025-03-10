@@ -35,6 +35,8 @@
   "adresa",
   "ulica_i_broj",
   "mesto",
+  "latitude",
+  "longitude",
   "section_break_gmqid",
   "brojila",
   "opis",
@@ -456,7 +458,7 @@
    "fieldname": "odrzava",
    "fieldtype": "Link",
    "label": "Odr\u017eava",
-   "options": "Osoba"
+   "options": "User"
   },
   {
    "fieldname": "osnovno_tab",
@@ -506,6 +508,16 @@
    "fieldname": "brojila",
    "fieldtype": "Table",
    "options": "Nekretnina Brojila"
+  },
+  {
+   "fieldname": "latitude",
+   "fieldtype": "Data",
+   "label": "Latitude"
+  },
+  {
+   "fieldname": "longitude",
+   "fieldtype": "Data",
+   "label": "Longitude"
   }
  ],
  "image_field": "slika_prilaza_nekretnini",
@@ -516,7 +528,7 @@
    "link_fieldname": "nekretnina"
   }
  ],
- "modified": "2025-03-10 15:47:48.750424",
+ "modified": "2025-03-10 21:31:09.480911",
  "modified_by": "Administrator",
  "module": "Nekretnine",
  "name": "Nekretnina",
