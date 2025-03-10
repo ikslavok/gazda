@@ -40,7 +40,9 @@ PageContent = Class.extend({
 				</div>
 			</div>
 			<div class="page-content-wrapper">
-				<div class="datatable-container"></div>
+				<div class="datatable-outer-container" style="height: 200px; overflow: hidden;">
+					<div class="datatable-container"></div>
+				</div>
 				<div id="map" style="height: 400px; width: 100%;"></div>
 			</div>
 		`;
@@ -52,10 +54,15 @@ PageContent = Class.extend({
 					flex-direction: column;
 					height: calc(100vh - 200px);
 				}
-				.datatable-container {
-					height: 50%;
-					overflow: auto;
+				.datatable-outer-container {
+					height: 200px !important;
+					overflow: hidden;
 					border: 1px solid #F3F3F3;
+					margin-bottom: 10px;
+				}
+				.datatable-container {
+					height: 100%;
+					overflow: auto;
 				}
 				.custom-div-icon svg {
 					display: block;
@@ -63,8 +70,8 @@ PageContent = Class.extend({
 					height: 100%;
 				}
 				.dt-scrollable {
-					height: calc(100vh - 70vh) !important;
-					max-height: none !important;
+					height: 200px !important;
+					max-height: 200px !important;
 				}
 				.datatable .dt-row.selected {
 					background-color: #f0f8ff;
@@ -86,6 +93,7 @@ PageContent = Class.extend({
 					max-width: 60px !important;
 					text-align: center;
 				}
+				
 				/* Style for the property icon button */
 				.btn-icon {
 					padding: 0;
@@ -304,6 +312,7 @@ PageContent = Class.extend({
 				{ 
 					name: '', 
 					width: 40,
+					resizable: false,
 					format: (value) => value, // This will render the button with SVG directly
 					editable: false,
 					sortable: false,
@@ -319,7 +328,7 @@ PageContent = Class.extend({
 				}
 			],
 			data: data,
-			layout: 'fluid',
+			layout: 'fixed',
 			serialNoColumn: false,
 			checkboxColumn: false,
 			inlineFilters: true,
