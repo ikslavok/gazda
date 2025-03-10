@@ -36,7 +36,7 @@
   "ulica_i_broj",
   "mesto",
   "section_break_gmqid",
-  "table_hwqr",
+  "brojila",
   "opis",
   "geodetski_podaci_section",
   "povr\u0161ina_m2",
@@ -503,7 +503,7 @@
    "unique": 1
   },
   {
-   "fieldname": "table_hwqr",
+   "fieldname": "brojila",
    "fieldtype": "Table",
    "options": "Nekretnina Brojila"
   }
@@ -516,7 +516,7 @@
    "link_fieldname": "nekretnina"
   }
  ],
- "modified": "2025-03-09 15:52:26.082707",
+ "modified": "2025-03-10 15:47:48.750424",
  "modified_by": "Administrator",
  "module": "Nekretnine",
  "name": "Nekretnina",
@@ -543,7 +543,7 @@
    "print": 1,
    "read": 1,
    "report": 1,
-   "role": "Upravnik stanova",
+   "role": "Nekretnine SVE",
    "select": 1,
    "share": 1,
    "write": 1
