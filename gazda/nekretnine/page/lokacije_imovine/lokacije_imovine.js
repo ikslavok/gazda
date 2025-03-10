@@ -40,15 +40,23 @@ PageContent = Class.extend({
 				</div>
 			</div>
 			<div class="page-content-wrapper">
+				<div id="map" style="height: 400px; width: 100%;"></div>
 				<div class="datatable-outer-container" style="height: 200px; overflow: hidden;">
 					<div class="datatable-container"></div>
 				</div>
-				<div id="map" style="height: 400px; width: 100%;"></div>
 			</div>
 		`;
 
+		// First render the HTML content
+		$(frappe.render(htmlContent, this)).appendTo(this.page.main);
+
+		// Initialize the datatable and map
+		this.initializeDataTable();
+		this.initializeMap();
+
+		// Load initial styles
 		let headContent = `
-			<style>
+			<style id="lokacije-imovine-styles">
 				.page-content-wrapper {
 					display: flex;
 					flex-direction: column;
@@ -57,12 +65,11 @@ PageContent = Class.extend({
 				.datatable-outer-container {
 					height: 200px !important;
 					overflow: hidden;
-					border: 1px solid #F3F3F3;
-					margin-bottom: 10px;
 				}
 				.datatable-container {
 					height: 100%;
 					overflow: auto;
+					margin-left: 50px;
 				}
 				.custom-div-icon svg {
 					display: block;
@@ -79,19 +86,6 @@ PageContent = Class.extend({
 				.dt-instance-1 {
 					margin: 0 !important;
 					margin-left: 0 !important;
-				}
-				/* Force first column width */
-				.dt-cell--0 {
-					width: 40px !important;
-					min-width: 40px !important;
-					max-width: 40px !important;
-				}
-				/* Force edit column width */
-				.dt-cell--3 {
-					width: 60px !important;
-					min-width: 60px !important;
-					max-width: 60px !important;
-					text-align: center;
 				}
 				
 				/* Style for the property icon button */
@@ -168,8 +162,12 @@ PageContent = Class.extend({
 					margin-top: 8px;
 					font-weight: bold;
 				}
+				.property-filters.mb-3 {
+					margin-bottom: 0;
+				}
 				#map {
-					flex-grow: 1;
+					flex-shrink: 0;
+					margin-bottom: 0;
 				}
 				/* Edit location mode styles */
 				.edit-location-mode {
@@ -193,15 +191,66 @@ PageContent = Class.extend({
 					padding: 4px 10px;
 					font-size: 12px;
 				}
+				.dt-cell__content--col-0 {
+					padding: 0 !important;
+				}
 			</style>
 		`;
 
 		$(frappe.render(headContent, this)).appendTo(this.page.head);
-		$(frappe.render(htmlContent, this)).appendTo(this.page.main);
-
-		// Initialize the datatable and map
-		this.initializeDataTable();
-		this.initializeMap();
+		
+		// Add final styles with a delay to ensure they're loaded last and can't be overwritten
+		setTimeout(() => {
+			// Remove existing styles if they exist
+			$('#lokacije-imovine-final-styles').remove();
+			
+			// Create a new style element with !important flags for critical styles
+			const finalStyles = document.createElement('style');
+			finalStyles.id = 'lokacije-imovine-final-styles';
+			finalStyles.innerHTML = `
+				.datatable-container {
+					height: 100% !important;
+					overflow: auto !important;
+					margin-left: 0 !important;
+				}
+				.dt-scrollable {
+					height: 200px !important;
+					max-height: 200px !important;
+					overflow-y: auto !important;
+				}
+				.dt-instance-1 {
+					margin: 0 !important;
+					margin-left: 0 !important;
+				}
+				.dt-cell--0 {
+					width: 40px !important;
+					min-width: 40px !important;
+					max-width: 40px !important;
+				}
+				.dt-cell--3 {
+					width: 60px !important;
+					min-width: 60px !important;
+					max-width: 60px !important;
+					text-align: center !important;
+				}
+				.dt-cell__content--col-0 {
+					padding: 0 !important;
+				}
+				#map {
+					flex-shrink: 0 !important;
+					margin-bottom: 0 !important;
+					height: 400px !important;
+					width: 100% !important;
+				}
+				.datatable-outer-container {
+					height: 200px !important;
+					overflow: hidden !important;
+				}
+			`;
+			
+			// Append the style element to the document head
+			document.head.appendChild(finalStyles);
+		}, 1000); // Delay of 1 second to ensure it's loaded after other styles
 	},
 	
 	initializeDataTable: function() {
@@ -317,11 +366,11 @@ PageContent = Class.extend({
 					editable: false,
 					sortable: false,
 				},
-				{ name: 'Naziv', width: 250 },
+				{ name: 'Naziv', width: 400 },
 				{ name: 'Zakupac', width: 200 },
 				{ 
-					name: 'Izmeni', 
-					width: 60,
+					name: '', 
+					width: 40,
 					format: (value) => value, // This will render the edit button
 					editable: false,
 					sortable: false,
