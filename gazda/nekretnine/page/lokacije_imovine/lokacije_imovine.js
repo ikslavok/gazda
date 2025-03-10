@@ -41,7 +41,7 @@ PageContent = Class.extend({
 			</div>
 			<div class="page-content-wrapper">
 				<div id="map" style="height: 400px; width: 100%;"></div>
-				<div class="datatable-outer-container" style="height: 200px; overflow: hidden;">
+				<div class="datatable-outer-container" style="height: 400px; overflow: hidden;">
 					<div class="datatable-container"></div>
 				</div>
 			</div>
@@ -60,10 +60,10 @@ PageContent = Class.extend({
 				.page-content-wrapper {
 					display: flex;
 					flex-direction: column;
-					height: calc(100vh - 200px);
+					height: calc(100vh - 400px);
 				}
 				.datatable-outer-container {
-					height: 200px !important;
+					height: 400px !important;
 					overflow: hidden;
 				}
 				.datatable-container {
@@ -77,8 +77,8 @@ PageContent = Class.extend({
 					height: 100%;
 				}
 				.dt-scrollable {
-					height: 200px !important;
-					max-height: 200px !important;
+					height: 400px !important;
+					max-height: 400px !important;
 				}
 				.datatable .dt-row.selected {
 					background-color: #f0f8ff;
@@ -214,8 +214,8 @@ PageContent = Class.extend({
 					margin-left: 0 !important;
 				}
 				.dt-scrollable {
-					height: 200px !important;
-					max-height: 200px !important;
+					height: 400px !important;
+					max-height: 400px !important;
 					overflow-y: auto !important;
 				}
 				.dt-instance-1 {
@@ -243,7 +243,7 @@ PageContent = Class.extend({
 					width: 100% !important;
 				}
 				.datatable-outer-container {
-					height: 200px !important;
+					height: 400px !important;
 					overflow: hidden !important;
 				}
 			`;
