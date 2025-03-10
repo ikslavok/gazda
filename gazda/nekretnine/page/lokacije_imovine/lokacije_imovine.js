@@ -39,14 +39,21 @@ PageContent = Class.extend({
 					</div>
 				</div>
 			</div>
-			<div class="datatable-container"></div>
-			<div id="map" style="height: 400px; width: 100%;"></div>
+			<div class="page-content-wrapper">
+				<div class="datatable-container"></div>
+				<div id="map" style="height: 400px; width: 100%;"></div>
+			</div>
 		`;
 
 		let headContent = `
 			<style>
+				.page-content-wrapper {
+					display: flex;
+					flex-direction: column;
+					height: calc(100vh - 200px);
+				}
 				.datatable-container {
-					max-height: 300px;
+					height: 50%;
 					overflow: auto;
 					border: 1px solid #F3F3F3;
 				}
@@ -56,7 +63,7 @@ PageContent = Class.extend({
 					height: 100%;
 				}
 				.dt-scrollable {
-					max-height: 300px;
+					max-height: 100%;
 				}
 				.datatable .dt-row.selected {
 					background-color: #f0f8ff;
@@ -69,6 +76,13 @@ PageContent = Class.extend({
 					width: 40px !important;
 					min-width: 40px !important;
 					max-width: 40px !important;
+				}
+				/* Force edit column width */
+				.dt-cell--3 {
+					width: 60px !important;
+					min-width: 60px !important;
+					max-width: 60px !important;
+					text-align: center;
 				}
 				/* Style for the property icon button */
 				.btn-icon {
@@ -89,6 +103,24 @@ PageContent = Class.extend({
 				.btn-icon svg {
 					width: 20px;
 					height: 20px;
+				}
+				/* Edit button styles */
+				.btn-edit-location {
+					padding: 4px 8px;
+					background-color: #f8f9fa;
+					border: 1px solid #dee2e6;
+					border-radius: 3px;
+					color: #495057;
+					cursor: pointer;
+					display: inline-flex;
+					align-items: center;
+					justify-content: center;
+				}
+				.btn-edit-location:hover {
+					background-color: #e9ecef;
+				}
+				.btn-edit-location svg {
+					margin-right: 0;
 				}
 				/* Popup styles */
 				.property-popup {
@@ -116,6 +148,31 @@ PageContent = Class.extend({
 					display: block;
 					margin-top: 8px;
 					font-weight: bold;
+				}
+				#map {
+					flex-grow: 1;
+				}
+				/* Edit location mode styles */
+				.edit-location-mode {
+					cursor: crosshair !important;
+				}
+				.location-edit-tooltip {
+					background-color: rgba(0, 0, 0, 0.7);
+					border: none;
+					color: white;
+					padding: 5px 10px;
+					border-radius: 3px;
+					font-weight: bold;
+				}
+				.location-edit-tooltip:before {
+					border-top-color: rgba(0, 0, 0, 0.7);
+				}
+				.edit-location-cancel {
+					margin-bottom: 10px;
+				}
+				.edit-location-cancel button {
+					padding: 4px 10px;
+					font-size: 12px;
 				}
 			</style>
 		`;
@@ -206,6 +263,12 @@ PageContent = Class.extend({
 			`<button class="btn btn-icon property-icon" data-property="${p.name}">${this.getPropertyIcon(p.tip_nekretnine, p.status)}</button>`,
 			p.naziv_nekretnine || p.name,
 			p.zakupac || '',
+			// Add edit button as a new column
+			`<button class="btn btn-sm btn-edit-location" data-property="${p.name}">
+				<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+					<path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path>
+				</svg>
+			</button>`
 		]);
 		
 		// If datatable already exists, refresh it
@@ -213,7 +276,10 @@ PageContent = Class.extend({
 			this.datatable.refresh(data);
 			
 			// Re-attach click handlers after refresh
-			setTimeout(() => this.attachButtonClickHandlers(), 500);
+			setTimeout(() => {
+				this.attachButtonClickHandlers();
+				this.attachEditButtonHandlers();
+			}, 500);
 			return;
 		}
 		
@@ -228,7 +294,14 @@ PageContent = Class.extend({
 					sortable: false,
 				},
 				{ name: 'Naziv', width: 250 },
-				{ name: 'Zakupac', width: 250 },
+				{ name: 'Zakupac', width: 200 },
+				{ 
+					name: 'Izmeni', 
+					width: 60,
+					format: (value) => value, // This will render the edit button
+					editable: false,
+					sortable: false,
+				}
 			],
 			data: data,
 			layout: 'fluid',
@@ -239,13 +312,18 @@ PageContent = Class.extend({
 			dynamicRowHeight: false,
 		});
 		
-		// Force the first column width to exactly 40px with CSS and attach button handlers
+		// Force column widths and attach button handlers
 		setTimeout(() => {
 			$('.dt-cell--0').css('width', '40px');
 			$('.dt-cell--0').css('min-width', '40px');
 			$('.dt-cell--0').css('max-width', '40px');
 			
+			$('.dt-cell--3').css('width', '60px');
+			$('.dt-cell--3').css('min-width', '60px');
+			$('.dt-cell--3').css('max-width', '60px');
+			
 			this.attachButtonClickHandlers();
+			this.attachEditButtonHandlers();
 		}, 500);
 	},
 	
@@ -273,13 +351,34 @@ PageContent = Class.extend({
 					// Center map on this property
 					this.map.setView([property.latitude, property.longitude], 16);
 					
-					// Find and open the marker popup
-					this.markers.forEach(marker => {
-						if (marker.propertyId === propertyId) {
+					// Find and open the marker popup immediately
+					const marker = this.markers.find(marker => marker.propertyId === propertyId);
+					if (marker) {
+						// Create a small delay to ensure the map has centered first
+						setTimeout(() => {
 							marker.openPopup();
-						}
-					});
+						}, 50);
+					}
 				}
+			}
+		});
+	},
+	
+	// Method to attach click handlers to the edit buttons in the datatable
+	attachEditButtonHandlers: function() {
+		// Remove any existing handlers to prevent duplicates
+		$(document).off('click', '.btn-edit-location');
+		
+		// Add click handler to all edit location buttons
+		$(document).on('click', '.btn-edit-location', (e) => {
+			e.preventDefault();
+			e.stopPropagation();
+			
+			// Get the property ID from the data attribute
+			const propertyId = $(e.currentTarget).data('property');
+			
+			if (propertyId) {
+				this.enableLocationEditMode(propertyId);
 			}
 		});
 	},
@@ -469,6 +568,142 @@ PageContent = Class.extend({
 				}
 			}
 		});
+	},
+	
+	// New method to enable location edit mode
+	enableLocationEditMode: function(propertyId) {
+		// Find the property
+		const property = this.properties.find(p => p.name === propertyId);
+		if (!property) return;
+		
+		// Close any open popups
+		this.map.closePopup();
+		
+		// Change cursor to crosshair
+		$('#map').addClass('edit-location-mode');
+		
+		// Create a tooltip but don't add it to the map yet
+		const tooltip = L.tooltip({
+			permanent: true,
+			direction: 'top',
+			className: 'location-edit-tooltip'
+		}).setContent('Postavi novu lokaciju');
+		
+		let tooltipAdded = false;
+		
+		// Update tooltip position on mousemove
+		const updateTooltip = (e) => {
+			if (!e.latlng) return;
+			
+			// Add tooltip to map on first valid mousemove if not already added
+			if (!tooltipAdded) {
+				tooltip.setLatLng(e.latlng).addTo(this.map);
+				tooltipAdded = true;
+			} else {
+				tooltip.setLatLng(e.latlng);
+			}
+		};
+		
+		this.map.on('mousemove', updateTooltip);
+		
+		// Handle click to set new location
+		const handleMapClick = (e) => {
+			if (!e.latlng) return;
+			
+			const newLat = e.latlng.lat;
+			const newLng = e.latlng.lng;
+			
+			// Ask for confirmation
+			frappe.confirm(
+				`Da li želite da postavite novu lokaciju za "${property.naziv_nekretnine || property.name}"?<br>
+				Nove koordinate: ${newLat.toFixed(6)}, ${newLng.toFixed(6)}`,
+				() => {
+					// User confirmed, update the property location
+					frappe.call({
+						method: "frappe.client.set_value",
+						args: {
+							doctype: "Nekretnina",
+							name: propertyId,
+							fieldname: {
+								latitude: newLat,
+								longitude: newLng
+							}
+						},
+						callback: (r) => {
+							if (r.message) {
+								frappe.show_alert({
+									message: __('Lokacija uspešno ažurirana'),
+									indicator: 'green'
+								});
+								
+								// Update the property in our local data
+								property.latitude = newLat;
+								property.longitude = newLng;
+								
+								// Refresh the map
+								this.refreshMap(this.properties);
+							}
+						}
+					});
+					
+					// Clean up
+					this.disableLocationEditMode(tooltip);
+				},
+				() => {
+					// User cancelled
+					this.disableLocationEditMode(tooltip);
+				},
+				'Potvrdi'
+			);
+		};
+		
+		this.map.once('click', handleMapClick);
+		
+		// Add escape key handler to cancel edit mode
+		const escKeyHandler = (e) => {
+			if (e.key === 'Escape') {
+				this.disableLocationEditMode(tooltip);
+				document.removeEventListener('keydown', escKeyHandler);
+			}
+		};
+		
+		document.addEventListener('keydown', escKeyHandler);
+		
+		// Add a cancel button to the map
+		const cancelButton = L.control({position: 'topright'});
+		cancelButton.onAdd = (map) => {
+			const div = L.DomUtil.create('div', 'edit-location-cancel');
+			div.innerHTML = '<button class="btn btn-sm btn-danger">Otkaži</button>';
+			div.onclick = () => {
+				this.disableLocationEditMode(tooltip);
+				map.removeControl(cancelButton);
+			};
+			return div;
+		};
+		cancelButton.addTo(this.map);
+		
+		// Store the cancel button reference for removal later
+		this.cancelEditButton = cancelButton;
+	},
+	
+	// Method to disable location edit mode
+	disableLocationEditMode: function(tooltip) {
+		// Remove the tooltip if it exists and has been added to the map
+		if (tooltip && tooltip._map) {
+			this.map.removeLayer(tooltip);
+		}
+		
+		// Remove the mousemove event
+		this.map.off('mousemove');
+		
+		// Remove the cancel button if it exists
+		if (this.cancelEditButton) {
+			this.map.removeControl(this.cancelEditButton);
+			this.cancelEditButton = null;
+		}
+		
+		// Reset cursor
+		$('#map').removeClass('edit-location-mode');
 	},
 	
 	refreshData: function() {
