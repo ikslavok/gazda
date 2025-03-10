@@ -104,6 +104,15 @@ PageContent = Class.extend({
 					width: 20px;
 					height: 20px;
 				}
+				/* No coordinates icon */
+				.no-coordinates-icon {
+					display: flex;
+					align-items: center;
+					justify-content: center;
+					height: 24px;
+					color: #aaa;
+					font-size: 16px;
+				}
 				/* Edit button styles */
 				.btn-edit-location {
 					padding: 4px 8px;
@@ -216,7 +225,6 @@ PageContent = Class.extend({
 		// Get filter values
 		const typeFilter = $('#property-type-filter').val();
 		const statusFilter = $('#property-status-filter').val();
-		const onlyWithCoordinates = true; // Only show properties with coordinates
 		
 		// Build filters object
 		let filters = {};
@@ -233,24 +241,27 @@ PageContent = Class.extend({
 			},
 			callback: (r) => {
 				if (r.message) {
-					// Filter properties to only include those with coordinates
+					// Store all properties
+					this.allProperties = r.message;
+					
+					// Filter properties for map display (only those with coordinates)
 					this.properties = r.message.filter(p => p.latitude && p.longitude);
 					
 					if (this.properties.length === 0) {
 						frappe.show_alert({
-							message: __('Nema nekretnina sa definisanim koordinatama'),
+							message: __('Nema nekretnina sa definisanim koordinatama za prikaz na mapi'),
 							indicator: 'orange'
 						});
 						
-						// Clear the datatable and map
-						if (this.datatable) {
-							this.datatable.refresh([]);
-						}
+						// Clear the map
 						this.refreshMap([]);
 					} else {
-						this.renderDataTable(this.properties);
+						// Refresh the map with properties that have coordinates
 						this.refreshMap(this.properties);
 					}
+					
+					// Always render the datatable with all properties
+					this.renderDataTable(this.allProperties);
 				}
 			}
 		});
@@ -259,12 +270,14 @@ PageContent = Class.extend({
 	renderDataTable: function(properties) {
 		// Format the data for the datatable
 		const data = properties.map(p => [
-			// Create a button with the SVG inside
-			`<button class="btn btn-icon property-icon" data-property="${p.name}">${this.getPropertyIcon(p.tip_nekretnine, p.status)}</button>`,
+			// Create a button with the SVG inside - only if coordinates exist
+			p.latitude && p.longitude ? 
+				`<button class="btn btn-icon property-icon" data-property="${p.name}">${this.getPropertyIcon(p.tip_nekretnine, p.status)}</button>` : 
+				'<div class="no-coordinates-icon">—</div>',
 			p.naziv_nekretnine || p.name,
 			p.zakupac || '',
 			// Add edit button as a new column
-			`<button class="btn btn-sm btn-edit-location" data-property="${p.name}">
+			`<button class="btn btn-sm btn-edit-location" data-property="${p.name}" ${!p.latitude && !p.longitude ? 'data-new-location="true"' : ''}>
 				<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
 					<path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path>
 				</svg>
@@ -327,6 +340,38 @@ PageContent = Class.extend({
 		}, 500);
 	},
 	
+	// Method to attach click handlers to the edit buttons in the datatable
+	attachEditButtonHandlers: function() {
+		// Remove any existing handlers to prevent duplicates
+		$(document).off('click', '.btn-edit-location');
+		
+		// Add click handler to all edit location buttons
+		$(document).on('click', '.btn-edit-location', (e) => {
+			e.preventDefault();
+			e.stopPropagation();
+			
+			// Get the property ID from the data attribute
+			const propertyId = $(e.currentTarget).data('property');
+			const isNewLocation = $(e.currentTarget).data('new-location');
+			
+			if (propertyId) {
+				// Find the property in all properties
+				const property = this.allProperties.find(p => p.name === propertyId);
+				
+				if (property) {
+					if (isNewLocation) {
+						// Show a message for properties without coordinates
+						frappe.show_alert({
+							message: __('Postavljanje nove lokacije za nekretninu bez koordinata'),
+							indicator: 'blue'
+						});
+					}
+					this.enableLocationEditMode(propertyId);
+				}
+			}
+		});
+	},
+	
 	// Method to attach click handlers to the buttons
 	attachButtonClickHandlers: function() {
 		// Remove any existing handlers to prevent duplicates
@@ -360,25 +405,6 @@ PageContent = Class.extend({
 						}, 50);
 					}
 				}
-			}
-		});
-	},
-	
-	// Method to attach click handlers to the edit buttons in the datatable
-	attachEditButtonHandlers: function() {
-		// Remove any existing handlers to prevent duplicates
-		$(document).off('click', '.btn-edit-location');
-		
-		// Add click handler to all edit location buttons
-		$(document).on('click', '.btn-edit-location', (e) => {
-			e.preventDefault();
-			e.stopPropagation();
-			
-			// Get the property ID from the data attribute
-			const propertyId = $(e.currentTarget).data('property');
-			
-			if (propertyId) {
-				this.enableLocationEditMode(propertyId);
 			}
 		});
 	},
@@ -572,12 +598,17 @@ PageContent = Class.extend({
 	
 	// New method to enable location edit mode
 	enableLocationEditMode: function(propertyId) {
-		// Find the property
-		const property = this.properties.find(p => p.name === propertyId);
+		// Find the property in all properties
+		const property = this.allProperties.find(p => p.name === propertyId);
 		if (!property) return;
 		
 		// Close any open popups
 		this.map.closePopup();
+		
+		// If property has coordinates, center the map on it
+		if (property.latitude && property.longitude) {
+			this.map.setView([property.latitude, property.longitude], 16);
+		}
 		
 		// Change cursor to crosshair
 		$('#map').addClass('edit-location-mode');
@@ -615,8 +646,8 @@ PageContent = Class.extend({
 			
 			// Ask for confirmation
 			frappe.confirm(
-				`Da li želite da postavite novu lokaciju za "${property.naziv_nekretnine || property.name}"?<br>
-				Nove koordinate: ${newLat.toFixed(6)}, ${newLng.toFixed(6)}`,
+				`Da li želite da postavite ${property.latitude ? 'novu' : 'prvu'} lokaciju za "${property.naziv_nekretnine || property.name}"?<br>
+				${property.latitude ? 'Nove' : 'Nove'} koordinate: ${newLat.toFixed(6)}, ${newLng.toFixed(6)}`,
 				() => {
 					// User confirmed, update the property location
 					frappe.call({
@@ -640,8 +671,14 @@ PageContent = Class.extend({
 								property.latitude = newLat;
 								property.longitude = newLng;
 								
-								// Refresh the map
+								// Add to properties with coordinates if it wasn't there before
+								if (!this.properties.some(p => p.name === property.name)) {
+									this.properties.push(property);
+								}
+								
+								// Refresh the map and datatable
 								this.refreshMap(this.properties);
+								this.renderDataTable(this.allProperties);
 							}
 						}
 					});
