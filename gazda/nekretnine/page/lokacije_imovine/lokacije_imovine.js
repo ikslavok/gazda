@@ -63,13 +63,14 @@ PageContent = Class.extend({
 					height: 100%;
 				}
 				.dt-scrollable {
-					max-height: 100%;
+					max-height: 200px !important;
 				}
 				.datatable .dt-row.selected {
 					background-color: #f0f8ff;
 				}
 				.dt-instance-1 {
 					margin: 0 !important;
+					margin-left: 0 !important;
 				}
 				/* Force first column width */
 				.dt-cell--0 {
