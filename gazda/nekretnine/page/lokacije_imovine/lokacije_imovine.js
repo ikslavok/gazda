@@ -63,7 +63,8 @@ PageContent = Class.extend({
 					height: 100%;
 				}
 				.dt-scrollable {
-					max-height: 200px !important;
+					height: calc(100vh - 70vh) !important;
+					max-height: none !important;
 				}
 				.datatable .dt-row.selected {
 					background-color: #f0f8ff;
