@@ -341,8 +341,7 @@
    "fieldname": "imaoci_prava_na_parcelu",
    "fieldtype": "Table MultiSelect",
    "label": "Imaoci prava na parcelu",
-   "options": "Nekretnina Suvlasnici",
-   "read_only": 1
+   "options": "Nekretnina Suvlasnici"
   },
   {
    "fieldname": "podaci_o_odabranom_delu_objekta_section",
@@ -538,7 +537,7 @@
    "link_fieldname": "nekretnina"
   }
  ],
- "modified": "2025-03-11 13:25:35.844181",
+ "modified": "2025-03-11 17:40:54.019855",
  "modified_by": "Administrator",
  "module": "Nekretnine",
  "name": "Nekretnina",
