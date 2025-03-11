@@ -488,6 +488,7 @@
    "label": "Opis name\u0161taja u stanu"
   },
   {
+   "description": "Da postavi\u0161 lokaciju idi na <a href=\"/app/lokacije-imovine\">mapu svih nekretnina</a>",
    "fieldname": "detalji_tab",
    "fieldtype": "Tab Break",
    "label": "Detalji"
@@ -523,6 +524,7 @@
    "label": "Longitude"
   },
   {
+   "description": "Postavi lokaciju na <a href=\"/app/lokacije-imovine\"> mapi svih nekretnina</a>.",
    "fieldname": "location",
    "fieldtype": "Geolocation",
    "label": "Lokacija"
@@ -536,7 +538,7 @@
    "link_fieldname": "nekretnina"
   }
  ],
- "modified": "2025-03-11 13:19:10.938012",
+ "modified": "2025-03-11 13:25:35.844181",
  "modified_by": "Administrator",
  "module": "Nekretnine",
  "name": "Nekretnina",
