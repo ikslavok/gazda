@@ -720,7 +720,6 @@ PageContent = Class.extend({
 			if (this.polygonPoints.length >= 3) {
 				// Clear existing polygon and area label
 				this.drawingPolygon.clearLayers();
-				this.areaLabel.clearLayers();
 				
 				// Create a new polygon
 				const polygon = L.polygon(this.polygonPoints, {
@@ -733,29 +732,13 @@ PageContent = Class.extend({
 				
 				// Only show area label if zoom level is 14 or higher
 				if (this.map.getZoom() >= 14) {
-					// Calculate the area in square meters and convert to acres
-					const areaInSqMeters = this.calculatePolygonArea(this.polygonPoints);
-					const areaInAcres = (areaInSqMeters / 4046.86).toFixed(2);
 					
 					// Add area label at the center of the polygon
 					const center = polygon.getBounds().getCenter();
-					const areaText = L.divIcon({
-						html: `<div style="color: #3388ff; text-shadow: 1px 1px 0 #fff, -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff; font-weight: bold;">${areaInAcres} acres</div>`,
-						className: 'area-label-container',
-						iconSize: [100, 30],
-						iconAnchor: [50, 15]
-					});
-					
-					L.marker(center, { icon: areaText }).addTo(this.areaLabel);
 				}
 			}
 		};
 
-		// Add zoom event listener
-		this.map.on('zoomend', updateAreaLabel);
-		
-		// Store the zoom handler for removal later
-		this.zoomHandler = updateAreaLabel;
 
 		// Handle click to add a point
 		const handleMapClick = (e) => {
@@ -812,12 +795,6 @@ PageContent = Class.extend({
 					weight: 3,
 					opacity: 0.7
 				}).addTo(this.drawingLines);
-			}
-			
-			// If we have at least 3 points, draw the polygon
-			if (this.polygonPoints.length >= 3) {
-				// Update the polygon and area label
-				updateAreaLabel();
 			}
 		};
 		
@@ -1290,6 +1267,9 @@ PageContent = Class.extend({
 			this.markerCluster.clearLayers();
 		} else if (this.markerGroup) {
 			this.markerGroup.clearLayers();
+		} else {
+			// Remove markers directly from the map if neither is available
+		this.markers.forEach(marker => this.map.removeLayer(marker));
 		}
 		
 		// Clear any existing polygons
@@ -1298,10 +1278,9 @@ PageContent = Class.extend({
 		}
 		
 		// Create a new layer group for property polygons
-		this.propertyPolygons = L.layerGroup();
+		this.propertyPolygons = L.layerGroup().addTo(this.map);
 		
 		this.markers = [];
-		const polygons = []; // Store polygon references
 		
 		// Helper function to get color based on status
 		function getStatusColor(status) {
@@ -1427,38 +1406,7 @@ PageContent = Class.extend({
 										fillColor: polygonColor,
 										fillOpacity: 0.2
 									}).addTo(this.propertyPolygons);
-									
-									// Calculate area and create label
-									const area = this.calculatePolygonArea(coords);
-									const areaInAcres = (area / 4046.86).toFixed(2);
-									const center = polygon.getBounds().getCenter();
-									
-									// Create area label with polygon color
-									const areaLabel = L.marker(center, {
-										icon: L.divIcon({
-											html: `<div style="color: ${polygonColor}; text-shadow: 1px 1px 0 #fff, -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff; font-weight: bold;">${areaInAcres} acres</div>`,
-											className: 'area-label-container',
-											iconSize: [100, 30],
-											iconAnchor: [50, 15]
-										})
-									});
-									
-									// Only show label at zoom level 14+
-									const updateLabelVisibility = () => {
-										if (this.map.getZoom() >= 14) {
-											if (!areaLabel._map) {
-												areaLabel.addTo(this.propertyPolygons);
-											}
-										} else {
-											if (areaLabel._map) {
-												this.propertyPolygons.removeLayer(areaLabel);
-											}
-										}
-									};
-									
-									// Initial visibility check
-									updateLabelVisibility();
-									
+								
 									// Associate the polygon with the property
 									polygon.propertyId = doc.name;
 									
@@ -1480,39 +1428,6 @@ PageContent = Class.extend({
 				}
 			}
 		});
-
-		// Function to update polygon visibility based on zoom level
-		const updatePolygonVisibility = () => {
-			const currentZoom = this.map.getZoom();
-			if (currentZoom >= 13) {
-				if (!this.propertyPolygons._map) {
-					this.propertyPolygons.addTo(this.map);
-				}
-			} else {
-				if (this.propertyPolygons._map) {
-					this.map.removeLayer(this.propertyPolygons);
-				}
-			}
-		};
-
-		// Add polygons to the layer group
-		polygons.forEach(polygon => {
-			this.propertyPolygons.addLayer(polygon);
-		});
-
-		// Initial visibility check
-		updatePolygonVisibility();
-
-		// Update visibility on zoom
-		this.map.off('zoomend', updatePolygonVisibility); // Remove existing handler if any
-		this.map.on('zoomend', updatePolygonVisibility);
-
-		// Add markers to appropriate layer
-		if (this.useMarkerCluster && this.markerCluster) {
-			this.markers.forEach(marker => this.markerCluster.addLayer(marker));
-		} else if (this.markerGroup) {
-			this.markers.forEach(marker => this.markerGroup.addLayer(marker));
-		}
 	},
 	
 	// New method to enable location edit mode
