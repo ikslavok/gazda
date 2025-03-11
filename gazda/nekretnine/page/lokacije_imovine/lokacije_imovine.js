@@ -715,6 +715,48 @@ PageContent = Class.extend({
 		// Create a layer for the area label
 		this.areaLabel = L.layerGroup().addTo(this.map);
 		
+		// Function to update area label visibility based on zoom
+		const updateAreaLabel = () => {
+			if (this.polygonPoints.length >= 3) {
+				// Clear existing polygon and area label
+				this.drawingPolygon.clearLayers();
+				this.areaLabel.clearLayers();
+				
+				// Create a new polygon
+				const polygon = L.polygon(this.polygonPoints, {
+					color: '#3388ff',
+					weight: 2,
+					opacity: 0.5,
+					fillColor: '#3388ff',
+					fillOpacity: 0.2
+				}).addTo(this.drawingPolygon);
+				
+				// Only show area label if zoom level is 14 or higher
+				if (this.map.getZoom() >= 14) {
+					// Calculate the area in square meters and convert to acres
+					const areaInSqMeters = this.calculatePolygonArea(this.polygonPoints);
+					const areaInAcres = (areaInSqMeters / 4046.86).toFixed(2);
+					
+					// Add area label at the center of the polygon
+					const center = polygon.getBounds().getCenter();
+					const areaText = L.divIcon({
+						html: `<div style="color: #3388ff; text-shadow: 1px 1px 0 #fff, -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff; font-weight: bold;">${areaInAcres} acres</div>`,
+						className: 'area-label-container',
+						iconSize: [100, 30],
+						iconAnchor: [50, 15]
+					});
+					
+					L.marker(center, { icon: areaText }).addTo(this.areaLabel);
+				}
+			}
+		};
+
+		// Add zoom event listener
+		this.map.on('zoomend', updateAreaLabel);
+		
+		// Store the zoom handler for removal later
+		this.zoomHandler = updateAreaLabel;
+
 		// Handle click to add a point
 		const handleMapClick = (e) => {
 			if (!e.latlng) return;
@@ -774,35 +816,8 @@ PageContent = Class.extend({
 			
 			// If we have at least 3 points, draw the polygon
 			if (this.polygonPoints.length >= 3) {
-				// Clear any existing polygon and area label
-				this.drawingPolygon.clearLayers();
-				this.areaLabel.clearLayers();
-				
-				// Create a new polygon
-				const polygon = L.polygon(this.polygonPoints, {
-					color: '#3388ff',
-					weight: 2,
-					opacity: 0.5,
-					fillColor: '#3388ff',
-					fillOpacity: 0.2
-				}).addTo(this.drawingPolygon);
-				
-				// Calculate the area
-				const area = this.calculatePolygonArea(this.polygonPoints);
-				
-				// Add area label at the center of the polygon
-				const center = polygon.getBounds().getCenter();
-				const areaText = L.divIcon({
-					html: `<div class="area-label" style="color: #3388ff; background: none; font-weight: bold;">${area.toFixed(2)} m²</div>`,
-					className: 'area-label-container',
-					iconSize: [100, 30],
-					iconAnchor: [50, 15]
-				});
-				
-				L.marker(center, { icon: areaText }).addTo(this.areaLabel);
-				
-				// Update tooltip content
-				tooltip.setContent('Kliknite na prvu tačku da završite poligon ili nastavite da dodate više tačaka.');
+				// Update the polygon and area label
+				updateAreaLabel();
 			}
 		};
 		
@@ -844,14 +859,11 @@ PageContent = Class.extend({
 	
 	// Method to complete the polygon drawing
 	completePolygon: function(property) {
-		// Calculate the area
-		const area = this.calculatePolygonArea(this.polygonPoints);
-		
 		// Get the center point of the polygon for the property location
 		const bounds = L.latLngBounds(this.polygonPoints);
 		const center = bounds.getCenter();
 		
-		// Format the GeoJSON data
+		// Format the GeoJSON data without area
 		const geoJsonData = {
 			"type": "FeatureCollection",
 			"features": [
@@ -865,60 +877,57 @@ PageContent = Class.extend({
 				},
 				{
 					"type": "Feature",
-					"properties": {
-						"area": area.toFixed(2)
-					},
+					"properties": {},  // Removed area property
 					"geometry": {
 						"type": "Polygon",
 						"coordinates": [
-							// Convert points to [lng, lat] format and close the polygon
 							[...this.polygonPoints.map(point => [point.lng, point.lat]),
-							 [this.polygonPoints[0].lng, this.polygonPoints[0].lat]] // Close the polygon
+							 [this.polygonPoints[0].lng, this.polygonPoints[0].lat]]
 						]
 					}
 				}
 			]
 		};
 		
-		// Update the property in the database
-		frappe.call({
-			method: "frappe.client.set_value",
-			args: {
-				doctype: "Nekretnina",
-				name: property.name,
-				fieldname: {
-					location: JSON.stringify(geoJsonData),
-					latitude: center.lat,
-					longitude: center.lng
-				}
-			},
-			callback: (r) => {
-				if (r.message) {
-					frappe.show_alert({
-						message: __('Lokacija i oblik nekretnine uspešno ažurirani'),
-						indicator: 'green'
-					});
-					
-					// Update the property in our local data
-					property.location = JSON.stringify(geoJsonData);
-					property.latitude = center.lat;
-					property.longitude = center.lng;
-					
-					// Add to properties with coordinates if it wasn't there before
-					if (!this.properties.some(p => p.name === property.name)) {
-						this.properties.push(property);
-					}
-					
-					// Refresh the map and datatable
-					this.refreshMap(this.properties);
-					this.renderDataTable(this.allProperties);
-				}
+	// Update the property in the database
+	frappe.call({
+		method: "frappe.client.set_value",
+		args: {
+			doctype: "Nekretnina",
+			name: property.name,
+			fieldname: {
+				location: JSON.stringify(geoJsonData),
+				latitude: center.lat,
+				longitude: center.lng
 			}
-		});
-		
-		// Disable the polygon draw mode
-		this.disablePolygonDrawMode();
-	},
+		},
+		callback: (r) => {
+			if (r.message) {
+				frappe.show_alert({
+					message: __('Lokacija i oblik nekretnine uspešno ažurirani'),
+					indicator: 'green'
+				});
+				
+				// Update the property in our local data
+				property.location = JSON.stringify(geoJsonData);
+				property.latitude = center.lat;
+				property.longitude = center.lng;
+				
+				// Add to properties with coordinates if it wasn't there before
+				if (!this.properties.some(p => p.name === property.name)) {
+					this.properties.push(property);
+				}
+				
+				// Refresh the map and datatable
+				this.refreshMap(this.properties);
+				this.renderDataTable(this.allProperties);
+			}
+		}
+	});
+	
+	// Disable the polygon draw mode
+	this.disablePolygonDrawMode();
+},
 	
 	// Method to calculate the area of a polygon in square meters
 	calculatePolygonArea: function(points) {
@@ -974,6 +983,12 @@ PageContent = Class.extend({
 		// Clear the polygon points and markers
 		this.polygonPoints = [];
 		this.polygonMarkers = [];
+
+		// Remove the zoom event handler
+		if (this.zoomHandler) {
+			this.map.off('zoomend', this.zoomHandler);
+			this.zoomHandler = null;
+		}
 	},
 	
 	// Update the getPropertyIcon method to return just the SVG content
@@ -1275,9 +1290,6 @@ PageContent = Class.extend({
 			this.markerCluster.clearLayers();
 		} else if (this.markerGroup) {
 			this.markerGroup.clearLayers();
-		} else {
-			// Remove markers directly from the map if neither is available
-		this.markers.forEach(marker => this.map.removeLayer(marker));
 		}
 		
 		// Clear any existing polygons
@@ -1286,9 +1298,10 @@ PageContent = Class.extend({
 		}
 		
 		// Create a new layer group for property polygons
-		this.propertyPolygons = L.layerGroup().addTo(this.map);
+		this.propertyPolygons = L.layerGroup();
 		
 		this.markers = [];
+		const polygons = []; // Store polygon references
 		
 		// Helper function to get color based on status
 		function getStatusColor(status) {
@@ -1415,18 +1428,36 @@ PageContent = Class.extend({
 										fillOpacity: 0.2
 									}).addTo(this.propertyPolygons);
 									
-									// Add area label if available
-									if (polygonFeature.properties && polygonFeature.properties.area) {
-										const center = polygon.getBounds().getCenter();
-										const areaText = L.divIcon({
-											html: `<div class="area-label" style="color: ${polygonColor}; background: none; font-weight: bold;">${polygonFeature.properties.area} m²</div>`,
+									// Calculate area and create label
+									const area = this.calculatePolygonArea(coords);
+									const areaInAcres = (area / 4046.86).toFixed(2);
+									const center = polygon.getBounds().getCenter();
+									
+									// Create area label with polygon color
+									const areaLabel = L.marker(center, {
+										icon: L.divIcon({
+											html: `<div style="color: ${polygonColor}; text-shadow: 1px 1px 0 #fff, -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff; font-weight: bold;">${areaInAcres} acres</div>`,
 											className: 'area-label-container',
-												iconSize: [100, 30],
-												iconAnchor: [50, 15]
-										});
-										
-										L.marker(center, { icon: areaText }).addTo(this.propertyPolygons);
-									}
+											iconSize: [100, 30],
+											iconAnchor: [50, 15]
+										})
+									});
+									
+									// Only show label at zoom level 14+
+									const updateLabelVisibility = () => {
+										if (this.map.getZoom() >= 14) {
+											if (!areaLabel._map) {
+												areaLabel.addTo(this.propertyPolygons);
+											}
+										} else {
+											if (areaLabel._map) {
+												this.propertyPolygons.removeLayer(areaLabel);
+											}
+										}
+									};
+									
+									// Initial visibility check
+									updateLabelVisibility();
 									
 									// Associate the polygon with the property
 									polygon.propertyId = doc.name;
@@ -1449,6 +1480,39 @@ PageContent = Class.extend({
 				}
 			}
 		});
+
+		// Function to update polygon visibility based on zoom level
+		const updatePolygonVisibility = () => {
+			const currentZoom = this.map.getZoom();
+			if (currentZoom >= 13) {
+				if (!this.propertyPolygons._map) {
+					this.propertyPolygons.addTo(this.map);
+				}
+			} else {
+				if (this.propertyPolygons._map) {
+					this.map.removeLayer(this.propertyPolygons);
+				}
+			}
+		};
+
+		// Add polygons to the layer group
+		polygons.forEach(polygon => {
+			this.propertyPolygons.addLayer(polygon);
+		});
+
+		// Initial visibility check
+		updatePolygonVisibility();
+
+		// Update visibility on zoom
+		this.map.off('zoomend', updatePolygonVisibility); // Remove existing handler if any
+		this.map.on('zoomend', updatePolygonVisibility);
+
+		// Add markers to appropriate layer
+		if (this.useMarkerCluster && this.markerCluster) {
+			this.markers.forEach(marker => this.markerCluster.addLayer(marker));
+		} else if (this.markerGroup) {
+			this.markers.forEach(marker => this.markerGroup.addLayer(marker));
+		}
 	},
 	
 	// New method to enable location edit mode
@@ -1585,17 +1649,17 @@ PageContent = Class.extend({
 			this.map.removeLayer(tooltip);
 		}
 		
-		// Remove the mousemove event
-		this.map.off('mousemove');
-		
-		// Remove the cancel button if it exists
-		if (this.cancelEditButton) {
-			this.map.removeControl(this.cancelEditButton);
-			this.cancelEditButton = null;
-		}
-		
-		// Reset cursor
-		$('#map').removeClass('edit-location-mode');
+	// Remove the mousemove event
+	this.map.off('mousemove');
+	
+	// Remove the cancel button if it exists
+	if (this.cancelEditButton) {
+		this.map.removeControl(this.cancelEditButton);
+		this.cancelEditButton = null;
+	}
+	
+	// Reset cursor
+	$('#map').removeClass('edit-location-mode');
 	},
 	
 	refreshData: function() {
