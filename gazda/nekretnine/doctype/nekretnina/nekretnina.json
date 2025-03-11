@@ -37,6 +37,7 @@
   "mesto",
   "latitude",
   "longitude",
+  "location",
   "section_break_gmqid",
   "brojila",
   "opis",
@@ -518,6 +519,11 @@
    "fieldname": "longitude",
    "fieldtype": "Data",
    "label": "Longitude"
+  },
+  {
+   "fieldname": "location",
+   "fieldtype": "Geolocation",
+   "label": "Lokacija"
   }
  ],
  "image_field": "slika_prilaza_nekretnini",
@@ -528,7 +534,7 @@
    "link_fieldname": "nekretnina"
   }
  ],
- "modified": "2025-03-10 21:31:09.480911",
+ "modified": "2025-03-11 01:22:24.895844",
  "modified_by": "Administrator",
  "module": "Nekretnine",
  "name": "Nekretnina",

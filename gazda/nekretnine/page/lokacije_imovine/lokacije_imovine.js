@@ -40,7 +40,7 @@ PageContent = Class.extend({
 				</div>
 			</div>
 			<div class="page-content-wrapper">
-				<div id="map" style="height: 400px; width: 100%;"></div>
+			<div id="map" style="height: 400px; width: 100%;"></div>
 				<div class="datatable-outer-container" style="height: 400px; overflow: hidden;">
 					<div class="datatable-container"></div>
 				</div>
@@ -227,10 +227,10 @@ PageContent = Class.extend({
 					min-width: 40px !important;
 					max-width: 40px !important;
 				}
-				.dt-cell--3 {
-					width: 60px !important;
-					min-width: 60px !important;
-					max-width: 60px !important;
+				.dt-cell--3, .dt-cell--4 {
+					width: 40px !important;
+					min-width: 40px !important;
+					max-width: 40px !important;
 					text-align: center !important;
 				}
 				.dt-cell__content--col-0 {
@@ -245,6 +245,124 @@ PageContent = Class.extend({
 				.datatable-outer-container {
 					height: 400px !important;
 					overflow: hidden !important;
+				}
+				/* Property link styles */
+				.property-link {
+					color: #2c80ff !important;
+					text-decoration: none !important;
+					font-weight: 500 !important;
+				}
+				.property-link:hover {
+					text-decoration: underline !important;
+				}
+				/* Marker cluster styles */
+				.custom-cluster-icon {
+					background: none;
+				}
+				.cluster-icon {
+					width: 40px !important;
+					height: 40px !important;
+					background-color: rgba(49, 52, 75, 0.8) !important;
+					color: white !important;
+					border-radius: 50% !important;
+					display: flex !important;
+					align-items: center !important;
+					justify-content: center !important;
+					font-weight: bold !important;
+					font-size: 14px !important;
+					box-shadow: 0 0 0 4px rgba(49, 52, 75, 0.3) !important;
+					transition: all 0.2s ease-in-out !important;
+				}
+				.cluster-icon:hover {
+					transform: scale(1.1) !important;
+					background-color: rgba(49, 52, 75, 0.9) !important;
+				}
+				/* Cluster polygon styles */
+				.cluster-polygon {
+					transition: all 0.3s ease-in-out !important;
+					animation: pulse 2s infinite !important;
+				}
+				@keyframes pulse {
+					0% {
+						opacity: 0.2;
+					}
+					50% {
+						opacity: 0.5;
+					}
+					100% {
+						opacity: 0.2;
+					}
+				}
+				/* Draw polygon mode styles */
+				.draw-polygon-mode {
+					cursor: crosshair !important;
+				}
+				.draw-polygon-tooltip {
+					background-color: rgba(0, 0, 0, 0.7) !important;
+					border: none !important;
+					color: white !important;
+					padding: 5px 10px !important;
+					border-radius: 3px !important;
+					font-weight: bold !important;
+					max-width: 300px !important;
+					text-align: center !important;
+				}
+				.draw-polygon-tooltip:before {
+					border-top-color: rgba(0, 0, 0, 0.7) !important;
+				}
+				.draw-polygon-cancel {
+					margin-bottom: 10px !important;
+				}
+				.draw-polygon-cancel button {
+					padding: 4px 10px !important;
+					font-size: 12px !important;
+				}
+				.polygon-marker-icon {
+					background: none !important;
+				}
+				.polygon-point-marker {
+					width: 20px !important;
+					height: 20px !important;
+					background-color: #3388ff !important;
+					color: white !important;
+					border-radius: 50% !important;
+					display: flex !important;
+					align-items: center !important;
+					justify-content: center !important;
+					font-weight: bold !important;
+					font-size: 12px !important;
+					box-shadow: 0 0 0 2px white !important;
+				}
+				/* Button styles */
+				.btn-draw-polygon {
+					padding: 4px 8px !important;
+					background-color: #f8f9fa !important;
+					border: 1px solid #dee2e6 !important;
+					border-radius: 3px !important;
+					color: #495057 !important;
+					cursor: pointer !important;
+					display: inline-flex !important;
+					align-items: center !important;
+					justify-content: center !important;
+				}
+				.btn-draw-polygon:hover {
+					background-color: #e9ecef !important;
+				}
+				.btn-draw-polygon svg {
+					margin-right: 0 !important;
+				}
+				/* Area label styles */
+				.area-label-container {
+					background: none !important;
+				}
+				.area-label {
+					background-color: rgba(0, 0, 0, 0.7) !important;
+					color: white !important;
+					padding: 5px 10px !important;
+					border-radius: 3px !important;
+					font-weight: bold !important;
+					text-align: center !important;
+					white-space: nowrap !important;
 				}
 			`;
 			
@@ -333,12 +451,19 @@ PageContent = Class.extend({
 			p.latitude && p.longitude ? 
 				`<button class="btn btn-icon property-icon" data-property="${p.name}">${this.getPropertyIcon(p.tip_nekretnine, p.status)}</button>` : 
 				'<div class="no-coordinates-icon">—</div>',
-			p.naziv_nekretnine || p.name,
+			// Make the property name a link to the property page
+			`<a href="/app/nekretnina/${p.name}" class="property-link">${p.naziv_nekretnine || p.name}</a>`,
 			p.zakupac || '',
 			// Add edit button as a new column
 			`<button class="btn btn-sm btn-edit-location" data-property="${p.name}" ${!p.latitude && !p.longitude ? 'data-new-location="true"' : ''}>
 				<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
 					<path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path>
+				</svg>
+			</button>`,
+			// Add draw polygon button as a new column
+			`<button class="btn btn-sm btn-draw-polygon" data-property="${p.name}">
+				<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+					<polygon points="3 11 22 2 13 21 11 13 3 11"></polygon>
 				</svg>
 			</button>`
 		]);
@@ -351,6 +476,7 @@ PageContent = Class.extend({
 			setTimeout(() => {
 				this.attachButtonClickHandlers();
 				this.attachEditButtonHandlers();
+				this.attachDrawPolygonHandlers();
 			}, 500);
 			return;
 		}
@@ -366,12 +492,23 @@ PageContent = Class.extend({
 					editable: false,
 					sortable: false,
 				},
-				{ name: 'Naziv', width: 400 },
+				{ 
+					name: 'Naziv', 
+					width: 400,
+					format: (value) => value, // This will render the link directly
+				},
 				{ name: 'Zakupac', width: 200 },
 				{ 
 					name: '', 
 					width: 40,
 					format: (value) => value, // This will render the edit button
+					editable: false,
+					sortable: false,
+				},
+				{ 
+					name: '', 
+					width: 40,
+					format: (value) => value, // This will render the draw polygon button
 					editable: false,
 					sortable: false,
 				}
@@ -391,12 +528,17 @@ PageContent = Class.extend({
 			$('.dt-cell--0').css('min-width', '40px');
 			$('.dt-cell--0').css('max-width', '40px');
 			
-			$('.dt-cell--3').css('width', '60px');
-			$('.dt-cell--3').css('min-width', '60px');
-			$('.dt-cell--3').css('max-width', '60px');
+			$('.dt-cell--3').css('width', '40px');
+			$('.dt-cell--3').css('min-width', '40px');
+			$('.dt-cell--3').css('max-width', '40px');
+			
+			$('.dt-cell--4').css('width', '40px');
+			$('.dt-cell--4').css('min-width', '40px');
+			$('.dt-cell--4').css('max-width', '40px');
 			
 			this.attachButtonClickHandlers();
 			this.attachEditButtonHandlers();
+			this.attachDrawPolygonHandlers();
 		}, 500);
 	},
 	
@@ -447,26 +589,391 @@ PageContent = Class.extend({
 			
 			if (propertyId) {
 				// Find the property in our data
-				const property = this.properties.find(p => p.name === propertyId);
-				
-				if (property && property.latitude && property.longitude) {
+					const property = this.properties.find(p => p.name === propertyId);
+					
+					if (property && property.latitude && property.longitude) {
 					// Invalidate the map size to ensure it's rendered correctly
 					this.map.invalidateSize();
 					
-					// Center map on this property
-					this.map.setView([property.latitude, property.longitude], 16);
-					
+						// Center map on this property
+						this.map.setView([property.latitude, property.longitude], 16);
+						
 					// Find and open the marker popup immediately
 					const marker = this.markers.find(marker => marker.propertyId === propertyId);
 					if (marker) {
 						// Create a small delay to ensure the map has centered first
 						setTimeout(() => {
-							marker.openPopup();
+								marker.openPopup();
 						}, 50);
 					}
 				}
 			}
 		});
+	},
+	
+	// Method to attach click handlers to the draw polygon buttons
+	attachDrawPolygonHandlers: function() {
+		// Remove any existing handlers to prevent duplicates
+		$(document).off('click', '.btn-draw-polygon');
+		
+		// Add click handler to all draw polygon buttons
+		$(document).on('click', '.btn-draw-polygon', (e) => {
+			e.preventDefault();
+			e.stopPropagation();
+			
+			// Get the property ID from the data attribute
+			const propertyId = $(e.currentTarget).data('property');
+			
+			if (propertyId) {
+				// Find the property in all properties
+				const property = this.allProperties.find(p => p.name === propertyId);
+				
+				if (property) {
+					this.enablePolygonDrawMode(propertyId);
+				}
+			}
+		});
+	},
+	
+	// Method to enable polygon drawing mode
+	enablePolygonDrawMode: function(propertyId) {
+		// Find the property in all properties
+		const property = this.allProperties.find(p => p.name === propertyId);
+		if (!property) return;
+		
+		// Close any open popups
+		this.map.closePopup();
+		
+		// If property has coordinates, center the map on it
+		if (property.latitude && property.longitude) {
+			this.map.setView([property.latitude, property.longitude], 16);
+		}
+		
+		// Check if property already has a polygon
+		const hasExistingShape = property.location && 
+			property.location.includes('"type":"Polygon"');
+		
+		if (hasExistingShape) {
+			frappe.confirm(
+				__('Ova nekretnina već ima definisan oblik. Da li želite da ga zamenite novim?'),
+				() => {
+					// User confirmed, proceed with drawing
+					this.startPolygonDrawing(property);
+				},
+				() => {
+					// User cancelled, do nothing
+				}
+			);
+		} else {
+			// No existing shape, proceed with drawing
+			this.startPolygonDrawing(property);
+		}
+	},
+	
+	// Method to start the polygon drawing process
+	startPolygonDrawing: function(property) {
+		// Change cursor to crosshair
+		$('#map').addClass('draw-polygon-mode');
+		
+		// Create a tooltip but don't add it to the map yet
+		const tooltip = L.tooltip({
+			permanent: true,
+			direction: 'top',
+			className: 'draw-polygon-tooltip'
+		}).setContent('Klikom na prvu tačku završite crtanje.');
+		
+		let tooltipAdded = false;
+		
+		// Update tooltip position on mousemove
+		const updateTooltip = (e) => {
+			if (!e.latlng) return;
+			
+			// Add tooltip to map on first valid mousemove if not already added
+			if (!tooltipAdded) {
+				tooltip.setLatLng(e.latlng).addTo(this.map);
+				tooltipAdded = true;
+			} else {
+				tooltip.setLatLng(e.latlng);
+			}
+		};
+		
+		this.map.on('mousemove', updateTooltip);
+		
+		// Initialize polygon points array and markers array
+		this.polygonPoints = [];
+		this.polygonMarkers = [];
+		
+		// Create a layer for the polygon
+		this.drawingPolygon = L.layerGroup().addTo(this.map);
+		
+		// Create a layer for the polygon markers
+		this.drawingMarkers = L.layerGroup().addTo(this.map);
+		
+		// Create a layer for the polygon lines
+		this.drawingLines = L.layerGroup().addTo(this.map);
+		
+		// Create a layer for the area label
+		this.areaLabel = L.layerGroup().addTo(this.map);
+		
+		// Handle click to add a point
+		const handleMapClick = (e) => {
+			if (!e.latlng) return;
+			
+			const clickedLat = e.latlng.lat;
+			const clickedLng = e.latlng.lng;
+			
+			// Check if this is a click on the first point to complete the polygon
+			if (this.polygonPoints.length > 2) {
+				const firstPoint = this.polygonPoints[0];
+				const distance = this.map.distance(
+					[clickedLat, clickedLng],
+					[firstPoint.lat, firstPoint.lng]
+				);
+				
+				// If clicked close to the first point, complete the polygon
+				if (distance < 20) { // 20 meters threshold
+					// Remove the tooltip before completing the polygon
+					if (tooltip && tooltip._map) {
+						this.map.removeLayer(tooltip);
+					}
+					this.completePolygon(property);
+					return;
+				}
+			}
+			
+			// Add the point to the array
+			this.polygonPoints.push({
+				lat: clickedLat,
+				lng: clickedLng
+			});
+			
+			// Add a marker for this point
+			const marker = L.marker([clickedLat, clickedLng], {
+				icon: L.divIcon({
+					html: `<div class="polygon-point-marker">${this.polygonPoints.length}</div>`,
+					className: 'polygon-marker-icon',
+					iconSize: [20, 20],
+					iconAnchor: [10, 10]
+				})
+			}).addTo(this.drawingMarkers);
+			
+			this.polygonMarkers.push(marker);
+			
+			// If we have at least 2 points, draw a line between the last two points
+			if (this.polygonPoints.length > 1) {
+				const lastPoint = this.polygonPoints[this.polygonPoints.length - 2];
+				const line = L.polyline([
+					[lastPoint.lat, lastPoint.lng],
+					[clickedLat, clickedLng]
+				], {
+					color: '#3388ff',
+					weight: 3,
+					opacity: 0.7
+				}).addTo(this.drawingLines);
+			}
+			
+			// If we have at least 3 points, draw the polygon
+			if (this.polygonPoints.length >= 3) {
+				// Clear any existing polygon and area label
+				this.drawingPolygon.clearLayers();
+				this.areaLabel.clearLayers();
+				
+				// Create a new polygon
+				const polygon = L.polygon(this.polygonPoints, {
+					color: '#3388ff',
+					weight: 2,
+					opacity: 0.5,
+					fillColor: '#3388ff',
+					fillOpacity: 0.2
+				}).addTo(this.drawingPolygon);
+				
+				// Calculate the area
+				const area = this.calculatePolygonArea(this.polygonPoints);
+				
+				// Add area label at the center of the polygon
+				const center = polygon.getBounds().getCenter();
+				const areaText = L.divIcon({
+					html: `<div class="area-label" style="color: #3388ff; background: none; font-weight: bold;">${area.toFixed(2)} m²</div>`,
+					className: 'area-label-container',
+					iconSize: [100, 30],
+					iconAnchor: [50, 15]
+				});
+				
+				L.marker(center, { icon: areaText }).addTo(this.areaLabel);
+				
+				// Update tooltip content
+				tooltip.setContent('Kliknite na prvu tačku da završite poligon ili nastavite da dodate više tačaka.');
+			}
+		};
+		
+		this.map.on('click', handleMapClick);
+		
+		// Add escape key handler to cancel draw mode
+		const escKeyHandler = (e) => {
+			if (e.key === 'Escape') {
+				this.disablePolygonDrawMode(tooltip);
+				document.removeEventListener('keydown', escKeyHandler);
+			}
+		};
+		
+		document.addEventListener('keydown', escKeyHandler);
+		
+		// Add a cancel button to the map
+		const cancelButton = L.control({position: 'topright'});
+		cancelButton.onAdd = (map) => {
+			const div = L.DomUtil.create('div', 'draw-polygon-cancel');
+			div.innerHTML = '<button class="btn btn-sm btn-danger">Otkaži</button>';
+			div.onclick = () => {
+				this.disablePolygonDrawMode(tooltip);
+				map.removeControl(cancelButton);
+			};
+			return div;
+		};
+		cancelButton.addTo(this.map);
+		
+		// Store the cancel button reference for removal later
+		this.cancelDrawButton = cancelButton;
+		
+		// Store the event handlers for removal later
+		this.polygonDrawHandlers = {
+			mousemove: updateTooltip,
+			click: handleMapClick,
+			escKey: escKeyHandler
+		};
+	},
+	
+	// Method to complete the polygon drawing
+	completePolygon: function(property) {
+		// Calculate the area
+		const area = this.calculatePolygonArea(this.polygonPoints);
+		
+		// Get the center point of the polygon for the property location
+		const bounds = L.latLngBounds(this.polygonPoints);
+		const center = bounds.getCenter();
+		
+		// Format the GeoJSON data
+		const geoJsonData = {
+			"type": "FeatureCollection",
+			"features": [
+				{
+					"type": "Feature",
+					"properties": {},
+					"geometry": {
+						"type": "Point",
+						"coordinates": [center.lng, center.lat]
+					}
+				},
+				{
+					"type": "Feature",
+					"properties": {
+						"area": area.toFixed(2)
+					},
+					"geometry": {
+						"type": "Polygon",
+						"coordinates": [
+							// Convert points to [lng, lat] format and close the polygon
+							[...this.polygonPoints.map(point => [point.lng, point.lat]),
+							 [this.polygonPoints[0].lng, this.polygonPoints[0].lat]] // Close the polygon
+						]
+					}
+				}
+			]
+		};
+		
+		// Update the property in the database
+		frappe.call({
+			method: "frappe.client.set_value",
+			args: {
+				doctype: "Nekretnina",
+				name: property.name,
+				fieldname: {
+					location: JSON.stringify(geoJsonData),
+					latitude: center.lat,
+					longitude: center.lng
+				}
+			},
+			callback: (r) => {
+				if (r.message) {
+					frappe.show_alert({
+						message: __('Lokacija i oblik nekretnine uspešno ažurirani'),
+						indicator: 'green'
+					});
+					
+					// Update the property in our local data
+					property.location = JSON.stringify(geoJsonData);
+					property.latitude = center.lat;
+					property.longitude = center.lng;
+					
+					// Add to properties with coordinates if it wasn't there before
+					if (!this.properties.some(p => p.name === property.name)) {
+						this.properties.push(property);
+					}
+					
+					// Refresh the map and datatable
+					this.refreshMap(this.properties);
+					this.renderDataTable(this.allProperties);
+				}
+			}
+		});
+		
+		// Disable the polygon draw mode
+		this.disablePolygonDrawMode();
+	},
+	
+	// Method to calculate the area of a polygon in square meters
+	calculatePolygonArea: function(points) {
+		if (points.length < 3) return 0;
+		
+		// Create a Leaflet polygon to use its getLatLngs method
+		const polygon = L.polygon(points);
+		
+		// Use Leaflet's built-in geodesic area calculation
+		return L.GeometryUtil.geodesicArea(polygon.getLatLngs()[0]);
+	},
+	
+	// Method to disable polygon draw mode
+	disablePolygonDrawMode: function(tooltip) {
+		// Remove the tooltip if it exists and has been added to the map
+		if (tooltip && tooltip._map) {
+			this.map.removeLayer(tooltip);
+		}
+		
+		// Remove the event handlers
+		if (this.polygonDrawHandlers) {
+			this.map.off('mousemove', this.polygonDrawHandlers.mousemove);
+			this.map.off('click', this.polygonDrawHandlers.click);
+			document.removeEventListener('keydown', this.polygonDrawHandlers.escKey);
+			this.polygonDrawHandlers = null;
+		}
+		
+		// Remove the cancel button if it exists
+		if (this.cancelDrawButton) {
+			this.map.removeControl(this.cancelDrawButton);
+			this.cancelDrawButton = null;
+		}
+		
+		// Remove the drawing layers
+		if (this.drawingPolygon) {
+			this.map.removeLayer(this.drawingPolygon);
+			this.drawingPolygon = null;
+		}
+		
+		if (this.drawingMarkers) {
+			this.map.removeLayer(this.drawingMarkers);
+			this.drawingMarkers = null;
+		}
+		
+		if (this.drawingLines) {
+			this.map.removeLayer(this.drawingLines);
+			this.drawingLines = null;
+		}
+		
+		// Reset cursor
+		$('#map').removeClass('draw-polygon-mode');
+		
+		// Clear the polygon points and markers
+		this.polygonPoints = [];
+		this.polygonMarkers = [];
 	},
 	
 	// Update the getPropertyIcon method to return just the SVG content
@@ -504,25 +1011,6 @@ PageContent = Class.extend({
 		var esri_url = 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}';
 		var esri_attribution = 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community';
 		
-		var mapbox_url = 'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw';
-		var mapbox_attribution = 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>';
-
-		// Define layers before using them
-		var lyr_satellite = L.tileLayer(esri_url, {
-			maxZoom: 20, 
-			tileSize: 512, 
-			zoomOffset: -1, 
-			attribution: esri_attribution
-		});
-		
-		var lyr_streets = L.tileLayer(mapbox_url, {
-			id: 'mapbox/streets-v11', 
-			maxZoom: 28, 
-			tileSize: 512, 
-			zoomOffset: -1, 
-			attribution: mapbox_attribution
-		});
-		
 		var osm = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 			maxZoom: 19,
 			attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
@@ -538,8 +1026,12 @@ PageContent = Class.extend({
 		// Define base maps for layer control
 		var baseMaps = {
 			"OpenStreetMap": osm,
-			"Satellite": lyr_satellite,
-			"Streets": lyr_streets
+			"Satellite": L.tileLayer(esri_url, {
+				maxZoom: 20, 
+				tileSize: 512, 
+				zoomOffset: -1, 
+				attribution: esri_attribution
+			})
 		};
 
 		// Add layer control to map
@@ -548,15 +1040,254 @@ PageContent = Class.extend({
 		// Initialize markers array
 		this.markers = [];
 		
+		// Create a layer for the cluster polygon
+		this.clusterPolygon = L.layerGroup().addTo(this.map);
+		
+		// Check if marker cluster plugin is available
+		this.useMarkerCluster = typeof L.markerClusterGroup === 'function';
+		
+		if (this.useMarkerCluster) {
+			// Initialize marker cluster group if available
+			this.markerCluster = L.markerClusterGroup({
+				showCoverageOnHover: false, // We'll handle this manually
+				maxClusterRadius: 50,
+				iconCreateFunction: function(cluster) {
+					const count = cluster.getChildCount();
+					return L.divIcon({
+						html: `<div class="cluster-icon">${count}</div>`,
+						className: 'custom-cluster-icon',
+						iconSize: L.point(40, 40)
+					});
+				}
+			});
+			
+			// Add event listeners for cluster hover
+			this.markerCluster.on('clustermouseover', (e) => {
+				this.showClusterPolygon(e.layer);
+			});
+			
+			this.markerCluster.on('clustermouseout', () => {
+				this.hideClusterPolygon();
+			});
+			
+			this.map.addLayer(this.markerCluster);
+		} else {
+			// If marker cluster is not available, create a layer group for markers
+			this.markerGroup = L.layerGroup().addTo(this.map);
+			console.warn('Leaflet.markercluster plugin is not loaded. Using regular markers instead.');
+			
+			// Try to load the marker cluster plugin dynamically
+			this.loadMarkerClusterPlugin();
+		}
+		
+		// Load Leaflet.GeometryUtil if not already loaded
+		if (!L.GeometryUtil) {
+			this.loadGeometryUtilPlugin();
+		}
+		
 		// Invalidate size after initialization to ensure proper rendering
 		setTimeout(() => {
 			this.map.invalidateSize();
 		}, 100);
 	},
+	
+	// Method to show the polygon shape of a cluster
+	showClusterPolygon: function(cluster) {
+		// Clear any existing polygon
+		this.hideClusterPolygon();
+		
+		// Get all markers in this cluster
+		const markers = cluster.getAllChildMarkers();
+		if (markers.length < 3) return; // Need at least 3 points for a polygon
+		
+		// Extract latlngs from markers
+		const points = markers.map(marker => marker.getLatLng());
+		
+		// Create a convex hull polygon
+		const hull = this.getConvexHull(points);
+		
+		if (hull.length >= 3) {
+			// Create a polygon with the hull points
+			this.currentClusterPolygon = L.polygon(hull, {
+				color: '#3388ff',
+				weight: 2,
+				opacity: 0.5,
+				fillColor: '#3388ff',
+				fillOpacity: 0.2,
+				className: 'cluster-polygon'
+			}).addTo(this.clusterPolygon);
+		}
+	},
+	
+	// Method to hide the cluster polygon
+	hideClusterPolygon: function() {
+		this.clusterPolygon.clearLayers();
+		this.currentClusterPolygon = null;
+	},
+	
+	// Method to calculate convex hull (Graham scan algorithm)
+	getConvexHull: function(points) {
+		// Function to calculate the cross product of three points
+		function cross(o, a, b) {
+			return (a.lat - o.lat) * (b.lng - o.lng) - (a.lng - o.lng) * (b.lat - o.lat);
+		}
+		
+		// Sort points by latitude (and longitude for ties)
+		points.sort((a, b) => {
+			return a.lat !== b.lat ? a.lat - b.lat : a.lng - b.lng;
+		});
+		
+		const lower = [];
+		const upper = [];
+		
+		// Build lower hull
+		for (let i = 0; i < points.length; i++) {
+			while (lower.length >= 2 && cross(lower[lower.length - 2], lower[lower.length - 1], points[i]) <= 0) {
+				lower.pop();
+			}
+			lower.push(points[i]);
+		}
+		
+		// Build upper hull
+		for (let i = points.length - 1; i >= 0; i--) {
+			while (upper.length >= 2 && cross(upper[upper.length - 2], upper[upper.length - 1], points[i]) <= 0) {
+				upper.pop();
+			}
+			upper.push(points[i]);
+		}
+		
+		// Remove the last point of each hull (it's the same as the first point of the other hull)
+		upper.pop();
+		lower.pop();
+		
+		// Concatenate the lower and upper hulls to form the convex hull
+		return lower.concat(upper);
+	},
+	
+	// Method to dynamically load the marker cluster plugin
+	loadMarkerClusterPlugin: function() {
+		// Check if already loaded or loading
+		if (document.querySelector('script[src*="leaflet.markercluster"]')) return;
+		
+		// Try to load the CSS
+		const cssLink = document.createElement('link');
+		cssLink.rel = 'stylesheet';
+		cssLink.href = 'https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css';
+		document.head.appendChild(cssLink);
+		
+		const cssDefaultLink = document.createElement('link');
+		cssDefaultLink.rel = 'stylesheet';
+		cssDefaultLink.href = 'https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css';
+		document.head.appendChild(cssDefaultLink);
+		
+		// Load the JS
+		const script = document.createElement('script');
+		script.src = 'https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js';
+		script.onload = () => {
+			console.log('Leaflet.markercluster plugin loaded successfully.');
+			// Refresh the map to use the newly loaded plugin
+			this.useMarkerCluster = typeof L.markerClusterGroup === 'function';
+			if (this.useMarkerCluster) {
+				// Initialize marker cluster group
+				this.markerCluster = L.markerClusterGroup({
+					showCoverageOnHover: false, // We'll handle this manually
+					maxClusterRadius: 50,
+					iconCreateFunction: function(cluster) {
+						const count = cluster.getChildCount();
+						return L.divIcon({
+							html: `<div class="cluster-icon">${count}</div>`,
+							className: 'custom-cluster-icon',
+							iconSize: L.point(40, 40)
+						});
+					}
+				});
+				
+				// Add event listeners for cluster hover
+				this.markerCluster.on('clustermouseover', (e) => {
+					this.showClusterPolygon(e.layer);
+				});
+				
+				this.markerCluster.on('clustermouseout', () => {
+					this.hideClusterPolygon();
+				});
+				
+				this.map.addLayer(this.markerCluster);
+				
+				// Remove markers from the regular layer group and add them to the cluster
+				if (this.markerGroup && this.markers.length > 0) {
+					this.markerGroup.clearLayers();
+					this.markers.forEach(marker => this.markerCluster.addLayer(marker));
+				}
+			}
+		};
+		script.onerror = () => {
+			console.error('Failed to load Leaflet.markercluster plugin.');
+		};
+		document.head.appendChild(script);
+	},
+
+	// Method to load the Leaflet.GeometryUtil plugin
+	loadGeometryUtilPlugin: function() {
+		// Check if already loaded or loading
+		if (document.querySelector('script[src*="leaflet.geometryutil"]')) return;
+		
+		// Load the JS
+		const script = document.createElement('script');
+		script.src = 'https://unpkg.com/leaflet-geometryutil@0.9.3/src/leaflet.geometryutil.js';
+		script.onload = () => {
+			console.log('Leaflet.GeometryUtil plugin loaded successfully.');
+		};
+		script.onerror = () => {
+			console.error('Failed to load Leaflet.GeometryUtil plugin.');
+			// Fallback implementation for polygon area calculation
+			if (!L.GeometryUtil) {
+				L.GeometryUtil = {
+					geodesicArea: function(latLngs) {
+						let area = 0;
+						const d2r = Math.PI / 180;
+						let p1, p2;
+						
+						for (let i = 0; i < latLngs.length - 1; i++) {
+							p1 = latLngs[i];
+							p2 = latLngs[i + 1];
+							area += ((p2.lng - p1.lng) * d2r) * 
+								(2 + Math.sin(p1.lat * d2r) + Math.sin(p2.lat * d2r));
+						}
+						
+						// Add the last segment connecting the last point to the first
+						p1 = latLngs[latLngs.length - 1];
+						p2 = latLngs[0];
+						area += ((p2.lng - p1.lng) * d2r) * 
+							(2 + Math.sin(p1.lat * d2r) + Math.sin(p2.lat * d2r));
+						
+						area = area * 6378137.0 * 6378137.0 / 2.0;
+						return Math.abs(area);
+					}
+				};
+			}
+		};
+		document.head.appendChild(script);
+	},
 
 	loadPropertyLocations: function(properties) {
 		// Clear existing markers
+		if (this.useMarkerCluster && this.markerCluster) {
+			this.markerCluster.clearLayers();
+		} else if (this.markerGroup) {
+			this.markerGroup.clearLayers();
+		} else {
+			// Remove markers directly from the map if neither is available
 		this.markers.forEach(marker => this.map.removeLayer(marker));
+		}
+		
+		// Clear any existing polygons
+		if (this.propertyPolygons) {
+			this.map.removeLayer(this.propertyPolygons);
+		}
+		
+		// Create a new layer group for property polygons
+		this.propertyPolygons = L.layerGroup().addTo(this.map);
+		
 		this.markers = [];
 		
 		// Helper function to get color based on status
@@ -592,7 +1323,7 @@ PageContent = Class.extend({
 			LOKAL: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 -960 960 960"><path d="M280-80q-33 0-56.5-23.5T200-160t23.5-56.5T280-240t56.5 23.5T360-160t-23.5 56.5T280-80m400 0q-33 0-56.5-23.5T600-160t23.5-56.5T680-240t56.5 23.5T760-160t-23.5 56.5T680-80M246-720l96 200h280l110-200zm-38-80h590q23 0 35 20.5t1 41.5L692-482q-11 20-29.5 31T622-440H324l-44 80h480v80H280q-45 0-68-39.5t-2-78.5l54-98-144-304H40v-80h130zm134 280h280z"/></svg>'
 		};
 
-		// Add markers for each property
+		// Add markers and polygons for each property
 		properties.forEach(doc => {
 			if (doc.latitude && doc.longitude) {
 				try {
@@ -629,7 +1360,6 @@ PageContent = Class.extend({
 						const odrzavaInfo = doc.odrzava ? `<strong>Održava:</strong> ${doc.odrzava}<br>` : '';
 						
 						let marker = L.marker([lat, lng], { icon: icon })
-							.addTo(this.map)
 							.bindPopup(`
 								<div class="property-popup">
 									<h4>${doc.naziv_nekretnine || doc.name}</h4>
@@ -640,7 +1370,7 @@ PageContent = Class.extend({
 										${zakupacInfo}
 										${zakupninaInfo}
 										${odrzavaInfo}
-										<a href="/app/nekretnina/${doc.name}">Prikaži detalje</a>
+								<a href="/app/nekretnina/${doc.name}">Prikaži detalje</a>
 									</div>
 								</div>
 							`);
@@ -648,6 +1378,71 @@ PageContent = Class.extend({
 						// Store property ID in marker for reference
 						marker.propertyId = doc.name;
 						this.markers.push(marker);
+						
+						// Add marker to the appropriate layer
+						if (this.useMarkerCluster && this.markerCluster) {
+							this.markerCluster.addLayer(marker);
+						} else if (this.markerGroup) {
+							this.markerGroup.addLayer(marker);
+						} else {
+							marker.addTo(this.map);
+						}
+						
+						// Check if property has GeoJSON data with a polygon
+						if (doc.location && doc.location.includes('"type":"Polygon"')) {
+							try {
+								const geoJson = JSON.parse(doc.location);
+								
+								// Find the polygon feature
+								const polygonFeature = geoJson.features.find(f => 
+									f.geometry && f.geometry.type === "Polygon");
+								
+								if (polygonFeature && polygonFeature.geometry.coordinates) {
+									// Extract coordinates and convert from [lng, lat] to [lat, lng]
+									const coords = polygonFeature.geometry.coordinates[0].map(
+										coord => [coord[1], coord[0]]
+									);
+									
+									// Get the color based on status
+									const polygonColor = getStatusColor(status);
+									
+									// Create the polygon
+									const polygon = L.polygon(coords, {
+										color: polygonColor,
+										weight: 2,
+										opacity: 0.5,
+										fillColor: polygonColor,
+										fillOpacity: 0.2
+									}).addTo(this.propertyPolygons);
+									
+									// Add area label if available
+									if (polygonFeature.properties && polygonFeature.properties.area) {
+										const center = polygon.getBounds().getCenter();
+										const areaText = L.divIcon({
+											html: `<div class="area-label" style="color: ${polygonColor}; background: none; font-weight: bold;">${polygonFeature.properties.area} m²</div>`,
+											className: 'area-label-container',
+												iconSize: [100, 30],
+												iconAnchor: [50, 15]
+										});
+										
+										L.marker(center, { icon: areaText }).addTo(this.propertyPolygons);
+									}
+									
+									// Associate the polygon with the property
+									polygon.propertyId = doc.name;
+									
+									// Make the polygon clickable to show property info
+									polygon.on('click', () => {
+										this.map.setView([lat, lng], 16);
+										setTimeout(() => {
+											marker.openPopup();
+										}, 50);
+									});
+								}
+							} catch (e) {
+								console.error("Error parsing GeoJSON for property", doc.name, e);
+							}
+						}
 					}
 				} catch (e) {
 					console.error("Error parsing coordinates for property", doc.name, e);
@@ -764,24 +1559,24 @@ PageContent = Class.extend({
 			}
 		};
 		
-		document.addEventListener('keydown', escKeyHandler);
-		
-		// Add a cancel button to the map
-		const cancelButton = L.control({position: 'topright'});
-		cancelButton.onAdd = (map) => {
-			const div = L.DomUtil.create('div', 'edit-location-cancel');
-			div.innerHTML = '<button class="btn btn-sm btn-danger">Otkaži</button>';
-			div.onclick = () => {
-				this.disableLocationEditMode(tooltip);
-				map.removeControl(cancelButton);
-			};
-			return div;
+	document.addEventListener('keydown', escKeyHandler);
+	
+	// Add a cancel button to the map
+	const cancelButton = L.control({position: 'topright'});
+	cancelButton.onAdd = (map) => {
+		const div = L.DomUtil.create('div', 'edit-location-cancel');
+		div.innerHTML = '<button class="btn btn-sm btn-danger">Otkaži</button>';
+		div.onclick = () => {
+			this.disableLocationEditMode(tooltip);
+			map.removeControl(cancelButton);
 		};
-		cancelButton.addTo(this.map);
-		
-		// Store the cancel button reference for removal later
-		this.cancelEditButton = cancelButton;
-	},
+		return div;
+	};
+	cancelButton.addTo(this.map);
+	
+	// Store the cancel button reference for removal later
+	this.cancelEditButton = cancelButton;
+},
 	
 	// Method to disable location edit mode
 	disableLocationEditMode: function(tooltip) {
