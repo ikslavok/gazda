@@ -63,6 +63,7 @@
    "allow_in_quick_entry": 1,
    "fieldname": "rok_placanja",
    "fieldtype": "Date",
+   "in_list_view": 1,
    "label": "Rok za naplatu"
   },
   {
@@ -80,7 +81,6 @@
    "fetch_if_empty": 1,
    "fieldname": "uplatilac",
    "fieldtype": "Link",
-   "in_list_view": 1,
    "in_standard_filter": 1,
    "label": "Uplatilac",
    "options": "Osoba",
@@ -88,6 +88,7 @@
   },
   {
    "allow_in_quick_entry": 1,
+   "description": "Mesec za naslov uzima iz datuma posle crte: npr. -1.1.2025 je JANUAR",
    "fieldname": "period",
    "fieldtype": "Data",
    "hide_seconds": 1,
@@ -179,6 +180,7 @@
   {
    "fieldname": "preostalo",
    "fieldtype": "Currency",
+   "in_list_view": 1,
    "label": "Preostalo",
    "read_only": 1
   }
@@ -186,7 +188,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2025-03-09 17:36:02.835885",
+ "modified": "2025-03-12 17:34:30.758176",
  "modified_by": "Administrator",
  "module": "Nekretnine",
  "name": "Racun",
