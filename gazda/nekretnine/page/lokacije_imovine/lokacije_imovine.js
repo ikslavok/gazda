@@ -194,6 +194,9 @@ PageContent = Class.extend({
 				.dt-cell__content--col-0 {
 					padding: 0 !important;
 				}
+				.dt-cell__content--col-3, .dt-cell__content--col-4 {
+					padding: 0 !important;
+				}
 			</style>
 		`;
 
@@ -234,6 +237,9 @@ PageContent = Class.extend({
 					text-align: center !important;
 				}
 				.dt-cell__content--col-0 {
+					padding: 0 !important;
+				}
+				.dt-cell__content--col-3, .dt-cell__content--col-4 {
 					padding: 0 !important;
 				}
 				#map {
@@ -412,18 +418,20 @@ PageContent = Class.extend({
 			method: "frappe.client.get_list",
 			args: {
 				doctype: "Nekretnina",
-				fields: ["name", "naziv_nekretnine", "tip_nekretnine", "status", "latitude", "longitude", 
-				         "adresa", "mesto", "zakupac", "zakupnina", "odrzava", "slika_prilaza_nekretnini"],
-				filters: filters
+				fields: ["name", "naziv_nekretnine", "tip_nekretnine", "status", 
+				         "adresa", "mesto", "zakupac", "zakupnina", "odrzava", "slika_prilaza_nekretnini", "location"],
+				filters: filters,
+				limit_page_length: 1000,
+				order_by: "modified desc"
 			},
 			callback: (r) => {
 				if (r.message) {
 					// Store all properties
 					this.allProperties = r.message;
 					
-					// Filter properties for map display (only those with coordinates)
-					this.properties = r.message.filter(p => p.latitude && p.longitude);
-					
+					// Filter properties for map display (only those with location)
+					this.properties = r.message.filter(p => p.location && this.hasValidCoordinates(p.location));
+
 					if (this.properties.length === 0) {
 						frappe.show_alert({
 							message: __('Nema nekretnina sa definisanim koordinatama za prikaz na mapi'),
@@ -444,6 +452,36 @@ PageContent = Class.extend({
 		});
 	},
 	
+	// Helper method to check if location has valid coordinates
+	hasValidCoordinates: function(location) {
+		try {
+			const geoJson = JSON.parse(location);
+			const pointFeature = geoJson.features.find(f => f.geometry && f.geometry.type === "Point");
+			if (pointFeature && pointFeature.geometry.coordinates) {
+				const [lng, lat] = pointFeature.geometry.coordinates;
+				return !isNaN(lng) && !isNaN(lat);
+			}
+			return false;
+		} catch (e) {
+			return false;
+		}
+	},
+
+	// Helper method to get coordinates from location
+	getCoordinatesFromLocation: function(location) {
+		try {
+			const geoJson = JSON.parse(location);
+			const pointFeature = geoJson.features.find(f => f.geometry && f.geometry.type === "Point");
+			if (pointFeature && pointFeature.geometry.coordinates) {
+				const [lng, lat] = pointFeature.geometry.coordinates;
+				return { lat, lng };
+			}
+			return null;
+		} catch (e) {
+			return null;
+		}
+	},
+	
 	renderDataTable: function(properties) {
 		// Format the data for the datatable
 		const data = properties.map(p => [
@@ -456,9 +494,7 @@ PageContent = Class.extend({
 			p.zakupac || '',
 			// Add edit button as a new column
 			`<button class="btn btn-sm btn-edit-location" data-property="${p.name}" ${!p.latitude && !p.longitude ? 'data-new-location="true"' : ''}>
-				<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-					<path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path>
-				</svg>
+				<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 -960 960 960"><path d="M480-80Q319-217 239.5-334.5T160-552q0-150 96.5-239T480-880q27 0 53.5 4.5T585-863l-65 66q-10-2-19.5-2.5T480-800q-101 0-170.5 69.5T240-552q0 71 59 162.5T480-186q122-112 181-203.5T720-552q0-12-1-24t-3-23l66-66q9 26 13.5 54t4.5 59q0 100-79.5 217.5T480-80m254-726-46-46-248 248v84h84l248-248zm66 10 28-28q11-11 11-28t-11-28l-28-28q-11-11-28-11t-28 11l-28 28z"/></svg>
 			</button>`,
 			// Add draw polygon button as a new column
 			`<button class="btn btn-sm btn-draw-polygon" data-property="${p.name}">
@@ -500,7 +536,7 @@ PageContent = Class.extend({
 				{ name: 'Zakupac', width: 200 },
 				{ 
 					name: '', 
-					width: 40,
+					width: 45,
 					format: (value) => value, // This will render the edit button
 					editable: false,
 					sortable: false,
@@ -1268,8 +1304,7 @@ PageContent = Class.extend({
 		} else if (this.markerGroup) {
 			this.markerGroup.clearLayers();
 		} else {
-			// Remove markers directly from the map if neither is available
-		this.markers.forEach(marker => this.map.removeLayer(marker));
+			this.markers.forEach(marker => this.map.removeLayer(marker));
 		}
 		
 		// Clear any existing polygons
@@ -1317,12 +1352,10 @@ PageContent = Class.extend({
 
 		// Add markers and polygons for each property
 		properties.forEach(doc => {
-			if (doc.latitude && doc.longitude) {
+			if (doc.location) {
 				try {
-					const lat = parseFloat(doc.latitude);
-					const lng = parseFloat(doc.longitude);
-					
-					if (!isNaN(lat) && !isNaN(lng)) {
+					const coords = this.getCoordinatesFromLocation(doc.location);
+					if (coords) {
 						const status = doc.status || 'N/A';
 						const propertyType = doc.tip_nekretnine || 'DEFAULT';
 						
@@ -1351,7 +1384,7 @@ PageContent = Class.extend({
 						const zakupninaInfo = doc.zakupnina ? `<strong>Zakupnina:</strong> ${doc.zakupnina}<br>` : '';
 						const odrzavaInfo = doc.odrzava ? `<strong>Održava:</strong> ${doc.odrzava}<br>` : '';
 						
-						let marker = L.marker([lat, lng], { icon: icon })
+						let marker = L.marker([coords.lat, coords.lng], { icon: icon })
 							.bindPopup(`
 								<div class="property-popup">
 									<h4>${doc.naziv_nekretnine || doc.name}</h4>
@@ -1412,7 +1445,7 @@ PageContent = Class.extend({
 									
 									// Make the polygon clickable to show property info
 									polygon.on('click', () => {
-										this.map.setView([lat, lng], 16);
+										this.map.setView([coords.lat, coords.lng], 16);
 										setTimeout(() => {
 											marker.openPopup();
 										}, 50);
@@ -1424,7 +1457,7 @@ PageContent = Class.extend({
 						}
 					}
 				} catch (e) {
-					console.error("Error parsing coordinates for property", doc.name, e);
+					console.error("Error processing property", doc.name, e);
 				}
 			}
 		});
@@ -1440,8 +1473,11 @@ PageContent = Class.extend({
 		this.map.closePopup();
 		
 		// If property has coordinates, center the map on it
-		if (property.latitude && property.longitude) {
-			this.map.setView([property.latitude, property.longitude], 16);
+		if (property.location) {
+			const coords = this.getCoordinatesFromLocation(property.location);
+			if (coords) {
+				this.map.setView([coords.lat, coords.lng], 16);
+			}
 		}
 		
 		// Change cursor to crosshair
@@ -1478,10 +1514,25 @@ PageContent = Class.extend({
 			const newLat = e.latlng.lat;
 			const newLng = e.latlng.lng;
 			
+			// Create new GeoJSON data
+			const newGeoJson = {
+				"type": "FeatureCollection",
+				"features": [
+					{
+						"type": "Feature",
+						"properties": {},
+						"geometry": {
+							"type": "Point",
+							"coordinates": [newLng, newLat]
+						}
+					}
+				]
+			};
+			
 			// Ask for confirmation
 			frappe.confirm(
-				`Da li želite da postavite ${property.latitude ? 'novu' : 'prvu'} lokaciju za "${property.naziv_nekretnine || property.name}"?<br>
-				${property.latitude ? 'Nove' : 'Nove'} koordinate: ${newLat.toFixed(6)}, ${newLng.toFixed(6)}`,
+				`Da li želite da postavite ${property.location ? 'novu' : 'prvu'} lokaciju za "${property.naziv_nekretnine || property.name}"?<br>
+				${property.location ? 'Nove' : 'Nove'} koordinate: ${newLat.toFixed(6)}, ${newLng.toFixed(6)}`,
 				() => {
 					// User confirmed, update the property location
 					frappe.call({
@@ -1490,20 +1541,18 @@ PageContent = Class.extend({
 							doctype: "Nekretnina",
 							name: propertyId,
 							fieldname: {
-								latitude: newLat,
-								longitude: newLng
+								location: JSON.stringify(newGeoJson)
 							}
 						},
 						callback: (r) => {
 							if (r.message) {
 								frappe.show_alert({
-									message: __('Lokacija uspešno ažurirana'),
-									indicator: 'green'
-								});
+										message: __('Lokacija uspešno ažurirana'),
+										indicator: 'green'
+									});
 								
 								// Update the property in our local data
-								property.latitude = newLat;
-								property.longitude = newLng;
+								property.location = JSON.stringify(newGeoJson);
 								
 								// Add to properties with coordinates if it wasn't there before
 								if (!this.properties.some(p => p.name === property.name)) {
@@ -1538,24 +1587,24 @@ PageContent = Class.extend({
 			}
 		};
 		
-	document.addEventListener('keydown', escKeyHandler);
-	
-	// Add a cancel button to the map
-	const cancelButton = L.control({position: 'topright'});
-	cancelButton.onAdd = (map) => {
-		const div = L.DomUtil.create('div', 'edit-location-cancel');
-		div.innerHTML = '<button class="btn btn-sm btn-danger">Otkaži</button>';
-		div.onclick = () => {
-			this.disableLocationEditMode(tooltip);
-			map.removeControl(cancelButton);
+		document.addEventListener('keydown', escKeyHandler);
+		
+		// Add a cancel button to the map
+		const cancelButton = L.control({position: 'topright'});
+		cancelButton.onAdd = (map) => {
+			const div = L.DomUtil.create('div', 'edit-location-cancel');
+			div.innerHTML = '<button class="btn btn-sm btn-danger">Otkaži</button>';
+			div.onclick = () => {
+				this.disableLocationEditMode(tooltip);
+				map.removeControl(cancelButton);
+			};
+			return div;
 		};
-		return div;
-	};
-	cancelButton.addTo(this.map);
-	
-	// Store the cancel button reference for removal later
-	this.cancelEditButton = cancelButton;
-},
+		cancelButton.addTo(this.map);
+		
+		// Store the cancel button reference for removal later
+		this.cancelEditButton = cancelButton;
+	},
 	
 	// Method to disable location edit mode
 	disableLocationEditMode: function(tooltip) {
@@ -1564,17 +1613,17 @@ PageContent = Class.extend({
 			this.map.removeLayer(tooltip);
 		}
 		
-	// Remove the mousemove event
-	this.map.off('mousemove');
-	
-	// Remove the cancel button if it exists
-	if (this.cancelEditButton) {
-		this.map.removeControl(this.cancelEditButton);
-		this.cancelEditButton = null;
-	}
-	
-	// Reset cursor
-	$('#map').removeClass('edit-location-mode');
+		// Remove the mousemove event
+		this.map.off('mousemove');
+		
+		// Remove the cancel button if it exists
+		if (this.cancelEditButton) {
+			this.map.removeControl(this.cancelEditButton);
+			this.cancelEditButton = null;
+		}
+		
+		// Reset cursor
+		$('#map').removeClass('edit-location-mode');
 	},
 	
 	refreshData: function() {

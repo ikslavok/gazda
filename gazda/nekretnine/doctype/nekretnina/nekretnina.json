@@ -35,8 +35,6 @@
   "adresa",
   "ulica_i_broj",
   "mesto",
-  "latitude",
-  "longitude",
   "location",
   "section_break_gmqid",
   "brojila",
@@ -191,7 +189,7 @@
    "label": "Opis"
   },
   {
-   "depends_on": "eval:doc.tip_nekretnine == \"Njiva\"",
+   "depends_on": "eval:doc.povr\u0161ina_m2",
    "fieldname": "povr\u0161ina_hektar",
    "fieldtype": "Float",
    "label": "Povr\u0161ina (hektar)",
@@ -427,7 +425,7 @@
    "read_only": 1
   },
   {
-   "depends_on": "eval:doc.tip_nekretnine == \"Njiva\"",
+   "depends_on": "eval:doc.povr\u0161ina_m2",
    "fieldname": "povr\u0161ina_jutro",
    "fieldtype": "Float",
    "label": "Povr\u0161ina (jutro)",
@@ -511,18 +509,6 @@
    "options": "Nekretnina Brojila"
   },
   {
-   "fieldname": "latitude",
-   "fieldtype": "Data",
-   "hidden": 1,
-   "label": "Latitude"
-  },
-  {
-   "fieldname": "longitude",
-   "fieldtype": "Data",
-   "hidden": 1,
-   "label": "Longitude"
-  },
-  {
    "description": "Postavi lokaciju na <a href=\"/app/lokacije-imovine\"> mapi svih nekretnina</a>.",
    "fieldname": "location",
    "fieldtype": "Geolocation",
@@ -537,7 +523,7 @@
    "link_fieldname": "nekretnina"
   }
  ],
- "modified": "2025-03-11 17:40:54.019855",
+ "modified": "2025-03-12 02:38:52.297304",
  "modified_by": "Administrator",
  "module": "Nekretnine",
  "name": "Nekretnina",
