@@ -1,9 +1,5 @@
 {
- "actions": [{
-    "label": "Preuzmi podatke iz katastra",
-    "action": "fetch_cadastral_data",
-    "group": "Katastar"
-  }],
+ "actions": [],
  "allow_events_in_timeline": 1,
  "allow_import": 1,
  "allow_rename": 1,
@@ -51,6 +47,7 @@
   "povr\u0161ina_hektar",
   "katastar_tab",
   "katastarska_strana_url",
+  "povuci_iz_katastra",
   "podaci_o_parceli_section",
   "op\u0161tina",
   "potes_ili_ulica",
@@ -517,6 +514,11 @@
    "fieldname": "location",
    "fieldtype": "Geolocation",
    "label": "Lokacija"
+  },
+  {
+   "fieldname": "povuci_iz_katastra",
+   "fieldtype": "Button",
+   "label": "Povuci iz katastra"
   }
  ],
  "image_field": "slika_prilaza_nekretnini",
@@ -527,7 +529,7 @@
    "link_fieldname": "nekretnina"
   }
  ],
- "modified": "2025-03-12 02:38:52.297304",
+ "modified": "2025-03-12 02:56:55.103531",
  "modified_by": "Administrator",
  "module": "Nekretnine",
  "name": "Nekretnina",

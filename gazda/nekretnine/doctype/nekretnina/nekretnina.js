@@ -2,31 +2,6 @@
 
 frappe.ui.form.on('Nekretnina', {
 	refresh: function(frm) {
-		// Add custom button to fetch cadastral data
-		if (frm.doc.katastarska_strana_url) {
-			frm.add_custom_button(__('Povuci podatke iz katastra'), function() {
-				// Debug log
-				
-				frappe.call({
-					method: 'gazda.nekretnine.doctype.nekretnina.nekretnina.fetch_cadastral_data',
-					args: {
-						'docname': frm.doc.name
-					},
-					freeze: true,
-					freeze_message: __('Preuzimanje podataka iz katastra...'),
-					callback: function(r) {
-						if (r.message) {
-							frm.reload_doc();
-							frappe.show_alert({
-								message: __('Podaci uspešno preuzeti'),
-								indicator: 'green'
-							});
-						}
-					}
-				});
-			}, __('Akcije'));
-		}
-
 		// Invalidate map size after the form is rendered
 		if (frm.fields_dict.location.map) {
 			setTimeout(() => {
@@ -116,5 +91,30 @@ frappe.ui.form.on('Nekretnina', {
 			});
 		}
 	},
+	povuci_iz_katastra: function(frm) {
+		frm.doc.katastarska_strana_url = frm.doc.katastarska_strana_url;
+		frm.save();
+		if (frm.doc.katastarska_strana_url) {
+			frappe.call({
+				method: 'gazda.nekretnine.doctype.nekretnina.nekretnina.fetch_cadastral_data',
+				args: {
+					'docname': frm.doc.name
+				},
+				freeze: true,
+				freeze_message: __('Preuzimanje podataka iz katastra...'),
+				callback: function(r) {
+					if (r.message) {
+						frm.reload_doc();
+						frappe.show_alert({
+							message: __('Podaci uspešno preuzeti'),
+							indicator: 'green'
+						});
+					}
+				}
+			});
+		} else {
+			frappe.throw(__('Molimo unesite katastarsku stranu (URL)'));
+		}
+	}
 });
 // Copyright (c) 2023, Filip Ilic and contributors
