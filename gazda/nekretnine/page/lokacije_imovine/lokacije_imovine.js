@@ -484,25 +484,34 @@ PageContent = Class.extend({
 	
 	renderDataTable: function(properties) {
 		// Format the data for the datatable
-		const data = properties.map(p => [
-			// Create a button with the SVG inside - only if coordinates exist
-			p.latitude && p.longitude ? 
-				`<button class="btn btn-icon property-icon" data-property="${p.name}">${this.getPropertyIcon(p.tip_nekretnine, p.status)}</button>` : 
-				'<div class="no-coordinates-icon">—</div>',
-			// Make the property name a link to the property page
-			`<a href="/app/nekretnina/${p.name}" class="property-link">${p.naziv_nekretnine || p.name}</a>`,
-			p.zakupac || '',
-			// Add edit button as a new column
-			`<button class="btn btn-sm btn-edit-location" data-property="${p.name}" ${!p.latitude && !p.longitude ? 'data-new-location="true"' : ''}>
-				<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 -960 960 960"><path d="M480-80Q319-217 239.5-334.5T160-552q0-150 96.5-239T480-880q27 0 53.5 4.5T585-863l-65 66q-10-2-19.5-2.5T480-800q-101 0-170.5 69.5T240-552q0 71 59 162.5T480-186q122-112 181-203.5T720-552q0-12-1-24t-3-23l66-66q9 26 13.5 54t4.5 59q0 100-79.5 217.5T480-80m254-726-46-46-248 248v84h84l248-248zm66 10 28-28q11-11 11-28t-11-28l-28-28q-11-11-28-11t-28 11l-28 28z"/></svg>
-			</button>`,
-			// Add draw polygon button as a new column
-			`<button class="btn btn-sm btn-draw-polygon" data-property="${p.name}">
-				<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-					<polygon points="3 11 22 2 13 21 11 13 3 11"></polygon>
-				</svg>
-			</button>`
-		]);
+		const data = properties.map(p => {
+			// Check if property has coordinates
+			const hasCoordinates = p.location && this.hasValidCoordinates(p.location);
+			
+			// Get property details for the icon
+			const status = p.status || 'N/A';
+			const propertyType = p.tip_nekretnine || 'DEFAULT';
+			
+			return [
+				// Create a button with the SVG inside - only if coordinates exist
+				hasCoordinates ? 
+					`<button class="btn btn-icon property-icon" data-property="${p.name}">${this.getPropertyIcon(propertyType, status)}</button>` : 
+					'<div class="no-coordinates-icon">—</div>',
+				// Make the property name a link to the property page
+				`<a href="/app/nekretnina/${p.name}" class="property-link">${p.naziv_nekretnine || p.name}</a>`,
+				p.zakupac || '',
+				// Add edit button as a new column
+				`<button class="btn btn-sm btn-edit-location" data-property="${p.name}" ${!hasCoordinates ? 'data-new-location="true"' : ''}>
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 -960 960 960"><path d="M480-80Q319-217 239.5-334.5T160-552q0-150 96.5-239T480-880q27 0 53.5 4.5T585-863l-65 66q-10-2-19.5-2.5T480-800q-101 0-170.5 69.5T240-552q0 71 59 162.5T480-186q122-112 181-203.5T720-552q0-12-1-24t-3-23l66-66q9 26 13.5 54t4.5 59q0 100-79.5 217.5T480-80m254-726-46-46-248 248v84h84l248-248zm66 10 28-28q11-11 11-28t-11-28l-28-28q-11-11-28-11t-28 11l-28 28q-11 11-11 28t11 28l28 28q11 11 28 11t28-11l28-28z"/></svg>
+				</button>`,
+				// Add draw polygon button as a new column
+				`<button class="btn btn-sm btn-draw-polygon" data-property="${p.name}">
+					<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+						<polygon points="3 11 22 2 13 21 11 13 3 11"></polygon>
+					</svg>
+				</button>`
+			];
+		});
 		
 		// If datatable already exists, refresh it
 		if (this.datatable) {
@@ -625,22 +634,25 @@ PageContent = Class.extend({
 			
 			if (propertyId) {
 				// Find the property in our data
-					const property = this.properties.find(p => p.name === propertyId);
-					
-					if (property && property.latitude && property.longitude) {
-					// Invalidate the map size to ensure it's rendered correctly
-					this.map.invalidateSize();
-					
-						// Center map on this property
-						this.map.setView([property.latitude, property.longitude], 16);
+				const property = this.properties.find(p => p.name === propertyId);
+				
+				if (property) {
+					const coords = this.getCoordinatesFromLocation(property.location);
+					if (coords) {
+						// Invalidate the map size to ensure it's rendered correctly
+						this.map.invalidateSize();
 						
-					// Find and open the marker popup immediately
-					const marker = this.markers.find(marker => marker.propertyId === propertyId);
-					if (marker) {
-						// Create a small delay to ensure the map has centered first
-						setTimeout(() => {
+						// Center map on this property
+						this.map.setView([coords.lat, coords.lng], 16);
+						
+						// Find the marker for this property
+						const marker = this.markersList.find(marker => marker.propertyId === propertyId);
+						if (marker) {
+							// Create a small delay to ensure the map has centered first
+							setTimeout(() => {
 								marker.openPopup();
-						}, 50);
+							}, 100);
+						}
 					}
 				}
 			}
@@ -1065,8 +1077,8 @@ PageContent = Class.extend({
 		// Add layer control to map
 		L.control.layers(baseMaps).addTo(this.map);
 		
-		// Initialize markers array
-		this.markers = [];
+		// Initialize markers list array
+		this.markersList = [];
 		
 		// Create a layer for the cluster polygon
 		this.clusterPolygon = L.layerGroup().addTo(this.map);
@@ -1075,9 +1087,9 @@ PageContent = Class.extend({
 		this.useMarkerCluster = typeof L.markerClusterGroup === 'function';
 		
 		if (this.useMarkerCluster) {
-			// Initialize marker cluster group if available
-			this.markerCluster = L.markerClusterGroup({
-				showCoverageOnHover: false, // We'll handle this manually
+			// Initialize marker cluster group
+			this.markers = L.markerClusterGroup({
+				showCoverageOnHover: false,
 				maxClusterRadius: 50,
 				iconCreateFunction: function(cluster) {
 					const count = cluster.getChildCount();
@@ -1090,18 +1102,18 @@ PageContent = Class.extend({
 			});
 			
 			// Add event listeners for cluster hover
-			this.markerCluster.on('clustermouseover', (e) => {
+			this.markers.on('clustermouseover', (e) => {
 				this.showClusterPolygon(e.layer);
 			});
 			
-			this.markerCluster.on('clustermouseout', () => {
+			this.markers.on('clustermouseout', () => {
 				this.hideClusterPolygon();
 			});
 			
-			this.map.addLayer(this.markerCluster);
+			this.map.addLayer(this.markers);
 		} else {
 			// If marker cluster is not available, create a layer group for markers
-			this.markerGroup = L.layerGroup().addTo(this.map);
+			this.markers = L.layerGroup().addTo(this.map);
 			console.warn('Leaflet.markercluster plugin is not loaded. Using regular markers instead.');
 			
 			// Try to load the marker cluster plugin dynamically
@@ -1217,8 +1229,8 @@ PageContent = Class.extend({
 			this.useMarkerCluster = typeof L.markerClusterGroup === 'function';
 			if (this.useMarkerCluster) {
 				// Initialize marker cluster group
-				this.markerCluster = L.markerClusterGroup({
-					showCoverageOnHover: false, // We'll handle this manually
+				this.markers = L.markerClusterGroup({
+					showCoverageOnHover: false,
 					maxClusterRadius: 50,
 					iconCreateFunction: function(cluster) {
 						const count = cluster.getChildCount();
@@ -1231,20 +1243,20 @@ PageContent = Class.extend({
 				});
 				
 				// Add event listeners for cluster hover
-				this.markerCluster.on('clustermouseover', (e) => {
+				this.markers.on('clustermouseover', (e) => {
 					this.showClusterPolygon(e.layer);
 				});
 				
-				this.markerCluster.on('clustermouseout', () => {
+				this.markers.on('clustermouseout', () => {
 					this.hideClusterPolygon();
 				});
 				
-				this.map.addLayer(this.markerCluster);
+				this.map.addLayer(this.markers);
 				
 				// Remove markers from the regular layer group and add them to the cluster
-				if (this.markerGroup && this.markers.length > 0) {
-					this.markerGroup.clearLayers();
-					this.markers.forEach(marker => this.markerCluster.addLayer(marker));
+				if (this.markers && this.markersList.length > 0) {
+					this.markers.clearLayers();
+					this.markersList.forEach(marker => this.markers.addLayer(marker));
 				}
 			}
 		};
@@ -1299,13 +1311,12 @@ PageContent = Class.extend({
 
 	loadPropertyLocations: function(properties) {
 		// Clear existing markers
-		if (this.useMarkerCluster && this.markerCluster) {
-			this.markerCluster.clearLayers();
-		} else if (this.markerGroup) {
-			this.markerGroup.clearLayers();
-		} else {
-			this.markers.forEach(marker => this.map.removeLayer(marker));
+		if (this.markers) {
+			this.markers.clearLayers();
 		}
+		
+		// Clear marker list
+		this.markersList = [];
 		
 		// Clear any existing polygons
 		if (this.propertyPolygons) {
@@ -1314,8 +1325,6 @@ PageContent = Class.extend({
 		
 		// Create a new layer group for property polygons
 		this.propertyPolygons = L.layerGroup().addTo(this.map);
-		
-		this.markers = [];
 		
 		// Helper function to get color based on status
 		function getStatusColor(status) {
@@ -1402,15 +1411,15 @@ PageContent = Class.extend({
 						
 						// Store property ID in marker for reference
 						marker.propertyId = doc.name;
-						this.markers.push(marker);
+						
+						// Add marker to the list
+						this.markersList.push(marker);
 						
 						// Add marker to the appropriate layer
-						if (this.useMarkerCluster && this.markerCluster) {
-							this.markerCluster.addLayer(marker);
-						} else if (this.markerGroup) {
-							this.markerGroup.addLayer(marker);
+						if (this.useMarkerCluster) {
+							this.markers.addLayer(marker);
 						} else {
-							marker.addTo(this.map);
+							this.markers.addLayer(marker);
 						}
 						
 						// Check if property has GeoJSON data with a polygon
@@ -1638,12 +1647,12 @@ PageContent = Class.extend({
 	},
 	
 	showAllOnMap: function() {
-		if (this.markers.length > 0) {
+		if (this.markersList.length > 0) {
 			// Invalidate size before fitting bounds
 			this.map.invalidateSize();
 			
 			// Create a bounds object
-			const bounds = L.latLngBounds(this.markers.map(marker => marker.getLatLng()));
+			const bounds = L.latLngBounds(this.markersList.map(marker => marker.getLatLng()));
 			// Fit the map to these bounds
 			this.map.fitBounds(bounds, { padding: [50, 50] });
 		} else {
