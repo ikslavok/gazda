@@ -1,5 +1,5 @@
 #!/bin/bash
 
-cp ./bin/locale/frappe/sr.mo ../frappe/frappe/locale/sr.mo
+cp ./bin/locale/frappe/sr.po ../frappe/frappe/locale/sr.po
 bench build && bench clear-cache
 
